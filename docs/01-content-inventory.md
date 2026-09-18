@@ -5,153 +5,163 @@
 
 ---
 
-## 🚦 Statussystem
+> [!NOTE]
+> **Detailed population of this inventory is intentionally deferred until positioning, architecture and design exploration are sufficiently stable.**  
+> Zum jetzigen Zeitpunkt werden bewusst keine realen Projekte, Kundendaten oder unbestätigten Qualifikationen als final eingetragen. Alle Tabelleneinträge dienen rein als strukturelle Platzhalter.
 
-| Status | Bedeutung |
+---
+
+## 🚦 Projektweites Statussystem
+
+| Status | Definition |
 | :--- | :--- |
-| `READY` | Inhalt/Asset ist final formuliert, geprüft und einsatzbereit. |
-| `NEEDS WORK` | Entwurf oder Rohfassung vorhanden; bedarf Überarbeitung oder Feinschliff. |
-| `PLACEHOLDER` | Platzhalter vorhanden, finaler Inhalt muss noch produziert werden. |
-| `MISSING` | Noch gar nicht vorhanden; muss neu erstellt oder recherchiert werden. |
+| `CONFIRMED` | Vom Nutzer explizit entschieden und freigegebene Vorgabe. |
+| `WORKING DIRECTION` | Aktuell bevorzugte Richtung; wird noch erprobt oder verfeinert. |
+| `NEEDS CONFIRMATION` | Plausibler Vorschlag oder Annahme; muss vom Nutzer bestätigt werden. |
+| `TODO` | Als Aufgabe oder Entscheidung geplant, aber noch nicht inhaltlich ausgearbeitet. |
+| `PLACEHOLDER` | Absichtlicher temporärer Inhalt / Beispiel zur Veranschaulichung. |
+| `MISSING` | Benötigter Inhalt existiert noch nicht; muss noch erstellt werden. |
+| `REJECTED` | Bewusst verworfen; darf nicht stillschweigend reaktiviert werden. |
 
 ---
 
-## 1. Client Projects
+## 1. Client Projects `[PLACEHOLDER / DEFERRED]`
 
-Reale Kundenprojekte mit Kontext, Herausforderung, Lösung und belegbaren Resultaten.
+*Reale Kundenprojekte mit Kontext, Herausforderung, Lösung und belegbaren Resultaten.*
 
-| Projektname | Kunde / Branche | Rolle / Leistung | Jahr | Asset-Status | Text-Status | Gesamtstatus |
+| Projektname | Kunde / Branche | Rolle / Beitrag | Jahr | Asset-Status | Text-Status | Gesamtstatus |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| *Projekt 01 (Beispiel)* | *Fintech / SaaS* | *Design & Frontend* | *2025* | `PLACEHOLDER` | `PLACEHOLDER` | `PLACEHOLDER` |
-| *Projekt 02* | | | | `MISSING` | `MISSING` | `MISSING` |
-| *Projekt 03* | | | | `MISSING` | `MISSING` | `MISSING` |
+| *Projekt 01 (Beispiel)* | *Beispielbranche* | *Design & Code* | *2025* | `PLACEHOLDER` | `PLACEHOLDER` | `PLACEHOLDER` |
+| *Projekt 02* | *TBD* | *TBD* | *TBD* | `MISSING` | `MISSING` | `MISSING` |
+| *Projekt 03* | *TBD* | *TBD* | *TBD* | `MISSING` | `MISSING` | `MISSING` |
 
 ---
 
-## 2. Independent Concepts (The Lab)
+## 2. Independent Concepts (The Lab) `[PLACEHOLDER / DEFERRED]`
 
-Eigeninitiierte Arbeiten, konzeptionelle Entwürfe und experimentelle Prototypen.  
-*(Hinweis: Keine erfundenen Kunden, KPIs oder Resultate!)*
+*Eigeninitiierte Arbeiten, konzeptionelle Entwürfe und experimentelle Prototypen. (Regel: Keine erfundenen Kunden, KPIs oder Resultate!)*
 
-| Konzeptname | Fokus / Thema | Deliverables (UI, Motion, 3D) | Jahr | Asset-Status | Text-Status | Gesamtstatus |
+| Konzeptname | Fokus / Thema | Geplante Artefakte | Jahr | Asset-Status | Text-Status | Gesamtstatus |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| *Concept 01 (Beispiel)* | *Editorial E-Commerce* | *Interactive Web Prototype* | *2025* | `PLACEHOLDER` | `PLACEHOLDER` | `PLACEHOLDER` |
-| *Concept 02* | | | | `MISSING` | `MISSING` | `MISSING` |
+| *Concept 01 (Beispiel)* | *Interaktives Web-Konzept* | *Prototype / Stills* | *2025* | `PLACEHOLDER` | `PLACEHOLDER` | `PLACEHOLDER` |
+| *Concept 02* | *TBD* | *TBD* | *TBD* | `MISSING` | `MISSING` | `MISSING` |
 
 ---
 
-## 3. Clients / Companies / Collaborations
+## 3. Clients / Companies / Collaborations `[PLACEHOLDER / DEFERRED]`
 
-Logos und Namen bisheriger Auftraggeber, Arbeitgeber oder Kooperationspartner.
+*Logos und Namen bisheriger Auftraggeber oder Kooperationspartner.*
 
 | Unternehmen / Partner | Art der Zusammenarbeit | Logo vorhanden | Nutzungsrecht geklärt | Status |
 | :--- | :--- | :--- | :--- | :--- |
-| *Unternehmen A* | *Kunde / Freelance* | Nein | Offen | `MISSING` |
-| *Unternehmen B* | *Agentur-Partner* | Nein | Offen | `MISSING` |
+| *Unternehmen A (Beispiel)* | *TBD* | Nein | Offen | `MISSING` |
+| *Unternehmen B (Beispiel)* | *TBD* | Nein | Offen | `MISSING` |
 
 ---
 
-## 4. Testimonials
+## 4. Testimonials `[MISSING / OPTIONAL]`
 
-Authentische Kunden- und Kollegenstimmen.
+*Authentische Kunden- und Partnerstimmen.*
 
 | Name & Rolle | Firma | Kernaussage / Zitat | Freigabe erteilt | Status |
 | :--- | :--- | :--- | :--- | :--- |
-| *Referenzgeber 1* | *CTO @ ...* | *Zitate-Entwurf...* | Nein | `MISSING` |
+| *Kunde / Partner 1* | *TBD* | *Zitatentwurf offen* | Nein | `MISSING` |
 
 ---
 
-## 5. Experience (Werdegang & Stationen)
+## 5. Experience (Werdegang & Meilensteine) `[PLACEHOLDER / DEFERRED]`
 
-Chronologische Auflistung von Positionen, Agenturerfahrungen und selbstständiger Tätigkeit.
+*Chronologische Auflistung relevanter Stationen oder selbstständiger Tätigkeit.*
 
-| Zeitraum | Rolle / Titel | Unternehmen / Kontext | Schwerpunkte & Erfolge | Status |
+| Zeitraum | Rolle / Titel | Unternehmen / Kontext | Schwerpunkte | Status |
 | :--- | :--- | :--- | :--- | :--- |
-| *2023 – Heute* | *Lead Designer / Dev* | *Freelance* | *...* | `PLACEHOLDER` |
-| *Frühere Station* | | | | `MISSING` |
+| *Station 01 (Beispiel)* | *TBD (vom Nutzer zu definieren)* | *TBD* | *TBD* | `PLACEHOLDER` |
+| *Station 02* | *TBD* | *TBD* | *TBD* | `MISSING` |
 
 ---
 
-## 6. Education
+## 6. Education `[PLACEHOLDER / DEFERRED]`
 
-Akademische Ausbildung, Studiengänge, relevante Weiterbildungen.
+*Ausbildung, Studiengänge, relevante Weiterbildungen.*
 
 | Zeitraum | Abschluss / Studiengang | Institution | Status |
 | :--- | :--- | :--- | :--- |
-| *JJJJ – JJJJ* | *B.A. / B.Sc. / o.ä.* | *Hochschule / Universität* | `PLACEHOLDER` |
+| *Ausbildung (Beispiel)* | *TBD (vom Nutzer anzugeben)* | *TBD* | `PLACEHOLDER` |
 
 ---
 
-## 7. Certifications & Credentials
+## 7. Certifications & Credentials `[MISSING / OPTIONAL]`
 
-Zertifikate, Auszeichnungen (Awwwards, FWA, Behance), Publikationen oder Patente.
+*Zertifikate, Auszeichnungen, Veröffentlichungen.*
 
 | Titel / Zertifikat | Aussteller / Organisation | Jahr | Nachweis / Link | Status |
 | :--- | :--- | :--- | :--- | :--- |
-| *Zertifikat / Award* | *...* | *...* | | `MISSING` |
+| *TBD* | *TBD* | *TBD* | *TBD* | `MISSING` |
 
 ---
 
-## 8. Languages (Sprachkenntnisse)
+## 8. Languages (Sprachkenntnisse) `[NEEDS CONFIRMATION]`
 
-| Sprache | Niveau (z. B. Muttersprache, Verhandlungssicher) | Einsatz im Kundenkontakt | Status |
+*Bedarf expliziter Bestätigung durch den Nutzer.*
+
+| Sprache | Niveau | Einsatz im Kundenkontakt | Status |
 | :--- | :--- | :--- | :--- |
-| *Deutsch* | *Muttersprache* | Ja | `READY` |
-| *Englisch* | *Fließend / C1* | Ja | `READY` |
+| *Deutsch* | *Muttersprache / Fließend* | Ja (DE-Website) | `NEEDS CONFIRMATION` |
+| *Englisch* | *Fließend / Verhandlungssicher* | Ja (EN-Website) | `NEEDS CONFIRMATION` |
 
 ---
 
-## 9. Tools / Technologies
+## 9. Tools / Technologies `[NEEDS CONFIRMATION / PROPOSAL]`
 
-Klare, fokussierte Übersicht moderner Technologien und Werkzeuge (keine Prozentbalken!).
+*Keine unbestätigten Festlegungen; Liste dient rein als unverbindlicher Orientierungsrahmen.*
 
-| Kategorie | Werkzeuge & Frameworks | Status |
+| Kategorie | Typische Werkzeuge & Technologien | Status |
 | :--- | :--- | :--- |
-| **Design** | Figma, Adobe Creative Suite (After Effects, Illustrator, Photoshop) | `READY` |
-| **Frontend & Code** | Next.js, React, TypeScript, Tailwind CSS, GSAP, Lenis, Three.js / WebGL | `READY` |
-| **Tooling & Ops** | Git, Vercel, Node.js | `READY` |
+| **Design** | Figma, Adobe Creative Cloud u. a. | `NEEDS CONFIRMATION` |
+| **Frontend & Code** | Modernes Komponenten-Framework, TypeScript, Tailwind CSS, Motion-Tools | `NEEDS CONFIRMATION` |
+| **Backend & Cloud** | Serverless / Cloudflare Runtimes, Neon PostgreSQL | `WORKING DIRECTION` |
 
 ---
 
-## 10. Capabilities (Dienstleistungen)
+## 10. Capabilities (Dienstleistungen) `[WORKING DIRECTION]`
 
-Leistungsangebote, beschrieben aus Sicht des Kundennutzens.
+*Strukturierung in drei Hauptbereiche gemäß Creative Brief:*
 
-| Leistung | Beschreibung & Nutzen für den Kunden | Status |
+| Hauptbereich | Konkreter Fokus | Status |
 | :--- | :--- | :--- |
-| **Art Direction & UI/UX** | Konzeption und visuelle Gestaltung digitaler Produkte mit Charakter | `PLACEHOLDER` |
-| **Creative Development** | High-Performance-Frontends mit flüssiger Motion und Liebe zum Detail | `PLACEHOLDER` |
-| **Design Systems** | Skalierbare Komponentenbibliotheken und visuelle Standards | `PLACEHOLDER` |
+| **1. Websites & Commerce** | Individuelle Webauftritte, Editorial Web, performante Online-Shops | `WORKING DIRECTION` |
+| **2. Apps & Business Systems** | Digitale Produkte, interne Tools, Business-Applikationen | `WORKING DIRECTION` |
+| **3. AI & Automation** | KI-Schnittstellen, Automatisierung von Workflows | `WORKING DIRECTION` |
 
 ---
 
-## 11. Portraits / Photos
+## 11. Portraits / Photos `[MISSING]`
 
-Professionelles Bildmaterial, das Persönlichkeit, Authentizität und Ruhe vermittelt.
-
-| Motiv | Geplante Stimmung / Location | Fotograf / Quelle | Status |
+| Motiv | Geplante Stimmung / Ausrichtung | Quelle / Status | Status |
 | :--- | :--- | :--- | :--- |
-| *Hauptporträt (Hero / About)* | *Editorial, warme Ausleuchtung, natürlicher Blick* | Offen | `MISSING` |
-| *Working Shot / Detail* | *Hände, Studio, Skizzen* | Offen | `MISSING` |
+| *Hauptporträt* | *Warmes Editorial, natürlicher Blick, nahbar* | *Noch zu erstellen/auszuwählen* | `MISSING` |
+| *Working Shot / Detail* | *Studio, Hände, Skizzen (optional)* | *TBD* | `MISSING` |
 
 ---
 
-## 12. Social Links
+## 12. Social Links `[PLACEHOLDER]`
 
 | Plattform | Profil-URL | Sichtbar auf Website | Status |
 | :--- | :--- | :--- | :--- |
-| **GitHub** | `https://github.com/...` | Ja | `PLACEHOLDER` |
-| **LinkedIn** | `https://linkedin.com/in/...` | Ja | `PLACEHOLDER` |
-| **X / Twitter** | `https://x.com/...` | Optional | `MISSING` |
-| **Behance / Dribbble** | `https://...` | Optional | `MISSING` |
+| **LinkedIn** | *TBD* | Geplant (primär) | `PLACEHOLDER` |
+| **GitHub** | *TBD* | Optional / TBD | `PLACEHOLDER` |
+| **Weitere** | *TBD* | TBD | `MISSING` |
 
 ---
 
-## 13. Contact Information
+## 13. Contact Information `[PLACEHOLDER]`
+
+*Standort und persönliche Daten werden erst nach Nutzerfreigabe befüllt.*
 
 | Feld | Inhalt / Wert | Status |
 | :--- | :--- | :--- |
-| **E-Mail-Adresse** | *hallo@...* | `PLACEHOLDER` |
-| **Standort / Zeitzone** | *Deutschland / MEZ (UTC+1)* | `READY` |
-| **Verfügbarkeits-Status** | *Verfügbar für Q3/Q4 2026* | `PLACEHOLDER` |
-| **Bevorzugter Erstkontakt** | *E-Mail oder kurzes Intro-Gespräch (Cal.com / Calendly)* | `PLACEHOLDER` |
+| **Name** | *TBD* | `PLACEHOLDER` |
+| **E-Mail-Adresse** | *TBD (vom Nutzer anzugeben)* | `PLACEHOLDER` |
+| **Standort** | *TBD (keine Vorab-Annahme)* | `PLACEHOLDER` |
+| **Verfügbarkeits-Status** | *TBD* | `PLACEHOLDER` |
+| **Bevorzugter Erstkontakt** | *Kontaktformular / Direkte E-Mail* | `CONFIRMED` |

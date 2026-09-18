@@ -1,85 +1,81 @@
 # Project & Case Study Template
 
 > **Zweck**: Standardisiertes Dokumentations- und Präsentationsschema für alle Projekte auf der Website.  
-> **Source of Truth**: Case-Study-Struktur
+> **Source of Truth**: Case-Study-Struktur & Inhaltsintegrität
 
 ---
 
-## ⚠️ Unverhandelbare Regel für Concept-Projekte
+## 🎯 Primärer Kommunikationsfokus `[CONFIRMED]`
 
-> **Wichtig**:  
-> Eigeninitiierte Arbeiten (*Independent Concepts / The Lab*) dürfen **keine erfundenen Kunden, gefälschten KPIs, fingierten Testimonials oder erfundenen Resultate** enthalten!  
-> Ehrlichkeit und Transparenz sind die Grundvoraussetzung für Vertrauen. Bei Concept-Arbeiten liegt der Fokus auf der **kreativen Fragestellung, der gestalterischen Innovation, der technischen Machbarkeit und dem Prototyping**.
+Die Präsentation jedes Projekts soll die Qualität des Denkens und des Handwerks in den Vordergrund stellen:
+
+1. **Projekt**: Was ist das Projekt, Identität, Anwendungsbereich
+2. **Rolle**: Welcher konkrete Beitrag wurde geleistet (Design, Code, Gesamtverantwortung)
+3. **Problem / Kontext**: Welche Ausgangslage oder Herausforderung bestand
+4. **Idee**: Der konzeptionelle Lösungsansatz
+5. **UX**: Struktur, Nutzerführung, Informationsarchitektur
+6. **Design**: Typografie, Farbwelt, Ästhetik, visuelle Identität
+7. **Experience**: Interaktion, Haptik, Motion, Animation
+8. **Umsetzung**: Technische Lösung, architektonische Besonderheiten
+9. **Resultat bzw. Erkenntnis**: Messbare Daten bei Kundenprojekten bzw. Lernergebnisse bei Konzepten
+
+> **Technologie-Klarstellung**:  
+> "Stack / Tools" wird im Project Hero ausdrücklich als **OPTIONAL** behandelt. Technologien werden nur dann prominent genannt, wenn sie für die Geschichte oder den technischen Kern des Projekts eine wesentliche Rolle spielen.
 
 ---
 
-## 📁 Projekttypen & Kennzeichnung
+## ⚠️ Integritätsregeln für Inhalte `[CONFIRMED]`
 
-- **Client Project**: Reale Arbeit für einen echten Auftraggeber mit echter Aufgabenstellung und belegbaren Resultaten.
-- **Independent Concept (The Lab)**: Eigeninitiierte Designstudie, Proof-of-Concept, technische Spielwiese oder visuelle Erkundung.
+### Für Independent Concepts (The Lab):
+- ❌ **Keine** erfundenen Kunden oder fingierten Firmennamen
+- ❌ **Keine** erfundenen Zahlen, Kennzahlen oder Conversion-Raten
+- ❌ **Keine** gefälschten Testimonials oder Kundenzitate
+- ❌ **Keine** erfundenen Business-Resultate
+- ✅ **Fokus auf**: Die kreative Fragestellung, visuelle Innovation, Interaktionsmodelle, Prototyping und gewonnene Erkenntnisse.
+
+### Für Client Projects:
+- ✅ **Ausschließlich** echte, belegbare Fakten und reale Ergebnisse
+- ✅ Zitate nur mit tatsächlicher Freigabe des Kunden
 
 ---
 
-## 🧱 Case Study Struktur
+## 🧱 Case Study Struktur (`/work/[slug]`) `[CONFIRMED]`
 
-Jede Projekt-Detailseite (`/work/[slug]`) folgt dieser klaren Erzählstruktur:
-
-### 1. Hero
-- **Projekttitel**: Prägnant und stark.
-- **Subline**: 1 Satz, der den Kern des Projekts zusammenfasst.
+### 1. Hero Section
+- **Projekttitel**: Prägnant und kraftvoll.
+- **Subline**: 1 Satz, der den Kern des Projekts auf den Punkt bringt.
 - **Metadaten-Leiste**:
   - Typ: *Client Project* oder *Independent Concept*
-  - Rolle: z. B. *Art Direction, UI/UX, Frontend Development*
+  - Rolle: z. B. *Art Direction, UI/UX, Software Development*
   - Jahr: z. B. *2025*
-  - Stack / Tools: z. B. *Next.js, Tailwind, GSAP, Figma*
-  - Live Link: *(falls öffentlich verfügbar)*
-- **Hero-Cover**: Vollflächiges, hochauflösendes Medien-Element (Bild oder Video-Loop).
+  - Live Link: *(optional, falls öffentlich zugänglich)*
+  - **Stack / Tools**: *(rein OPTIONAL – nur bei Relevanz für die Story)*
+- **Hero-Cover**: Vollflächiges Medien-Element (Standbild oder ruhiger Video-Loop).
 
----
+### 2. Overview & Kontext
+- Warum existiert dieses Projekt? Welche Ausgangssituation lag vor?
 
-### 2. Overview
-- Kurze, prägnante Zusammenfassung (2–3 Sätze) über das Projekt.
-- Was war der Ausgangspunkt? Warum existiert diese Arbeit?
+### 3. Problem & Herausforderung
+- Welche konkreten Hürden, geschäftlichen Anforderungen oder gestalterischen Defizite galt es zu überwinden?
 
----
+### 4. Idee & Konzept
+- Der strategische Hebel: Welcher Lösungsansatz wurde gewählt und warum?
 
-### 3. Context & Challenge
-- Welche konkrete Herausforderung galt es zu lösen?
-- Welche Markt-, Marken- oder Nutzerbedürfnisse standen im Mittelpunkt?
+### 5. UX & Information Architecture
+- Wie ist das Produkt strukturiert? Wie orientiert sich der Nutzer?
 
----
+### 6. Visual Design & Identity
+- Typografie, Farbwelt, Bildsprache, Komponenten und visuelle Details.
 
-### 4. Idea & Strategy
-- Der konzeptionelle Dreh- und Angelpunkt: Was war der entscheidende Lösungsansatz?
-- Welche strategischen oder gestalterischen Entscheidungen wurden getroffen?
+### 7. Interactive Experience & Motion
+- Mikro-Interaktionen, Übergänge, Reaktionsverhalten und Bediengefühl (Video-Snippets oder Stills).
 
----
+### 8. Technische Umsetzung & Architecture
+- Relevante technische Highlights, Performance-Überlegungen oder Schnittstellen.
 
-### 5. Visual Direction & Design System
-- Typografie, Farbwelt und visuelle Besonderheiten des Projekts.
-- Eingebettete Design-Assets, Screens, Layout-Details und Grid-Erklärungen.
+### 9. Resultat & Impact / Erkenntnis
+- **Client Projects**: Reale Ergebnisse (z. B. Launch-Erfolg, Nutzerwachstum, Kunden-Feedback).
+- **Independent Concepts**: Konzeptuelle Erkenntnisse, Learnings aus dem Prototyping, Ausblick.
 
----
-
-### 6. Interactive Experience & Motion
-- Wie fühlt sich die Bedienung an?
-- Video-Clips oder interaktive Einbettungen von Mikro-Interaktionen, Scroll-Effekten und Übergängen.
-
----
-
-### 7. Details & Responsive Views
-- Mobile Ansichten, responsive Anpassungen und Detailaufnahmen von Schlüssel-Komponenten.
-
----
-
-### 8. Results & Impact
-> **Nur bei Client Projects mit echten, belegbaren Daten!**  
-> Bei Independent Concepts entfällt dieser Abschnitt oder wird durch ein Fazit zum Erkenntnisgewinn / Prototyping ersetzt.
-- Konkrete Kennzahlen (z. B. Conversion-Rate-Steigerung, Ladezeit-Optimierung, Nutzerwachstum).
-- Echtes Kunden-Feedback oder Zitat.
-
----
-
-### 9. Next Project
-- Vorschau auf das chronologisch oder thematisch nächste Projekt.
-- Einladender Übergang zum Weitersurfen.
+### 10. Next Project
+- Flüssiger Übergang zur nächsten Case Study.

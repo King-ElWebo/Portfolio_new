@@ -1,73 +1,70 @@
 # Motion Language
 
-> **Zweck**: Festlegung der Animationsprinzipien, Übergänge, Scroll-Mechaniken und Performance-Vorgaben.  
-> **Hinweis**: Noch keine finale Motion erfinden; Abschnitte und Rahmenbedingungen vorbereiten.  
+> **Zweck**: Festlegung der Animationsprinzipien, Übergänge, Scroll-Mechaniken und Performance-Leitlinien.  
+> **Hinweis**: Noch keine finale Motion-Bibliothek fest auswählen oder installieren.  
 > **Source of Truth**: Interaktions- & Animationsrichtlinien
 
 ---
 
-## 1. Motion Principles
+## 1. Motion Principles `[CONFIRMED]`
 
-1. **Inhalt & Story First**: Motion dient nie der reinen Selbstinszenierung, sondern führt das Auge und unterstützt die Erzählung.
-2. **Physik & Trägheit**: Bewegungen wirken natürlich, flüssig und wertig; keine ruckartigen oder hektischen Effekte.
-3. **Asymmetrie**: Einblendungen dürfen inszeniert und getaktet sein; Ausblendungen erfolgen schnell und unaufdringlich.
-4. **Respekt vor dem Nutzer**: Animationen blockieren zu keinem Zeitpunkt das Navigieren, Lesen oder Interagieren.
-
----
-
-## 2. Page Transitions
-- [ ] **TODO**: Konzept für nahtlose Seitenwechsel (z. B. zwischen Home und Case Studies).
-- [ ] **TODO**: Dauer und Easing von View Transitions definieren.
-- [ ] **TODO**: Erhalt der Scroll-Position und Caching-Verhalten festlegen.
+1. **Bedeutung & Funktion**: Motion dient nie der reinen Selbstdarstellung, sondern führt das Auge, vermittelt räumliche Orientierung und unterstützt die Erzählung.
+2. **Static First**: Das Interface muss statisch ohne jede Animation vollendet wirken. Motion ist eine Veredelung, kein Ersatz für saubere Gestaltung.
+3. **Keine Animation um der Library willen**: Es wird nichts animiert, nur weil ein Werkzeug oder ein Effekt technisch verfügbar ist.
+4. **Respekt vor dem Nutzer**: Animationen dürfen niemals den Lesefluss oder das schnelle Navigieren blockieren.
+5. **Reduced Motion ist Pflicht**: Barrierefreiheit und die Berücksichtigung von Bewegungssensibilität sind verbindliche Standards.
+6. **Performance ist Pflicht**: Stabile Bildraten (typischerweise 60 FPS auf geeigneten Geräten) ohne Ruckler oder Frame-Drops.
 
 ---
 
-## 3. Scroll Behaviour
-- [ ] **TODO**: Integration von Lenis Smooth Scrolling evaluieren (sanfte Trägheit ohne Verlust des nativen Scrollgefühls).
-- [ ] **TODO**: ScrollTrigger-Setup für abschnittsbezogenes Einblenden und Pinnen von Inhalten.
-- [ ] **TODO**: Horizontale oder Sticky-Bereiche für ausgewählte Projekte oder Case-Study-Gallerien.
+## 2. Bibliotheken & Tooling-Strategie `[WORKING DIRECTION]`
+
+*Es wird vorerst keine Animationsbibliothek installiert oder final festgelegt. Für den späteren Entwicklungsstart gelten folgende Kandidaten:*
+
+- **CSS (Transforms & Transitions)**:  
+  Erste Wahl für alle einfachen Hover-Zustände, Button-Reaktionen, Menü-Toggles und subtile UI-Übergänge.
+- **GSAP / ScrollTrigger `[KANDIDAT]`**:  
+  Starker Kandidat für komplexe, scroll-verknüpfte Sequenzen, Timeline-Choreografien und Pinned-Sections.
+- **Lenis `[KANDIDAT]`**:  
+  Möglicher Kandidat für sanftes, träges Scroll-Verhalten, sofern es das native Scrollgefühl bereichert und keine Performance-Einbußen verursacht.
+- **Three.js / WebGL / Canvas `[NUR BEI BEDARF]`**:  
+  Ausschließlich dann, wenn eine spezifische visuelle Idee (z. B. ein interaktives Hero-Asset im Lab) dies rechtfertigt. Kein WebGL als bloßes Gimmick.
+
+> **Regel gegen Redundanz**:  
+> Es werden **niemals mehrere konkurrierende Bibliotheken für denselben Zweck** eingeplant oder installiert (z. B. nicht gleichzeitig Framer Motion und GSAP für denselben Animationsbereich).
 
 ---
 
-## 4. Text Motion
-- [ ] **TODO**: Headline-Reveals (z. B. feines Mask-Reveal per Zeile oder eleganter Fade-Up).
-- [ ] **TODO**: Stagger-Intervalle für Textzeilen und Absätze.
-- [ ] **TODO**: Zahlen- und Zähler-Animationen für Metriken und Jahre.
+## 3. Signature-Moment: Dark ↔ Cream Transition `[CONFIRMED KONZEPT / TODO TECHNIK]`
+
+Der Übergang zwischen **Cinematic Dark** und **Warm Editorial** ist der zentrale dramaturgische Wendepunkt der Homepage:
+- **Konzept**: Beim Hineinscrollen in Act II (About / Trust) wandelt sich der visuelle Hintergrund und die Typografie nahtlos von cineastischer Dunkelheit zu warmem, hellem Editorial-Papier.
+- **Technik `[TODO]`**: Evaluierung der performantesten Methode (CSS Custom Properties per Scroll-Position tweenen vs. Section-basierter Backdrop-Wechsel).
+- **Anforderung**: Absolut flackerfreier Farbumschlag aller Texte, Icons und Rahmen.
 
 ---
 
-## 5. Image & Media Motion
-- [ ] **TODO**: Parallax-Effekte bei großformatigen Projektbildern (subtiler Geschwindigkeitsunterschied).
-- [ ] **TODO**: Curtain- oder Scale-Down-Reveals beim Erreichen des Viewports.
-- [ ] **TODO**: Video-Autoplay- und Loop-Verhalten (stets stummgeschaltet, Pause bei Nicht-Sichtbarkeit).
+## 4. Scroll Behaviour & Text Motion `[TODO]`
+
+- [ ] Scroll-verknüpfte Parallax-Geschwindigkeiten bei Medien
+- [ ] Text-Reveals (Mask-Up oder feiner Fade für Headlines)
+- [ ] Staggering von Projektkarten bei Eintritt in den Viewport
 
 ---
 
-## 6. Hover & Pointer Interaction
-- [ ] **TODO**: Magnetische Buttons oder dezente Translation in Richtung des Cursors.
-- [ ] **TODO**: Cursor-Feedback bei klickbaren Medien (z. B. dezentes "View"-Badge beim Hover über Projektbilder).
-- [ ] **TODO**: Sanfte Farbumschwünge und Unterstreichungs-Animationen bei Textlinks.
+## 5. Reduced Motion & Barrierefreiheit `[CONFIRMED VORGABE]`
+
+- Vollständige Unterstützung von `@media (prefers-reduced-motion: reduce)`.
+- Bei aktivem Reduced-Motion-Modus:
+  - Sofortiges Einblenden von Inhalten ohne Translation/Bewegung.
+  - Deaktivierung aller Parallax- und Trägheitseffekte.
+  - Keine automatischen Video-Loops, die Irritationen auslösen könnten.
 
 ---
 
-## 7. Dark ↔ Cream Transitions
-*Einer der wichtigsten dramaturgischen Übergänge der Website: Der Wechsel zwischen Cinematic Dark und Warm Editorial.*
+## 6. Performance-Leitlinien `[CONFIRMED]`
 
-- [ ] **TODO**: Auslöser definieren (Scroll-Position vs. Abschnittsgrenzen).
-- [ ] **TODO**: Technische Umsetzung (CSS-Variablen per GSAP ScrollTrigger tweenen vs. Section-basierter Backdrop-Wechsel).
-- [ ] **TODO**: Übergang von Textfarben, Rahmen und Logo-Elementen während des Farbumschwungs ohne Flackern.
-
----
-
-## 8. Reduced Motion & Accessibility
-- [ ] **TODO**: Vollständige Berücksichtigung der Media Query `@media (prefers-reduced-motion: reduce)`.
-- [ ] **TODO**: Fallback-Verhalten: Sofortiges Einblenden ohne Translation und ohne Scroll-Verzögerung.
-- [ ] **TODO**: Deaktivierung von automatischen Loops oder Parallax für Nutzer mit Bewegungssensibilität.
-
----
-
-## 9. Performance Rules
-- [ ] **TODO**: Ausschließlich GPU-beschleunigte CSS-Eigenschaften animieren (`transform`, `opacity`).
-- [ ] **TODO**: Vermeidung von Layout Thrashing und Reflows (`top`, `left`, `width`, `height` niemals animieren).
-- [ ] **TODO**: Gezielter Einsatz von `will-change`, ohne Speicherlecks zu erzeugen.
-- [ ] **TODO**: Zielmarke: Stabile 60–120 FPS auf modernen Desktop- und Mobilgeräten.
+- Bevorzugte Animation von GPU-beschleunigten Eigenschaften (`transform`, `opacity`).
+- Layout-auslösende Eigenschaften (`top`, `left`, `width`, `height`, `margin`) nach Möglichkeit vermeiden.
+- Gezielter, temporärer Einsatz von `will-change` während aktiver Übergänge.
+- Keine Memory Leaks durch unbereinigte Event-Listener oder Scroll-Observer.

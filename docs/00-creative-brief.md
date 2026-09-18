@@ -1,121 +1,184 @@
 # Creative Brief
 
-> **Status**: IN PROGRESS  
+> **Status**: IN PROGRESS (Fundament bestätigt, Detailentscheidungen & Copy in Ausarbeitung)  
 > **Letzte Aktualisierung**: 2026-09-18  
-> **Source of Truth**: Portfolio-Konzeption & Strategie
+> **Source of Truth**: Portfolio-Strategie, Positionierung & Markenidentität
 
 ---
 
-## 1. Purpose & Vision
-Erstellung eines erstklassigen, unverwechselbaren persönlichen Portfolios für einen Designer & Developer. Die Website soll das handwerkliche Niveau, die gestalterische Reife und das technische Verständnis auf höchstem Niveau demonstrieren.
+## 🚦 Projektweites Statussystem für Entscheidungen
+
+- `CONFIRMED`: Vom Nutzer entschieden und verbindliche Projektvorgabe.
+- `WORKING DIRECTION`: Aktuell bevorzugte Richtung; wird in der Konzeption/Designphase getestet.
+- `NEEDS CONFIRMATION`: Plausible Option oder Annahme; muss explizit vom Nutzer bestätigt werden.
+- `TODO`: Muss noch erarbeitet oder entschieden werden.
+- `PLACEHOLDER`: Absichtlicher temporärer Inhalt / Beispiel zur Veranschaulichung.
+- `MISSING`: Benötigter Inhalt existiert noch nicht.
+- `REJECTED`: Bewusst verworfene Richtung (darf von Agents nicht wiederbelebt werden).
 
 ---
 
-## 2. Goals
+## 1. Purpose & Kernfunktion `[CONFIRMED]`
 
-### Primäres Ziel
-- **Vertrauen aufbauen** und gezielt **neue, hochwertige Kundenprojekte** (Freelance / Studio / Consulting) gewinnen.
+Das Portfolio ist primär eine **Vertrauens- und Proof-of-Work-Plattform** für einen *Digital Designer & Software Developer*.
 
-### Sekundäres Ziel
-- Als vielseitiger Gestalter und Entwickler wahrgenommen werden, der Design und Code auf World-Class-Niveau vereint.
-- Eigeninitiativ entwickelte Konzepte ("The Lab") als Spielwiese für kreative Exzellenz und innovative Ideen etablieren.
+Es soll potenziellen Kunden, Unternehmen, Agenturen und Partnern unmittelbar beweisen:
+> **„Der kann komplette digitale Produkte gestalten und entwickeln.“**
 
----
+### Kommunikationsziel:
+- Die Website soll **nicht aggressiv verkaufen**.
+- Sie dient als zentraler Vertrauensanker — insbesondere **nach einem Erstgespräch, einer Empfehlung, einer Anfrage oder im Rahmen einer Bewerbung**.
+- Sie belegt handwerkliche Reife, architektonisches Verständnis und gestalterische Exzellenz.
 
-## 3. Target Audience
-<!-- TODO: Zielgruppe weiter schärfen und priorisieren -->
-- [ ] **Entscheider & Gründer**: Startups, Scale-ups und etablierte Unternehmen, die ein herausragendes digitales Produkt oder einen high-end Webauftritt suchen.
-- [ ] **Design- & Creative Directors**: Agenturen und Studios, die Senior-Unterstützung für anspruchsvolle Projekte suchen.
-- [ ] **Product Leads / Tech Leads**: Teams, die jemanden brauchen, der die Brücke zwischen Design und sauberer technischer Umsetzung schlägt.
-
----
-
-## 4. Desired Visitor Journey
-Der Besucher soll während des Scrollens und Navigierens drei aufeinander aufbauende Stufen durchlaufen:
-
-1. **"Wow, das sieht stark aus."** *(Visuelle Faszination & unmittelbare Differenzierung im Hero)*
-2. **"Da steckt jemand dahinter, der professionell arbeitet."** *(Handwerk, Struktur, klare Case Studies, Erfahrung und Verlässlichkeit)*
-3. **"Ich könnte mir vorstellen, dass er meine Website baut."** *(Überzeugungskraft, Vertrauen und ein einladender nächster Schritt)*
+### Einsatzszenarien (Funktioniert für):
+- Kleine lokale Kunden mit Anspruch an Qualität
+- Mittelgroße bis größere Kundenprojekte
+- Partnerschaften und Zusammenarbeit mit Design- und Digitalagenturen
+- Externe Mitarbeit / Freelance-Verstärkung in bestehenden Produkt- und Engineering-Teams
+- Bewerbungen auf anspruchsvolle projektbasierte technische oder kreative Rollen
 
 ---
 
-## 5. Brand & Personality
-- **Hochwertig & selbstbewusst**: Ruhige Eleganz statt lauter Effekthascherei.
-- **Menschlich & nahbar**: Keine unpersönliche Agentur-Fassade; der Mensch hinter der Arbeit wird greifbar.
-- **Präzise & professionell**: Typografie, Rhythmus und Details sitzen millimetergenau.
-- **Kreativ & experimentierfreudig**: Mut zu eigenständigen visuellen Richtungen und interaktiven Akzenten.
+## 2. Positionierung `[CONFIRMED]`
+
+### Arbeitsbezeichnung:
+- **`[WORKING DIRECTION]`**: `Digital Designer & Software Developer`
+- *(Alternative, noch nicht final: `Digital Designer & Developer`)*
+
+### Klare Abgrenzung `[REJECTED]`:
+- ❌ **Keine** Positionierung als reiner „Webdesigner“
+- ❌ **Keine** Positionierung mit dem primären Label „Freelancer“
+- ❌ **Keine** Positionierung als reine „Webagentur“
+- ❌ **Keine** Positionierung als reiner „Frontend Developer“
+
+### Wahrnehmung & Nutzenversprechen `[CONFIRMED]`:
+- **Design + Development in einer Person**: Von Idee, Recherche und UX über visuelle Gestaltung bis zur sauberen technischen Umsetzung.
+- **Maximale Flexibilität**:
+  - Kann komplette Projekte ganzheitlich **End-to-End** übernehmen.
+  - Kann alternativ **gezielt einzelne technische oder gestalterische Teilbereiche** in bestehenden Teams verstärken.
+- Handwerkliche Bandbreite nach Projektbedarf:
+  - Frontend, Backend, Datenbanken, individuelle Systeme, Websites, Shops, Web Apps, Desktop Apps, AI-Integrationen, Automatisierung, Motion, UI/UX, visuelle Assets, ergänzend Branding/Logos sowie Wartung & Weiterentwicklung.
+
+### Strukturierung der Leistungen `[WORKING DIRECTION]`:
+*Nicht alle Einzelleistungen gleich laut bewerben; keine unübersichtliche „Ich-kann-alles“-Liste.*  
+Aktuell bevorzugte Gliederung in **drei Kernbereiche**:
+
+1. **Websites & Commerce** (Markenauftritte, Editorial Web, performante Online-Shops)
+2. **Apps & Business Systems** (Individuelle Webanwendungen, interne Tools, digitale Plattformen)
+3. **AI & Automation** (Schnittstellen, Prozessautomatisierung, intelligente Workflows)
+
+> **Ergänzende & ausgeschlossene Leistungen**:  
+> - UI, UX, Motion, Frontend und Backend durchdringen alle drei Bereiche und benötigen keine isolierte Selbstdarstellung.  
+> - Branding & Logodesign sind **ergänzende** Leistungen, kein primärer Service.  
+> - Reine WordPress-Projekte und reine Logo-Aufträge werden **ausdrücklich NICHT aktiv beworben** `[REJECTED]`.
 
 ---
 
-## 6. Creative Direction: *Cinematic Dark × Warm Editorial*
+## 3. Target Audience & Marktansatz `[CONFIRMED]`
 
-Die gestalterische Leitidee verbindet zwei gegensätzliche, sich ergänzende Welten:
+> **Positionierung über Kompetenz und Ergebnis, nicht über eine enge Branchen-Nische.**
 
-- **Cinematic Dark**: Tiefes, atmosphärisches Schwarz/Dunkelgrau für immersive Momente, Drama, Projektinszenierung und visuelle Fokussierung.
-- **Warm Editorial**: Warme Cream- und Off-White-Bereiche, die an gedruckte Magazine und Kunstkataloge erinnern; bringt Ruhe, Lesbarkeit, Menschlichkeit und Wärme ins Spiel.
+Das Portfolio grenzt sich nicht künstlich auf eine einzige Branche ein. Potenzielle Kunden kommen aus verschiedenen Segmenten, die einen individuellen, hochwertigen Web- oder Produktauftritt suchen.
 
----
-
-## 7. Visual Principles
-
-1. **Projekte sind die Hauptdarsteller**: Keine überladenen Interfaces, die von der eigentlichen Arbeit ablenken.
-2. **Große, selbstbewusste Typografie**: Starke Headlines mit redaktionellem Gespür und makelloser Hierarchie.
-3. **Sinnvolle Scroll- & Motion-Experiences**: Jede Bewegung hat einen funktionalen oder erzählerischen Grund (Führung des Blicks, Aufdecken von Inhalten, Rhythmus).
-4. **Persönlichkeit sichtbar machen**: Echte Gedanken, klare Haltung und ein authentischer Tonfall statt generischer Buzzwords.
-5. **Gleichwertigkeit von Client Work & Independent Concepts**: Beide Formen zeigen Können, werden visuell auf demselben Niveau inszeniert, aber transparent deklariert.
+**Beispielhafte Branchen und Zielgruppen (nicht limitierend):**
+- Lokale Premium-Unternehmen (z. B. Friseure, Hair Studios, Barbershops)
+- Arztpraxen, Dental- & Medical-Kliniken (Seriosität, Vertrauen, Patientenführung)
+- Kleinerer und gehobener Mittelstand (Modernisierung digitaler Produkte und Websites)
+- E-Commerce-Brands & kuratierte Shops
+- Digital- und Kreativagenturen auf der Suche nach Senior Design-Engineering-Kapazität
 
 ---
 
-## 8. Homepage Story (Dramaturgie)
+## 4. Brand & Tonalität `[CONFIRMED]`
 
-Die Startseite folgt einem klaren dreiteiligen Aufbau mit markantem Abschluss:
-
-```text
-┌────────────────────────────────────────────────────────┐
-│  ACT I — IMPRESS (Cinematic Dark)                      │
-│  • Hero (Starkes Statement, Atmosphäre, erste Reize)   │
-│  • Selected Work (Die stärksten Projekte sofort)       │
-├────────────────────────────────────────────────────────┤
-│  ACT II — TRUST (Warm Editorial / Cream)               │
-│  • Clients & Collaborations                            │
-│  • About & Philosophie                                 │
-│  • Capabilities (Was ich konkret tue)                  │
-│  • Experience & Werdegang                              │
-│  • Credentials (Auszeichnungen, Zertifikate)           │
-│  • Optional: Testimonials / Kundenstimmen              │
-├────────────────────────────────────────────────────────┤
-│  ACT III — EXPLORE (Cinematic Dark oder Hybrid)        │
-│  • The Lab / Independent Concepts (Ideen, Experimente) │
-├────────────────────────────────────────────────────────┤
-│  FINAL — ACT (Cinematic Dark)                          │
-│  • Starker Contact CTA                                 │
-│  • Rückkehr zur immersiven dunklen Welt                │
-└────────────────────────────────────────────────────────┘
-```
+- **Persönlich, aber professionell**: Menschlich nahbar, ohne flapsig oder unstrukturiert zu wirken.
+- **Hochwertig, aber nicht arrogant**: Selbstbewusst in den Fähigkeiten, ohne künstliche Selbstbeweihräucherung.
+- **Premium Look, trotzdem zugänglich**: Ästhetisch auf Galerie- und Studio-Niveau, aber absolut verständlich und bedienbar.
+- **Die Arbeit steht im Vordergrund**: Die Projekte sind die Stars; die Person dahinter bleibt greifbar, drängt sich aber nicht laut in den Vordergrund.
+- **UX ist genauso wichtig wie visuelle Qualität**: Design ist Problemlösung und Struktur, nicht bloße Dekoration.
+- **Individuelle Lösungen statt Template-Denken**: Keine vorgefertigten Themes oder Einheitsbrei.
+- **Keine aggressive Sales-Funnel-Website**:
+  - ❌ Kein „Book a free discovery call“-Drängen
+  - ❌ Kein Budget-Prequalifying im Kontaktformular
+  - ❌ Keine Projektgrößen-Vorauswahl im Formular
+- **Geplanter Kontakt-Flow**:
+  - Formularfelder: *Name*, *E-Mail*, *Nachricht*, Button: *Projekt anfragen / Send inquiry*
+  - Ergänzende Direktkanäle: Direkte E-Mail-Adresse, LinkedIn-Profil
 
 ---
 
-## 9. Main Pages
-- **Home**: Die zentrale narrative Reise (Act I – Final).
-- **Work**: Vollständige Übersicht aller Arbeiten (Filterbar nach Client Projects & Independent Concepts).
-- **Contact**: Direkter, barrierefreier Kontaktbereich mit klaren Angaben zu Verfügbarkeit und Projektstart.
-- **Project Detail Template**: Ausführliche Case Studies mit Fokus auf Herausforderung, Lösung, Handwerk und reale Ergebnisse.
+## 5. Working Copy (Demo-Texte) `[WORKING DIRECTION / DEMO COPY]`
+
+*Die folgenden Texte dienen zur Veranschaulichung von Rhythmus und Tonalität in der Konzeptionsphase. Sie sind NICHT final freigegeben.*
+
+### Hero Headline
+> **FROM IDEA TO DIGITAL EXPERIENCE.**
+
+### Demo Subline
+> *I design and build digital products — from websites and shops to custom software, business systems and AI integrations.*
+
+### Flexibility Copy
+> *Whether you need a new digital presence, a custom application or support on an existing product — I can join where I'm needed.*
+
+### Personal Statement / About
+> *I'm [Name], a digital designer and software developer based in Austria.*  
+> *I like turning complex ideas into digital products that feel simple, useful and considered.*  
+> *I care about how things work just as much as how they look.*
 
 ---
 
-## 10. Things To Avoid (No-Gos)
-- ❌ **Keine generische SaaS-/AI-Ästhetik** (z. B. typische lila-blaue Gradienten, vorgefertigte UI-Kits).
-- ❌ **Keine sinnlosen Bento-Grids**, die nur verwendet werden, weil sie gerade Trend sind.
-- ❌ **Keine Skill-Prozentbalken** (z. B. "React 90%", "Figma 95%").
-- ❌ **Keine Gradient-Orbs oder Glassmorphism** als Selbstzweck.
-- ❌ **Keine erfundenen Zahlen, Metriken oder fiktiven Kunden-Zitate** bei Concept-Arbeiten.
-- ❌ **Keine Performance-Einbußen durch überladene Motion-Libraries**; Performance und Zugänglichkeit haben Vorrang.
+## 6. Internationalisierung & Sprachen `[CONFIRMED]`
+
+- Die Website wird vollständig **zweisprachig aufgebaut**: **Deutsch (DE)** und **Englisch (EN)**.
+- Es gibt auf allen Seiten einen **dauerhaft sichtbaren DE / EN Language Switcher**.
+
+### Sprachlogik & Erkennung:
+1. **Erster Besuch**: Automatische Erkennung der Browser-Locale:
+   - Deutschsprachige Locales (`de`, `de-AT`, `de-DE`, `de-CH` etc.) → **Deutsch**
+   - Andere Locales / Englisch → **Englisch als Fallback**
+2. **Manuelle Auswahl**:
+   - Sobald der Nutzer den Switcher bedient, wird diese Auswahl dauerhaft (z. B. via Cookie/LocalStorage) persistiert.
+   - Die manuelle Auswahl überschreibt jede automatische Erkennung für alle Folgeseiten und künftigen Besuche.
+3. **Routing `[WORKING DIRECTION]`**:
+   - `/de`, `/de/work`, `/de/work/[slug]`, `/de/contact`
+   - `/en`, `/en/work`, `/en/work/[slug]`, `/en/contact`
 
 ---
 
-## 11. Open Questions
-<!-- TODO: Offene strategische Fragen während der Konzeption klären -->
-- [ ] Sollen konkrete Projektbudgets oder Mindest-Projektgrößen auf der Kontaktseite genannt werden?
-- [ ] Welche 3–4 Projekte bilden das initiale "Selected Work"-Setup für Act I?
-- [ ] Werden Testimonials als Zitate oder mit Video/Audio-Elementen eingebunden?
-- [ ] Wie lautet der finale Claim / Subtitle im Hero?
+## 7. Creative Direction: *Cinematic Dark × Warm Editorial* `[CONFIRMED]`
+
+### Kernidee
+- **Cinematic Dark**: Tiefes, sattes Dunkel für Fokus, Atmosphäre, Inszenierung der Projekte und visuelle Differenzierung.
+- **Warm Editorial**: Warme Cream- und Off-White-Töne für Lesbarkeit, Ruhe, Intellekt, Glaubwürdigkeit und Menschlichkeit.
+
+### Gestaltungsprinzipien `[CONFIRMED]`
+- **Statische Exzellenz**: Die Komposition muss statisch bereits absolut hochwertig und lesbar sein. Motion verbessert die Erzählung, darf aber niemals schwaches Design kaschieren.
+- **Große, selbstbewusste Typografie**: Starke redaktionelle Headlines mit erstklassiger Hierarchie.
+- **Farbtöne mit Seele**: Warmes Dunkel statt hartem `#000000`; warmes Off-White/Cream statt klinischem `#FFFFFF`.
+- **Projekte als Hauptdarsteller**: Keine überladene UI, die von der Arbeit ablenkt.
+
+### Ausdrückliche No-Gos `[REJECTED]`
+- ❌ Keine generische AI-/SaaS-Ästhetik (lila-blaue Standard-Gradients, generische UI-Kits)
+- ❌ Keine sinnlosen Bento-Grids
+- ❌ Keine Gradient-Orbs als reine Deko
+- ❌ Keine Skill-Prozentbalken („CSS 90%“, „Figma 95%“)
+- ❌ Kein Glassmorphism als reiner Selbstzweck
+- ❌ Kein Neon-Tech-Developer-Look (Cyberpunk, Matrix-Grün)
+- ❌ Keine unnötige technische Selbstdarstellung
+
+---
+
+## 8. Desired Visitor Journey `[CONFIRMED]`
+
+1. **„Wow, das sieht stark aus.“** *(Visuelle Faszination und Niveau im Hero)*
+2. **„Da steckt jemand dahinter, der professionell arbeitet.“** *(Struktur, Tiefe, greifbare Case Studies, Verlässlichkeit)*
+3. **„Ich könnte mir vorstellen, dass er mein Projekt umsetzt.“** *(Vertrauen, Sympathie und ein klarer, barrierefreier nächster Schritt)*
+
+---
+
+## 9. Offene strategische Fragen `[TODO]`
+
+- [ ] Finale Festlegung des Namens und finaler Domain-Setup
+- [ ] Auswahl der 2–3 Leitprojekte für die initiale "Selected Work"-Sektion
+- [ ] Klärung, ob Kundenstimmen (Testimonials) als Zitate vorliegen oder noch eingeholt werden
+- [ ] Finale Freigabe der englischen und deutschen Copytexte

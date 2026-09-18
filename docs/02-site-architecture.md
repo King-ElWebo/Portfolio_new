@@ -1,116 +1,135 @@
 # Site Architecture
 
-> **Zweck**: Strukturelle Dokumentation der Seitenhierarchie, Routen und Abschnittsdramaturgie der Homepage.  
-> **Hinweis**: Hier werden noch keine finalen Layoutentscheidungen oder Wireframes vorweggenommen.  
-> **Source of Truth**: Informationsarchitektur
+> **Zweck**: Strukturelle Dokumentation der Seitenhierarchie, Routen, Navigation und Abschnittsdramaturgie der Homepage.  
+> **Hinweis**: Noch keine finalen Layoutentscheidungen oder Wireframes vorwegnehmen.  
+> **Source of Truth**: Informationsarchitektur & Routing
 
 ---
 
 ## 1. Global Navigation & Layout Shell
 
-### Header / Navigation
-- **Logo / Wordmark**: Typografisch prägnant, linksbündig oder zentriert.
-- **Navigationslinks**:
-  - `Work`
-  - `About` (Sprungmarke auf Homepage oder Unterseite)
-  - `Lab` (Independent Concepts)
-  - `Contact` (CTA)
-- **Status-Indikator**: Optional dezente Anzeige der aktuellen Projektverfügbarkeit (z. B. *"Available for Q4"*).
+### Header / Hauptnavigation `[CONFIRMED]`
+Die primäre Navigation bleibt bewusst schlank und fokussiert:
+- **Name / Wordmark / Logo** → führt zur Startseite
+- **Work** → führt zur Projektübersicht
+- **Contact** → führt zum Kontaktbereich
+- **Optionaler CTA**: hervorgehobener *"Let's talk ↗"*-Button
+- **Language Switcher `[CONFIRMED]`**: Dauerhaft sichtbarer **DE / EN Switcher** (mit automatischer Erst-Erkennung und persistierter manueller Auswahl).
 
-### Footer
-- **Grosser Call-to-Action**: Aufforderung zur Kontaktaufnahme ("Let's build something together").
-- **Kontaktwege**: Direkte E-Mail, evtl. Buchungslink, Social Links.
-- **Rechtliches**: Impressum, Datenschutz, Copyright.
-- **Visuelle Welt**: Rückkehr zu Cinematic Dark.
+> **Navigationseinordnung von About & Lab `[CONFIRMED]`**:  
+> - **About** bleibt vorläufig als feste Section auf der Homepage integriert (kein separater Menüpunkt notwendig).  
+> - **The Lab / Concepts** bleibt Bestandteil der Homepage bzw. der Filterstruktur unter `/work`. Es wird keine eigenständige Lab-Route erzwungen.  
+> - Eine Auslagerung in eigene Hauptnavigationspunkte bleibt eine optionale spätere Erweiterung `[TODO]`.
+
+### Footer `[CONFIRMED]`
+- **Großer Call-to-Action**: Einladender Abschluss ("Let's build something together").
+- **Kontaktwege**: Direkte E-Mail, LinkedIn, ggf. weitere Profile.
+- **Rechtliches / Meta**: Impressum, Datenschutz (technisch erforderlich, aber keine kreative Hauptnavigation).
+- **Visuelle Klammer**: Rückkehr zur dunklen, immersiven Tonalität (Cinematic Dark).
 
 ---
 
-## 2. Seitenübersicht (Routen)
+## 2. Seitenübersicht & Routing-Modell
+
+### Hauptseiten `[CONFIRMED]`
+- `/` — Homepage (Dramaturgische Reise)
+- `/work` — Übersicht aller Arbeiten (Client Work & Concepts)
+- `/work/[slug]` — Case Study Detailansicht
+- `/contact` — Barrierefreier Kontaktbereich
+
+### Mehrsprachiges Routing `[WORKING DIRECTION]`
+Für die zweisprachige Umsetzung (DE/EN) wird folgende strukturierte Locale-Architektur als bevorzugte Richtung festgehalten:
 
 ```text
-/ (Home)
-├── /work
-│   ├── /work/[slug]          (Case Study — Client Project oder Concept)
-│   └── (Optionaler Filter nach Client Work vs. Concepts)
-├── /contact
-└── /legal
-    ├── /impressum
-    └── /datenschutz
+/de
+├── /de/work
+│   └── /de/work/[slug]
+└── /de/contact
+
+/en
+├── /en/work
+│   └── /en/work/[slug]
+└── /en/contact
+```
+
+*Technische Hilfsseiten (nachgelagert):*
+```text
+├── /de/impressum  &  /en/imprint
+└── /de/datenschutz  &  /en/privacy
 ```
 
 ---
 
-## 3. Homepage-Struktur & Abschnittsfolge
+## 3. Homepage-Struktur & Abschnittsfolge `[WORKING DIRECTION]`
 
-Die Homepage bildet den dramaturgischen Leitfaden der gesamten Nutzererfahrung.
+Die genaue Homepage-Komposition ist **noch nicht final** und wird in der Design-Exploration getestet. Aktuell bevorzugte Abfolge:
 
-### ACT I — IMPRESS *(Cinematic Dark)*
-*Fokus: Maximale visuelle Wirkung, Neugier wecken, gestalterisches Können beweisen.*
-1. **Hero Section**
-   - Markante Headline / Mission Statement
-   - Feine, cineastische Typografie und Atmosphäre
-   - Subtiler Scroll-Indikator
-2. **Selected Work**
-   - 2 bis 3 handverlesene Spitzenprojekte
-   - Großformatige Medien (Video/Stills), flüssige Scroll-Interaktion
-   - Nahtloser Übergang zur nächsten Phase
-
-### ACT II — TRUST *(Warm Editorial / Cream)*
-*Fokus: Substanzieller Beweis von Professionalität, Zuverlässigkeit und Tiefe.*
-1. **Clients / Collaborations**
-   - Ruhige, edle Logoleiste oder typografische Nennung
-2. **About / Philosophy**
-   - Wer steht dahinter? Haltung, Design- & Engineering-Philosophie
-   - Authentisches Porträt / Editorial-Layout
-3. **Capabilities / Services**
-   - Was konkret angeboten wird (Art Direction, Creative Tech, Design Systems)
-4. **Experience & Stationen**
-   - Relevante Meilensteine, Agentur-/Studio-Erfahrung
-5. **Credentials & Recognition**
-   - Zertifikate, Auszeichnungen oder relevante Veröffentlichungen
-6. **Testimonials (Optional)**
-   - Ausgewählte Stimmen von Auftraggebern oder Partnern
-
-### ACT III — EXPLORE *(The Lab / Independent Concepts)*
-*Fokus: Innovationskraft, Leidenschaft und unkonventionelle Ideen.*
-1. **The Lab Intro**
-   - Erklärung: Eigeninitiierte Studien, Zukunftskonzepte, experimentelle Interaktionen
-2. **Concept Grid / Cards**
-   - Visuell gleichwertig zu Client-Projekten inszeniert
-   - Transparente Kennzeichnung als *"Independent Concept"*
-
-### FINAL — ACT *(Cinematic Dark)*
-*Fokus: Konversion und Abschluss der visuellen Klammer.*
-1. **Contact CTA**
-   - Direkte Einladung zum Austausch
-   - Niederschwellige Kontaktmöglichkeit
+```text
+┌────────────────────────────────────────────────────────┐
+│  01 Hero Section (Cinematic Dark)                      │
+│     • Statement: "FROM IDEA TO DIGITAL EXPERIENCE."    │
+│     • Subline, Atmosphäre, subtiler Scroll-Impuls      │
+├────────────────────────────────────────────────────────┤
+│  02 Selected Work (Cinematic Dark)                     │
+│     • 2–3 handverlesene Spitzenprojekte                │
+│     • Großformatige Medien, Fokus auf Exzellenz        │
+├────────────────────────────────────────────────────────┤
+│  03 Signature Dark → Cream Transition                  │
+│     • Dramaturgischer Farbumschwung zu Warm Editorial  │
+├────────────────────────────────────────────────────────┤
+│  04 About / Personal Statement (Warm Editorial)        │
+│     • Nahbare Vorstellung, Philosophie, Porträt        │
+├────────────────────────────────────────────────────────┤
+│  05 What I Do / Capabilities (Warm Editorial)          │
+│     • 3 Bereiche: Websites, Apps, AI & Automation      │
+│     • Ergänzend integriert: Think / Design / Build     │
+├────────────────────────────────────────────────────────┤
+│  06 Selected Experience / Collaborations               │
+│     • Meilensteine, Zusammenarbeit, Agenturbezug       │
+├────────────────────────────────────────────────────────┤
+│  07 The Lab / Independent Concepts (Hybrid / Dark)     │
+│     • Eigeninitiierte Studien & Prototypen             │
+├────────────────────────────────────────────────────────┤
+│  08 Optionale Trust Elements                           │
+│     • Testimonials oder relevante Referenz-Logos       │
+├────────────────────────────────────────────────────────┤
+│  09 Final CTA (Cinematic Dark)                         │
+│     • Rückkehr zur immersiven Welt                     │
+│     • Starker Kontakt-Abschluss                        │
+└────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## 4. Work Page (`/work`)
-- **Header**: Einführung & Überblick über das Gesamtwerk.
-- **Filter / Toggle**:
-  - All Projects
-  - Client Work
+## 4. Work Page (`/work`) `[WORKING DIRECTION]`
+
+- **Kopfbereich**: Übersichtliche Einführung und Haltung zur Arbeit.
+- **Filter- / Gruppierungsoptionen**:
+  - Alle Arbeiten
+  - Client Projects (Reale Auftragsarbeiten)
   - Independent Concepts (The Lab)
-- **Projektliste / Grid**: Großzügige, visuell ansprechende Kacheln/Zeilen mit Metadaten (Kategorie, Jahr, Rolle).
+- **Projektübersicht**: Großzügige Kacheln/Zeilen mit Metadaten (Kategorie, Jahr, Rolle).
 
 ---
 
-## 5. Project Detail Template (`/work/[slug]`)
-- Detailliertes Case Study Template (siehe Spezifikation in [`docs/07-project-template.md`](07-project-template.md)).
-- Einheitlicher Aufbau für Client Projects und Independent Concepts.
+## 5. Project Detail Template (`/work/[slug]`) `[CONFIRMED]`
+
+- Detailliertes Case Study Template (Spezifikation siehe [`docs/07-project-template.md`](07-project-template.md)).
+- Einheitlicher gestalterischer Aufbau für Client Projects und Independent Concepts.
 
 ---
 
-## 6. Contact Page (`/contact`)
-- Direkte Kontaktoptionen (E-Mail mit Click-to-Copy).
-- Angaben zur aktuellen Projektverfügbarkeit und Vorlaufzeit.
-- Zeitzone & bevorzugte Kommunikationswege.
+## 6. Contact Page (`/contact`) `[CONFIRMED]`
+
+- Unkomplizierter, schneller Erstkontakt (Formular: Name, E-Mail, Nachricht).
+- Direkte E-Mail-Adresse mit Click-to-Copy.
+- LinkedIn-Profil.
+- Keine Hürden, kein Budget-Prequalifying.
 
 ---
 
-## 7. Offene Punkte & TODOs
-- [ ] Festlegung, ob "About" eine separate Unterseite erhält oder auf der Homepage verbleibt.
-- [ ] Definition der genauen URL-Slugs für Case Studies.
-- [ ] Wireframing der responsiven Breakpoint-Anpassungen (Mobile vs. Desktop Navigation).
+## 7. Offene Punkte `[TODO]`
+
+- [ ] Finale Festlegung des Routing-Mechanismus (Sub-Path `/de`/`/en` vs. Cookie-basiertes Rendering) nach Framework-Entscheidung.
+- [ ] Responsive Verhalten der Navigation auf Mobilgeräten (Minimalistisches Menü-Overlay vs. Sticky Bar).
+- [ ] Testen der 3 Design-Explorationen für die Homepage-Dramaturgie.
