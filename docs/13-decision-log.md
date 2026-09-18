@@ -62,35 +62,43 @@ NOTES: [Relevante Einschränkungen oder nachgelagerte Aufgaben]
 - **RATIONALE**: Schafft eine barrierefreie, sympathische und professionelle Kontaktaufnahme auf Augenhöhe.
 - **NOTES**: Formular mit Name, E-Mail, Nachricht sowie direkter E-Mail-Adresse und LinkedIn.
 
+### DEC-008: Design-Tooling: Impeccable & Google Stitch MCP
+- **DATE**: 2026-09-18
+- **STATUS**: `CONFIRMED`
+- **RATIONALE**:
+  - **Impeccable** dient als projektbezogenes Tool für Design Critique, Refinement, Entrümpelung und abschließende visuelle Qualitätsprüfung, sobald konkrete Entwürfe vorliegen.
+  - **Google Stitch MCP** dient als Tooling für visuelle Design-Exploration, Variantenbildung und Prototyping.
+- **NOTES**: Beide Werkzeuge sind reines Development- und Design-Tooling, stellen **keine Runtime-Dependencies** dar und dürfen niemals Source-of-Truth-Entscheidungen oder Briefing-Vorgaben aus `/docs` überschreiben.
+
 ---
 
 ## 🧭 Aktuelle Arbeitsrichtungen `[WORKING DIRECTION]`
 
-### DEC-008: Working Copy & Hero Headline
+### DEC-009: Working Copy & Hero Headline
 - **DATE**: 2026-09-18
 - **STATUS**: `WORKING DIRECTION`
 - **RATIONALE**: Hero Headline: *"FROM IDEA TO DIGITAL EXPERIENCE."* spiegelt den End-to-End-Gedanken wider.
 - **NOTES**: Dient aktuell als Demo-Copy für Rhythmus und Typografie, noch nicht als finale Marketing-Copy.
 
-### DEC-009: Strukturierung in 3 Haupt-Leistungsbereiche
+### DEC-010: Strukturierung in 3 Haupt-Leistungsbereiche
 - **DATE**: 2026-09-18
 - **STATUS**: `WORKING DIRECTION`
 - **RATIONALE**: Vermeidung einer unübersichtlichen Einzelleistungs-Liste durch Fokussierung auf: 1. Websites & Commerce, 2. Apps & Business Systems, 3. AI & Automation.
 - **NOTES**: UI/UX, Motion und Code durchdringen alle drei Bereiche.
 
-### DEC-010: Locale-basiertes Routing (`/de`, `/en`)
+### DEC-011: Locale-basiertes Routing (`/de`, `/en`)
 - **DATE**: 2026-09-18
 - **STATUS**: `WORKING DIRECTION`
 - **RATIONALE**: Saubere Trennung für SEO (`hreflang`), Caching und Teilen von URLs.
 - **NOTES**: Noch nicht technisch implementieren.
 
-### DEC-011: Next.js App Router als starker Framework-Kandidat
+### DEC-012: Next.js App Router als starker Framework-Kandidat
 - **DATE**: 2026-09-18
 - **STATUS**: `WORKING DIRECTION`
 - **RATIONALE**: Industriestandard mit React Server Components, starker Typisierung und großem Ökosystem.
 - **NOTES**: Vor Initialisierung ist die Cloudflare-Kompatibilität (`@opennextjs/cloudflare`) verbindlich zu prüfen.
 
-### DEC-012: 9-teilige Homepage-Sektionsfolge
+### DEC-013: 9-teilige Homepage-Sektionsfolge
 - **DATE**: 2026-09-18
 - **STATUS**: `WORKING DIRECTION`
 - **RATIONALE**: 01 Hero → 02 Selected Work → 03 Dark-Cream-Transition → 04 About → 05 What I Do → 06 Experience → 07 The Lab → 08 Trust Elements → 09 Final CTA.

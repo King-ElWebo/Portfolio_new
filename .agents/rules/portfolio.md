@@ -19,5 +19,10 @@
    Erstelle keine leeren App-Ordner (`app/`, `src/`) und installiere keine npm-Packages ohne ausdrückliche Bestätigung.
 6. **Schlankes Skill-Set nutzen**:
    Wähle stets die kleinste sinnvolle Skill-Kombination (maximal 2–3) passend zur aktuellen Teilaufgabe gemäß [`docs/11-agent-workflow.md`](../../docs/11-agent-workflow.md).
-7. **Verifikation vor Abschluss**:
+7. **Visuelle Design-Tasks (Stitch & Impeccable)**:
+   - Folge [`docs/11-agent-workflow.md`](../../docs/11-agent-workflow.md) und nutze die kleinste sinnvolle Skill-Kombination.
+   - Nutze **Stitch MCP** ausschließlich zur visuellen Exploration und Variantengenerierung.
+   - Setze **Impeccable** gezielt für Critique und Refinement ein, sobald ein konkreter Entwurf existiert.
+   - Tool-Outputs dürfen niemals bestätigte Repository-Entscheidungen überschreiben.
+8. **Verifikation vor Abschluss**:
    Überprüfe vor jeder Fertigmeldung die tatsächlichen Dateiänderungen, Git-Status und Konsistenz aller internen Referenzen.

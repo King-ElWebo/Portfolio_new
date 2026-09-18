@@ -73,7 +73,12 @@ Before starting substantial work, read the relevant documentation in `/docs`. Re
 
 ## Design & Aesthetics
 - Follow the confirmed creative direction: **Cinematic Dark × Warm Editorial**.
+- Follow **`docs/11-agent-workflow.md`** for skill orchestration and tooling.
 - Static design must look complete without animations.
+- **Design Tooling & Quality**:
+  - **Stitch MCP** is exploration tooling, not runtime architecture.
+  - Use **Impeccable** for critique, refinement, and final visual quality once a concrete design exists.
+  - Do not use Impeccable or Stitch to override confirmed product, architecture, or art-direction decisions.
 - **Strictly rejected**: Generic AI/SaaS aesthetics (purple gradients, generic templates), pointless Bento grids, skill percentage bars, decorative gradient orbs.
 
 ---

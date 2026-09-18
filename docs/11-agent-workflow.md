@@ -20,49 +20,104 @@ Dieses Projekt wird kollaborativ durch spezialisierte KI-Agenten und den Entwick
 > [!WARNING]
 > **NIEMALS alle Skills gleichzeitig aktivieren oder laden!**  
 > Die Aktivierung übermäßig vieler Skills führt zu Kontext-Überladung, widersprüchlichen Anweisungen und generischem Code.  
-> **Es wird immer die kleinste sinnvolle Kombination für die spezifische Aufgabe gewählt.**
+> **Es wird immer die kleinste sinnvolle Kombination für die spezifische Teilaufgabe gewählt.**
 
 ---
 
 ## 🧩 Phasenbezogene Skill-Zuordnung
 
-| Phase | Primäre Skills | Zweck & Fokus |
+| Phase | Primäre Skills & Tools | Zweck & Fokus |
 | :--- | :--- | :--- |
-| **1. Strategy & Ideation** | `brainstorming` | Strukturierung von Ideen, Hinterfragen von Anforderungen |
-| **2. Research & Benchmarks** | `firecrawl-search`, `firecrawl-scrape` | Gezielte Recherche offizieller Dokumentation & Referenzen |
-| **3. Visual Direction** | `frontend-design`, `ui-ux-pro-max` | Gestaltung von Layouts, Typografie und Farbwelten |
-| **4. Anti-Generic Review** | `design-taste-frontend` | Schutz vor generischem AI-/SaaS-Slop und Template-Mustern |
-| **5. Microinteraction Thinking** | `emil-design-eng` | Feinschliff von Interaktionsdetails und haptischem Feedback |
-| **6. Motion & Transitions** | `cinematic-gsap-lenis-motion-system`, `gsap-scrolltrigger` *(nur bei Bedarf)* | Choreografie von ScrollTrigger-Sequenzen und Lenis |
-| **7. Engineering & Code** | `react-best-practices`, `composition-patterns` | Saubere Komponentenstrukturen und TypeScript-Disziplin |
-| **8. Quality & Auditing** | `design-review`, `typography-audit`, `ui-ux-audit`, `web-accessibility` | Systematische Überprüfung vor dem Release |
-| **9. Process & QA** | `writing-plans`, `verification-before-completion` | Strukturierte Planung und Verifikation vor Aufgabenabschluss |
-
-### Praxisbeispiele für schlanke Kombinationen:
-- **Design Exploration**:  
-  `brainstorming` → `frontend-design` → `ui-ux-pro-max` *(maximal 2–3 Skills)*.
-- **Frontend-Implementierung**:  
-  Framework-Dokumentation → `react-best-practices` *(keine gleichzeitigen 5 Motion-Skills)*.
-- **Accessibility & Quality Review**:  
-  `web-accessibility` → `verification-before-completion`.
+| **1. Strategy / Ideation** | `brainstorming` | Strukturierung von Ideen, Hinterfragen von Anforderungen |
+| **2. Research** | `firecrawl-search`, `firecrawl-scrape`, `firecrawl-website-design-clone` | Gezielte Recherche offizieller Dokumentation & Referenzen |
+| **3. Visual Exploration** | `frontend-design`, `ui-ux-pro-max`, `Stitch MCP` | Entwurf von Layouts, typografischen Hierarchien & Varianten |
+| **4. Anti-Generic / Art-Direction Review** | `design-taste-frontend` | Schutz vor generischem AI-/SaaS-Slop und Modetrends |
+| **5. Design Refinement / Quality** | `Impeccable` | Kritische Design-Reviews, Polish & Beseitigung visueller Komplexität |
+| **6. Microinteractions** | `emil-design-eng` | Feinschliff von Interaktionsdetails und haptischem Feedback |
+| **7. Motion** | `cinematic-gsap-lenis-motion-system`, `gsap-scrolltrigger` *(gsap-react / gsap-performance nur bei konkreter Notwendigkeit)* | Choreografie von Scroll-Sequenzen und Performance-Tuning |
+| **8. Engineering** | `react-best-practices`, `composition-patterns` | Saubere Komponentenarchitektur & TypeScript-Disziplin |
+| **9. Final Quality & QA** | `design-review`, `typography-audit`, `ui-ux-audit`, `web-accessibility`, `Impeccable`, `verification-before-completion` | Abschließendes Auditing vor Release & Fertigmeldung |
 
 ---
 
-## 🛠️ Design-Tooling (Nicht-Runtime)
+## 💎 Impeccable: Design-Quality & Refinement `[CONFIRMED]`
 
-### 1. Stitch MCP
-- **Einsatzbereich**: Design-Exploration, visuelle Prototypen, Erprobung alternativer Homepage-Kompositionen.
-- **Status**: **Reines Entwicklungs- und Design-Tool**, absolut **keine Runtime-Dependency** im späteren Codebase.
-- **Nutzung**: Generierung und Gegenüberstellung von Layout-Varianten vor der Code-Erstellung.
+`Impeccable` ist als spezialisiertes Werkzeug für **Design-Kritik, Veredelung und visuelle Qualität** in das Projekt integriert.
 
-### 2. Nano Banana / Bildgenerierung
-- **Einsatzbereich**: Visuelle Assets, Moodboards, Editorial-Hintergründe, Texturen und Concept-Mockups.
-- **Status**: Asset-Produktion. Hat keinerlei Einfluss auf die Anwendungs- oder Code-Architektur.
+### Einsatzlogik für Impeccable:
+- **Kein Einsatz während des frühen Brainstormings**: In ersten Ideenrunden wird Impeccable **nicht automatisch** hinzugeschaltet.
+- **Einsatz erst bei konkreten Entwürfen**: Sobald eine visuelle Richtung oder ein konkreter UI-Entwurf vorliegt, wird Impeccable aktiviert für:
+  - **Design Critique**: Aufspüren von Schwachstellen, unsauberer Ausrichtung oder visuellen Brüchen.
+  - **Refinement / Polish**: Typografischer Feinschliff, Abstands-Präzision und Rhythmus.
+  - **Entrümpelung**: Reduktion unnötiger visueller Komplexität und Zierde.
+  - **Abschließende UI-/Design-Audits**: Überprüfung vor der finalen Freigabe.
+- **Motion-Funktionen**: Dürfen nur dann eingesetzt werden, wenn die Animation zuvor konzeptionell begründet wurde.
+
+> [!IMPORTANT]
+> **Impeccable-Prinzip**:  
+> Impeccable agiert als **Reviewer und Refinement-Spezialist**.  
+> Es ersetzt **weder** den Creative Brief, die Art Direction, das Design System, noch Nutzerentscheidungen oder Source-of-Truth-Dokumente.  
+> Impeccable darf **keine offenen architektonischen oder gestalterischen Entscheidungen stillschweigend finalisieren**.
 
 ---
 
-## 🚫 No-Gos für Agenten
+## 🧵 Google Stitch MCP: Design Exploration Tooling `[CONFIRMED]`
 
-1. **Keine stillschweigenden Entscheidungen**: Fehlende Entscheidungen zu Frameworks, Design oder Content niemals selbst erfinden, sondern als Frage an den Nutzer formulieren.
+Google Stitch MCP ist als externes Design-Exploration-Werkzeug angebunden.
+
+### Geeignete Einsatzbereiche:
+- Generierung alternativer **Homepage-Kompositionsvarianten**
+- Erprobung unterschiedlicher **Hero-Varianten**
+- Visuelle **Layout-Exploration** für Case Studies
+- Testen alternativer Ausprägungen der Art Direction (Cinematic, Editorial, Hybrid)
+- Schnelle Erzeugung interaktiver **UI-Prototypen**
+
+### Klare Befugnisgrenzen für Stitch MCP:
+- **Stitch-Outputs sind NIEMALS automatisch final**: Sie dienen als Diskussions- und Entscheidungsgrundlage.
+- **Stitch darf**:
+  - Bestehende, bestätigte Vorgaben aus `/docs` interpretieren.
+  - Mehrere visuelle Varianten zur Auswahl durch den Nutzer erzeugen.
+- **Stitch darf NICHT**:
+  - ❌ Architekturentscheidungen treffen.
+  - ❌ Produktanforderungen oder Briefing-Inhalte eigenmächtig verändern.
+  - ❌ Runtime-Dependencies im Codebase vorgeben (Stitch ist reines Dev-Tooling).
+  - ❌ Noch offene Projektentscheidungen als bestätigt behandeln.
+
+> **Priorität**: Die Dokumentation in `/docs` steht strikt über allen Stitch-Outputs.
+
+---
+
+## 🔄 Beispielhafter Portfolio-Design-Workflow
+
+Um das Minimalprinzip in der Praxis einzuhalten, folgt der Entwurfsprozess diesem linearen Ablauf:
+
+```text
+1. Ideation & Struktur
+   └─ brainstorming
+
+2. Visuelle Grobentwürfe
+   └─ frontend-design + ui-ux-pro-max + Stitch MCP
+
+3. Nutzer-Feedback & Richtungsentscheidung
+   └─ Nutzer wählt oder kombiniert eine Richtung
+
+4. Detailkritik & Vereinfachung
+   └─ Impeccable Critique
+
+5. Iteration & Ausarbeitung
+   └─ Design-Anpassung
+
+6. Feinschliff & Polish
+   └─ Impeccable Polish
+
+7. Finales Quality Gate
+   └─ design-review + web-accessibility + typography-audit + verification-before-completion
+```
+
+---
+
+## 🚫 Übergreifende No-Gos für Agenten
+
+1. **Keine stillschweigenden Entscheidungen**: Fehlende Entscheidungen zu Frameworks, Design, Schriften oder Content niemals selbst erfinden, sondern als Frage an den Nutzer formulieren.
 2. **Keine spekulative Code-Erstellung**: Wenn die Aufgabe eine Planungs- oder Dokumentationsaufgabe ist, darf kein Produktiv-Code geschrieben oder installiert werden.
 3. **Keine Secrets in Repositories**: Niemals API-Keys, Token oder Zugangsdaten in Dateien hinterlegen.
