@@ -33,27 +33,25 @@
   - ❌ Keine Authentication-Lösung
   ...solange keine konkrete Produktanforderung danach verlangt.
 
-### 3. Framework-Auswahl `[WORKING DIRECTION / CANDIDATE]`
-- **Next.js (App Router)** ist aktuell ein **starker Kandidat**, jedoch **noch nicht final CONFIRMED**.
-- **Vor der Framework-Initialisierung müssen zwingend folgende Faktoren geprüft werden**:
-  1. Aktuelle, offizielle Cloudflare-Unterstützung (z. B. `@opennextjs/cloudflare` vs. Cloudflare Pages / Workers).
-  2. Empfohlene Deployment-Strategie auf Cloudflare.
-  3. Reibungslose Kompatibilität mit Neon PostgreSQL (Serverless Driver / WebSocket / HTTP).
-  4. Native oder saubere Unterstützung unserer Internationalisierungs-Anforderung (DE/EN mit Locale-Routing).
-  5. Harmonische Integration geplanter Motion-Libraries.
-- **Alternative Kandidaten (maximal 2–3)**: z. B. Astro (exzellenter Server-First-Ansatz für Content) oder Remix / React Router v7. Es wird keine theoretische Debatte mit Dutzenden Frameworks geführt.
+### 3. Framework-Auswahl `[CONFIRMED]`
+- **React Router v8 + Vite + Cloudflare Workers** ist das verbindlich ausgewählte Framework (`DEC-014`).
+- **Rationale**:
+  1. **Nativer Cloudflare Workers Support**: Vollständige Unterstützung über `@cloudflare/vite-plugin` und `@react-router/dev/vite` mit direkter Ausführung im `workerd`-Runtime.
+  2. **Keine Shim-Komplexität**: Im Gegensatz zu Next.js (das auf Cloudflare `@opennextjs/cloudflare` zur Emulation von Node.js/Vercel-APIs benötigt) läuft React Router v8 nativ und schlank.
+  3. **Server-Side-Rendering & Daten-Layer**: Erstklassige Server-Loaders, Actions und Form-Handling direkt im Worker.
+  4. **Volle Neon PostgreSQL Kompatibilität**: Reibungsloser Zugriff über serverless HTTP/WebSocket-Driver in Cloudflare Workers.
+  5. **Sauberes Locale-Routing**: Native Unterstützung von parametrisierten Routen (`/de/...`, `/en/...`).
+- **Next.js (App Router)** wurde als Kandidat evaluiert und zugunsten dieser nativen Edge-Architektur als `REJECTED / SUPERSEDED` eingestuft (`DEC-R08`).
 
 ### 4. Rendering & Hydration `[CONFIRMED]`
-- **Server-First denken**: HTML wird standardmäßig auf dem Server gerendert.
-- **Client JavaScript minimieren**: Client-Code wird ausschließlich dort ausgeliefert, wo echte Interaktivität erforderlich ist.
-- *Bei Einsatz von Next.js*:
-  - **Server Components by default** für Layout, Seitenstruktur und Datenabruf.
-  - **Client Components (`'use client'`) nur für**:
-    - Direkte Browser-APIs (z. B. Locale-Erkennung, Media-Queries)
-    - Interaktive Event-Handler (Buttons, Formular-Inputs)
-    - Lokale UI-Zustände (z. B. Menü-Toggle)
-    - Motion & Animations-Trigger
-    - Interaktive Canvas- / WebGL-Elemente
+- **Server-First denken**: HTML wird standardmäßig auf dem Server gerendert (SSR via Cloudflare Workers).
+- **Client JavaScript minimieren**: Client-Code wird ausschließlich dort hydriert, wo echte Interaktivität erforderlich ist.
+- **Client-Interaktivität**:
+  - Direkte Browser-APIs (z. B. Locale-Erkennung, Media-Queries)
+  - Interaktive Event-Handler (Buttons, Formular-Inputs)
+  - Lokale UI-Zustände (z. B. Menü-Toggle)
+  - Motion & Animations-Trigger (GSAP / Canvas / WebGL)
+  - Interaktive Hero- und Lab-Elemente (Canvas / WebGL)
 
 ### 5. Datenbank-Prinzipien (Neon PostgreSQL) `[CONFIRMED]`
 - **Aktueller Status**: Noch kein Schema, keine Tabellen, kein ORM und keine Migrationen.

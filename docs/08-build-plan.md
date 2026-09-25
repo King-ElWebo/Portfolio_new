@@ -1,17 +1,14 @@
 # Technical Build Plan
 
-> **Status**: PAUSED (Wartet auf Abschluss von Design-Exploration & Architektur-Freigabe) `[CONFIRMED]`  
+> **Status**: IN PROGRESS (Design Exploration mit D3.1 abgeschlossen; Framework React Router v8 bestätigt; Initialisierung & Entwicklung aktiv) `[CONFIRMED]`  
 > **Zweck**: Schritt-für-Schritt-Plan zur technischen Realisierung des Portfolios.  
 > **Source of Truth**: Entwicklungsfahrplan & Meilensteine
 
 ---
 
-## 🛑 Aktueller Status: Planungsphase
+## 🚀 Aktueller Status: Implementierungsphase
 
-Der konkrete Implementierungs- und Code-Build-Plan ist **ausdrücklich pausiert**.
-
-> **Verbindliche Regel**:  
-> Die eigentliche technische Implementierung (Installation von Frameworks, Erstellung von Source-Code, Datenbank-Provisionierung) beginnt **erst nach expliziter Freigabe durch den Nutzer**.
+Die Design-Exploration ist abgeschlossen (Referenz: D3.1 — Visual Polish). Das Framework wurde auf React Router v8 + Vite + Cloudflare Workers verbindlich festgelegt (`DEC-014`). Die technische Initialisierung und statische Umsetzung der Homepage erfolgen direkt im Repository-Root.
 
 ---
 

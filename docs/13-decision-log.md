@@ -92,11 +92,10 @@ NOTES: [Relevante Einschränkungen oder nachgelagerte Aufgaben]
 - **RATIONALE**: Saubere Trennung für SEO (`hreflang`), Caching und Teilen von URLs.
 - **NOTES**: Noch nicht technisch implementieren.
 
-### DEC-012: Next.js App Router als starker Framework-Kandidat
+### DEC-012: Next.js App Router (ursprünglicher Kandidat)
 - **DATE**: 2026-09-18
-- **STATUS**: `WORKING DIRECTION`
-- **RATIONALE**: Industriestandard mit React Server Components, starker Typisierung und großem Ökosystem.
-- **NOTES**: Vor Initialisierung ist die Cloudflare-Kompatibilität (`@opennextjs/cloudflare`) verbindlich zu prüfen.
+- **STATUS**: `SUPERSEDED` (durch DEC-014 & DEC-R08)
+- **RATIONALE**: War der initiale Evaluierungskandidat. Wurde nach Verifikation der Cloudflare- und Vite-Architektur zugunsten von React Router v8 verworfen.
 
 ### DEC-013: 9-teilige Homepage-Sektionsfolge
 - **DATE**: 2026-09-18
@@ -104,12 +103,18 @@ NOTES: [Relevante Einschränkungen oder nachgelagerte Aufgaben]
 - **RATIONALE**: 01 Hero → 02 Selected Work → 03 Dark-Cream-Transition → 04 About → 05 What I Do → 06 Experience → 07 The Lab → 08 Trust Elements → 09 Final CTA.
 - **NOTES**: Wird in drei Design-Explorationen (Cinematic, Editorial, Hybrid) getestet.
 
+### DEC-014: React Router v8 + Vite + Cloudflare Workers als verbindliches Framework
+- **DATE**: 2026-09-25
+- **STATUS**: `CONFIRMED`
+- **RATIONALE**: React Router v8 bietet native TypeScript/TSX-Workflows, erstklassige Vite-Integration via `@cloudflare/vite-plugin`, Server-Side-Rendering auf Cloudflare Workers (`workerd`), sauberes Locale-Routing und schlanke Server-Funktionen (Loaders/Actions) ohne die künstliche Komplexität oder Shim-Schichten von Next.js auf Cloudflare (`@opennextjs/cloudflare`).
+- **NOTES**: Initialisierung erfolgt direkt im Root des Repositories.
+
 ---
 
 ## 🔍 Noch offene Entscheidungen `[OPEN / TODO]`
 
-- **DEC-O1**: Finales Frontend-Framework (Next.js vs. Astro / Remix).
-- **DEC-O2**: Cloudflare Adapter & Build-Pipeline.
+- **DEC-O1**: Finales Frontend-Framework `[RESOLVED -> DEC-014]`.
+- **DEC-O2**: Cloudflare Adapter & Build-Pipeline `[RESOLVED -> @cloudflare/vite-plugin + React Router]`.
 - **DEC-O3**: ORM / Query Builder (Drizzle ORM vs. Kysely).
 - **DEC-O4**: Konkrete Schriftarten (Headline-Serif/-Grotesk & Body-Font).
 - **DEC-O5**: Exakte Hex-/OKLCH-Farbwerte für Dark- und Cream-Bereiche.
@@ -151,3 +156,7 @@ NOTES: [Relevante Einschränkungen oder nachgelagerte Aufgaben]
 ### DEC-R07: Sinnlose Bento-Grid-Layouts
 - **DATE**: 2026-09-18 | **STATUS**: `REJECTED`
 - **RATIONALE**: Bento-Grids werden oft als reiner Trend ohne Rücksicht auf inhaltliche Hierarchie eingesetzt.
+
+### DEC-R08: Next.js (App Router) für dieses Projekt
+- **DATE**: 2026-09-25 | **STATUS**: `REJECTED / SUPERSEDED`
+- **RATIONALE**: Next.js erfordert auf dem bestätigten Deployment-Ziel Cloudflare zusätzliche Transpilations- und Shim-Schichten (`@opennextjs/cloudflare`) zur Emulation von Node.js-/Vercel-Runtimes. React Router v8 mit Vite und `@cloudflare/vite-plugin` läuft nativ auf Cloudflare Workers (`workerd`) und bietet eine deutlich wartungsärmere, schlankere Architektur ohne Vercel-Vendor-Lock-in.

@@ -20,6 +20,7 @@ coverage/
 # Cloudflare & Runtime Cache
 .wrangler/
 .mf/
+.react-router/
 
 # System & OS Files
 .DS_Store

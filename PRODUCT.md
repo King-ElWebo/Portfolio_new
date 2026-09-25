@@ -8,12 +8,12 @@
 
 web
 
-## Stack `[WORKING DIRECTION / NOT FINALIZED]`
+## Stack `[CONFIRMED]`
 
-- **Framework**: Candidate under evaluation is Next.js (App Router). Alternative candidates: Astro, Remix. Final selection deferred until after design exploration and Cloudflare runtime verification.
-- **Hosting / Deployment Target `[CONFIRMED]`**: Cloudflare (Pages / Workers / OpenNext). No Vercel-specific dependencies.
+- **Framework `[CONFIRMED]`**: React Router v8 + Vite + Cloudflare Workers (`DEC-014`). Superseeded Next.js candidate (`DEC-R08`).
+- **Hosting / Deployment Target `[CONFIRMED]`**: Cloudflare Workers via `@cloudflare/vite-plugin`. No Vercel-specific dependencies.
 - **Database Target `[CONFIRMED]`**: Neon PostgreSQL (serverless, server-side access only).
-- **Status**: Greenfield planning phase. No packages installed, no app scaffold initialized yet.
+- **Status**: Framework decided; implementation phase initiated.
 
 ## Users `[CONFIRMED]`
 
