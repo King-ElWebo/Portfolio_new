@@ -1,0 +1,15 @@
+{
+  "variant": "B",
+  "particleCount": 40305,
+  "strideFloats": 13,
+  "strideBytes": 52,
+  "bounds": {
+    "minX": -1.4787987421938409,
+    "maxX": 1.2820088533467269,
+    "minY": -1.4508380383233235,
+    "maxY": 1.2913033396351334,
+    "minZ": -0.9836928625956936,
+    "maxZ": 0.7799052752106598
+  },
+  "version": "refined-shell-B"
+}

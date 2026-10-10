@@ -1,0 +1,15 @@
+{
+  "variant": "A",
+  "particleCount": 38071,
+  "strideFloats": 13,
+  "strideBytes": 52,
+  "bounds": {
+    "minX": -1.4017001313448303,
+    "maxX": 1.2799528050091713,
+    "minY": -1.3573641110293153,
+    "maxY": 1.22096814875603,
+    "minZ": -0.8333837728428095,
+    "maxZ": 0.72602293523168
+  },
+  "version": "refined-shell-A"
+}

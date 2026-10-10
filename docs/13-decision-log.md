@@ -109,6 +109,18 @@ NOTES: [Relevante Einschränkungen oder nachgelagerte Aufgaben]
 - **RATIONALE**: React Router v8 bietet native TypeScript/TSX-Workflows, erstklassige Vite-Integration via `@cloudflare/vite-plugin`, Server-Side-Rendering auf Cloudflare Workers (`workerd`), sauberes Locale-Routing und schlanke Server-Funktionen (Loaders/Actions) ohne die künstliche Komplexität oder Shim-Schichten von Next.js auf Cloudflare (`@opennextjs/cloudflare`).
 - **NOTES**: Initialisierung erfolgt direkt im Root des Repositories.
 
+### DEC-015: 3D Computational Point-Cloud Sculpture im Hero
+- **DATE**: 2026-10-10
+- **STATUS**: `WORKING DIRECTION` (Visual Art Direction Variant A bestätigt, pausiert für persönlichen Smartphone-3D-Scan)
+- **RATIONALE**: 
+  - Genuiner, GPU-gerenderter 3D Point-Cloud-Bust mittels Three.js BufferGeometry + Custom GLSL Vertex- und Fragment-Shadern.
+  - Echte 3D-Volumetrie statt flacher 2D-Fotofilter: Realistische Tiefenstaffelung (Z) und Chiaroscuro-Studiobeleuchtung mittels echter 3D-Oberflächennormalen.
+  - Farbpalette: 88% architektonisches Warm-White / neutrales Off-White (`#f8f6f0`, `#eae5da`) mit 12% dezenten Champagner-/Gold-Akzenten (`#ebd6b7`, `#d8b27d`) auf Lockenspitzen und Silhouette. 0% fotografische Orangetöne.
+  - Cursor-Interaktion: Sanfte Tiefen- und Wellenperturbation mit Parallax-Kippung statt radialer Punktverdrängung (keine schwarzen Löcher im Gesicht).
+  - Gestaffelte Assembly-Kurve (2.2s), lebendiger Idle-Microdrift und umkehrbarer Scroll-Dissolve.
+- **NOTES**: Visuelle Basis (Variante A: feine Partikelgröße, Chiaroscuro, Obsidian-Negativraum) bestätigt. Das generische Lee-Perry-Smith-Basismesh wird durch einen echten Smartphone-Scan (FaceID/Photogrammetrie) ersetzt, um authentische Gesichtsähnlichkeit ohne Proportionsschätzungen zu gewährleisten. Datensatz liegt vorbereitet in `public/assets/portrait-particles.bin`.
+
+
 ---
 
 ## 🔍 Noch offene Entscheidungen `[OPEN / TODO]`
