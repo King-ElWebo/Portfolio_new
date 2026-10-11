@@ -78,6 +78,22 @@ export interface Translations {
     project01: Project01;
     project02: Project02;
   };
+  workArchive: {
+    metaTitle: string;
+    metaDescription: string;
+    pageTitle: string;
+    filterAll: string;
+    filterClient: string;
+    filterLab: string;
+    viewCaseStudy: string;
+    viewExperiment: string;
+    caseStudyPlanned: string;
+    curatorialStatement: string;
+    previewNotice: string;
+    emptyStateTitle: string;
+    emptyStateDescription: string;
+    previewBadge: string;
+  };
   bridge: {
     project03: Project03;
     heading: string;
@@ -175,29 +191,45 @@ export const translations: Record<Locale, Translations> = {
       kicker: "01 / SELECTED WORK",
       subtitle: "— CURATED ARCHIVE",
       project01: {
-        badge: "[Client Project — Case Study]",
-        title: "Digital Flagship Platform & Design System",
-        tags: ["Art Direction", "Design Tokens", "Headless Architecture"],
-        meta: "PROD DEPLOYMENT // NEXT.JS · TAILWIND · GRAPHQL",
+        badge: "[Client Project — Boutique Showcase]",
+        title: "Checkpot Hietzing — Fashion Boutique & Custom CMS",
+        tags: ["Next.js", "Tailwind CSS", "Neon PostgreSQL", "Cloudflare Workers"],
+        meta: "PROD DEPLOYMENT // NEXT.JS · TAILWIND · CLOUDFLARE WORKERS",
       },
       project02: {
-        badge: "[Client Project]",
-        title: "Interactive Spatial Experience & Web Application",
-        description: "An architectural web application examining 3D spatial viewport mechanics, real-time shaders, and custom physics simulation.",
-        tags: ["Three.js", "Shader GLSL", "Interactive Canvas"],
+        badge: "[Client Project — Floral Atelier]",
+        title: "Let It Bloom — Vienna Floral Atelier & Mini-CMS",
+        description: "Bespoke digital presence for a Vienna floral atelier featuring a password-protected mini-CMS for seasonal selections and curated photography.",
+        tags: ["Next.js 15", "React 19", "Tailwind CSS v4", "Vercel KV / Blob"],
       },
+    },
+    workArchive: {
+      metaTitle: "Projects — WILK // Digital Designer & Software Developer",
+      metaDescription: "Curated portfolio index of commissioned digital products, brand flagships, and computational experiments.",
+      pageTitle: "Projects",
+      filterAll: "All",
+      filterClient: "Client Projects",
+      filterLab: "The Lab",
+      viewCaseStudy: "View Case Study",
+      viewExperiment: "View Experiment",
+      caseStudyPlanned: "Case Study in Preparation",
+      curatorialStatement: "Selected client commissions and independent computational research. Crafted with architectural discipline, accessible ergonomics, and rigorous engineering.",
+      previewNotice: "Preview Mode — Illustrative Project Candidates (Real content in verification)",
+      emptyStateTitle: "No Published Projects in this Category",
+      emptyStateDescription: "Client work and lab studies are currently undergoing verification before publication.",
+      previewBadge: "Illustrative Preview Fixture",
     },
     bridge: {
       project03: {
-        badge: "[Independent Concept / Architectural Study]",
-        title: "Adaptive Data Surface & System Shell",
-        tags: ["Information Architecture", "Component Systems", "State Management"],
-        visualBadge: "FIGMA TO RUST/WASM TO RUNTIME",
-        kicker: "FRAMEWORK EXPLORATION",
-        calloutTitle: "The tactile software imperative",
-        description: "A speculative interface examining ultra-dense telemetry panels without cognitive strain. Designed with a custom typography hierarchy, strict column grids, and sub-millisecond local state synchronization.",
-        statusLeft: "STATUS: LAB EXPERIMENTAL",
-        statusRight: "SPEC_V0.8",
+        badge: "[Independent Concept / Specialist ERP]",
+        title: "SPEICHE — Bicycle Workshop Management System",
+        tags: ["Information Architecture", "State Systems", "Specialist ERP"],
+        visualBadge: "REACT 19 // OFFLINE-FIRST CLIENT STATE",
+        kicker: "INDEPENDENT CONCEPT & ARCHITECTURE",
+        calloutTitle: "Focused software craftsmanship without SaaS bloat",
+        description: "An independent specialist application concept examining dense bicycle repair workflows: robust client-side state, repair tracking, parts inventory, and work-time logging.",
+        statusLeft: "STATUS: INDEPENDENT CONCEPT / DEMO",
+        statusRight: "SPEC_READY",
       },
       heading: "CRAFT & METHODOLOGY",
     },
@@ -349,29 +381,45 @@ export const translations: Record<Locale, Translations> = {
       kicker: "01 / AUSGEWÄHLTE ARBEITEN",
       subtitle: "— KURATIERTES ARCHIV",
       project01: {
-        badge: "[Kundenprojekt — Fallstudie]",
-        title: "Digitale Flagship-Plattform & Design System",
-        tags: ["Art Direction", "Design Tokens", "Headless Architektur"],
-        meta: "PRODUKTIONS-DEPLOYMENT // NEXT.JS · TAILWIND · GRAPHQL",
+        badge: "[Kundenprojekt — Boutique Webpräsenz]",
+        title: "Checkpot Hietzing — Modeboutique & Custom CMS",
+        tags: ["Next.js", "Tailwind CSS", "Neon PostgreSQL", "Cloudflare Workers"],
+        meta: "PRODUKTIONS-DEPLOYMENT // NEXT.JS · TAILWIND · CLOUDFLARE WORKERS",
       },
       project02: {
-        badge: "[Kundenprojekt]",
-        title: "Interaktives räumliches Erlebnis & Web-Applikation",
-        description: "Eine architektonische Web-Applikation zur Untersuchung von 3D-Viewport-Mechaniken, Echtzeit-Shadern und Physiksimulationen.",
-        tags: ["Three.js", "Shader GLSL", "Interaktives Canvas"],
+        badge: "[Kundenprojekt — Florales Atelier]",
+        title: "Let It Bloom — Floristik & Mini-CMS",
+        description: "Bespoke digitale Präsenz für ein Wiener Floristik-Atelier mit passwortgeschütztem Mini-CMS für saisonale Werkstücke und Bildergalerie.",
+        tags: ["Next.js 15", "React 19", "Tailwind CSS v4", "Vercel KV / Blob"],
       },
+    },
+    workArchive: {
+      metaTitle: "Projekte — WILK // Digital Designer & Software Developer",
+      metaDescription: "Kuratiertes Portfolio-Archiv aus realisierten Kundenprojekten, Flagship-Plattformen und interaktiven Konzepten.",
+      pageTitle: "Projekte",
+      filterAll: "Alle",
+      filterClient: "Kundenprojekte",
+      filterLab: "The Lab",
+      viewCaseStudy: "Case Study ansehen",
+      viewExperiment: "Experiment ansehen",
+      caseStudyPlanned: "Case Study in Vorbereitung",
+      curatorialStatement: "Ausgewählte Kundenaufträge und freie computergestützte Forschung. Entwickelt mit gestalterischer Disziplin, barrierefreier Ergonomie und verlässlicher Ingenieurskunst.",
+      previewNotice: "Vorschau-Modus — Illustrative Projekt-Kandidaten (Reale Inhalte in Verifikation)",
+      emptyStateTitle: "Keine veröffentlichten Projekte in dieser Kategorie",
+      emptyStateDescription: "Kundenarbeiten und Labor-Studien durchlaufen derzeit die inhaltliche Freigabe vor der Veröffentlichung.",
+      previewBadge: "Illustrativer Vorschau-Kandidat",
     },
     bridge: {
       project03: {
-        badge: "[Eigenständiges Konzept / Architektonische Studie]",
-        title: "Adaptive Datenoberfläche & System-Shell",
-        tags: ["Informationsarchitektur", "Komponentensysteme", "Zustandsmanagement"],
-        visualBadge: "FIGMA ZU RUST/WASM ZUR RUNTIME",
-        kicker: "FRAMEWORK-EXPLORATION",
-        calloutTitle: "Das Gebot taktiler Software",
-        description: "Ein spekulatives Interface zur Erprobung hochdichter Telemetrie-Panels ohne kognitive Überlastung. Konzipiert mit strenger Typografie-Hierarchie und lokaler Zustandssynchronisation im Submillisekundenbereich.",
-        statusLeft: "STATUS: LAB EXPERIMENTELL",
-        statusRight: "SPEZ_V0.8",
+        badge: "[Unabhängiges Konzept / Fachsoftware]",
+        title: "SPEICHE — Werkstattmanager & Betriebs-Applikation",
+        tags: ["Informationsarchitektur", "Zustandsmanagement", "Fachanwendung"],
+        visualBadge: "REACT 19 // OFFLINE-FIRST CLIENT STATE",
+        kicker: "UNABHÄNGIGES KONZEPT & ARCHITEKTUR",
+        calloutTitle: "Fokussierte Fachsoftware ohne SaaS-Banalität",
+        description: "Ein eigenständiges Fachanwendungs-Konzept für Fahrradwerkstätten: Untersuchung dichter Arbeitsabläufe mit robuster lokaler Zustandsführung, Auftragsabwicklung, Teileverzeichnis und Zeiterfassung.",
+        statusLeft: "STATUS: EIGENSTÄNDIGES KONZEPT / DEMO",
+        statusRight: "SPEZ_READY",
       },
       heading: "CRAFT & METHODOLOGY",
     },

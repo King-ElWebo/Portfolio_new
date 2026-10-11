@@ -42,11 +42,12 @@
 
 ---
 
-## 4. Server / Client-Trennung `[CONFIRMED]`
+## 4. Server-Side Rendering (SSR) & Hydration `[CONFIRMED]`
 
-- **Server-First als Leitlinie**: Komponenten werden standardmäßig auf dem Server gerendert.
-- **Kein Client-Side-Rendering als Standard**: Client JavaScript wird nur dort ausgeliefert, wo Browser-Events, lokaler Zustand oder Animationen es zwingend erfordern.
-- Client-Komponenten so tief wie möglich im DOM-Baum halten („Push Client State down“), um statische Eltern-Bereiche als Server Components zu bewahren.
+- **Server-First als Leitlinie**: Seiten und Routen werden standardmäßig auf dem Server gerendert (Cloudflare Workers SSR).
+- **React Router v8 Daten-Architektur**: Datenabruf erfolgt über serverseitige `loader`-Funktionen; Mutationen (wie Formular-Submits) erfolgen über `action`-Funktionen.
+- **Client JavaScript minimieren**: Client-Hydration und Event-Listener werden ausschließlich dort aktiviert, wo interaktive Browser-APIs, Canvas/WebGL (Hero Portrait) oder lokaler Komponenten-State (z. B. mobiles Navigationsmenü) zwingend erforderlich sind.
+- Reine Präsentations- und Layout-Komponenten verbleiben schlank und hydration-arm.
 
 ---
 
@@ -142,13 +143,16 @@ Vor dem Hinzufügen einer neuen npm-Dependency muss folgende Checkliste durchlau
 ## 14. Quality Gate (Definition of Done) `[CONFIRMED]`
 
 Bevor eine Implementierungsaufgabe als **DONE** bezeichnet werden darf, müssen folgende Kriterien erfüllt sein:
-1. `typecheck` (tsc) läuft ohne Fehler durch.
-2. `linter` läuft ohne Warnungen/Fehler durch.
-3. Relevante Tests laufen erfolgreich durch.
-4. Der Produktions-Build (`build`) kompiliert fehlerfrei.
+1. `typecheck` (`react-router typegen && tsc`) läuft ohne Fehler durch.
+2. `linter` läuft ohne Warnungen/Fehler durch *(Hinweis: Linter ist noch nicht in `package.json` konfiguriert; Task in Epic G)*.
+3. Relevante Tests laufen erfolgreich durch *(Hinweis: Test-Framework noch nicht konfiguriert; Task in Epic G)*.
+4. Der Produktions-Build (`npm run build`) kompiliert fehlerfrei.
 5. Keine JavaScript-Fehler oder Warnungen in der Browser-Konsole.
 6. Responsive Ansichten auf Mobile und Desktop geprüft.
 7. Tastaturbedienbarkeit und `@media (prefers-reduced-motion)` verifiziert.
 8. Keine versehentlichen oder ungenehmigten Dependencies installiert.
 9. Keine Secrets im Code oder Git-Diff.
 10. Dokumentation in `/docs` aktualisiert, sofern sich architektonische Details geändert haben.
+
+> [!NOTE]
+> **Aktuelle Tooling-Lücke**: In `package.json` existieren derzeit nur die Skripte `dev`, `build`, `preview` und `typecheck`. Weder ein Linter (ESLint/Biome) noch ein Test-Runner (Vitest/Playwright) sind aktuell installiert. Bis zur Umsetzung von Task `QA-001` im Backlog erfolgt das Quality Gate über `typecheck`, `build` und manuelle visuelle/konsolenbasierte Prüfung.

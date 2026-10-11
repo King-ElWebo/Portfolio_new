@@ -4,16 +4,29 @@
 
 > **Note for Impeccable**: This document is a product-context adapter for Impeccable. The canonical Source of Truth for all requirements and decisions remains in [`/docs`](docs/) and [`/AGENTS.md`](AGENTS.md).
 
-## Platform
+## Platform & Product Scope `[CONFIRMED]`
 
-web
+- **Platform**: Web (Multi-Page Portfolio Application)
+- **Scope**: The product is a **multi-page portfolio**, not a single-page site. The current homepage design provides the visual baseline, not the completed application.
+- **Core Route Architecture**:
+  - **Homepage**: `/de`, `/en` (Cinematic Dark × Warm Editorial, 3-Act narrative, signature bridge, selected work, capabilities, practitioner, collaboration, lab, contact, footer)
+  - **Work Archive**: `/de/work`, `/en/work` (Dedicated standalone work overview, client work & independent concepts, category filtering, case-study links)
+  - **Case Studies**: `/de/work/:slug`, `/en/work/:slug` (Deep-dive project presentations following `docs/07-project-template.md`)
+  - **Dedicated Contact**: `/de/contact`, `/en/contact` (Focused inquiry page, direct email, network links, accessible form)
+  - **Legal Routes**: `/de/impressum` / `/en/imprint`, `/de/datenschutz` / `/en/privacy` (Statutory legal pages, no invented claims)
+  - **About & Lab**: Homepage sections and integrated project filters; no forced standalone pages unless decided later.
 
 ## Stack `[CONFIRMED]`
 
-- **Framework `[CONFIRMED]`**: React Router v8 + Vite + Cloudflare Workers (`DEC-014`). Superseeded Next.js candidate (`DEC-R08`).
-- **Hosting / Deployment Target `[CONFIRMED]`**: Cloudflare Workers via `@cloudflare/vite-plugin`. No Vercel-specific dependencies.
-- **Database Target `[CONFIRMED]`**: Neon PostgreSQL (serverless, server-side access only).
-- **Status**: Framework decided; implementation phase initiated.
+- **Framework `[CONFIRMED]`**: React Router v8 + Vite + Cloudflare Workers (`DEC-014`). Superseded Next.js candidate (`DEC-R08`).
+- **Hosting / Deployment Target `[CONFIRMED]`**: Cloudflare Workers via `@cloudflare/vite-plugin`. SSR in `workers/app.ts`. No Vercel-specific dependencies.
+- **Database Target `[CONFIRMED]`**: Neon PostgreSQL (serverless, server-side access only; currently unprovisioned/unconnected, static/local content first).
+- **Status**: Framework initialized; Homepage D3.1 visual baseline implemented; Multi-page architecture and content system in progress.
+
+## Visual Design Baseline & Signature Elements `[CONFIRMED]`
+
+- **Approved Visual Baseline**: **D3.1 — Visual Polish** (Stitch Project `9864955914556862585`, Screen `projects/9864955914556862585/screens/6ee11b79164049f5885ec647cf18a32a`).
+- **Hero Particle Portrait**: Interactive 3D Point-Cloud Bust (Three.js + custom GLSL shaders). Status: **PAUSED — awaiting decision on personalized facial geometry**. Foundation preserved; development frozen until authentic geometry is decided.
 
 ## Users `[CONFIRMED]`
 
@@ -50,12 +63,11 @@ The portfolio is intentionally not positioned around one fixed industry or a nar
   - provide credible proof through work
   - communicate the person and capabilities behind the work
   - build enough trust for a potential client, company, or collaborator to make contact  
-  *(Note: Detailed homepage dramaturgy and section progression remain a `[WORKING DIRECTION]` in `docs/02-site-architecture.md` and will be tested during design exploration).*
 - **Contact Flow `[CONFIRMED]`**: Straightforward and respectful (Name, Email, Message, Submit inquiry, direct email, LinkedIn). No discovery-call booking funnels, no budget prequalifying.
 
 ## Capabilities and Constraints `[CONFIRMED]`
 
-- **Internationalization (i18n)**: Fully bilingual (DE + EN) with browser locale detection on first visit and persistent manual switcher. Locale-aware URLs (`/de`, `/en`) are `[WORKING DIRECTION]`.
+- **Internationalization (i18n)**: Fully bilingual (DE + EN) with browser locale detection on first visit and persistent manual switcher. Locale routes (`/de`, `/en`).
 - **Architecture**: Single application first; no premature backend split.
 - **Security**: Database access strictly server-side; no credentials exposed client-side.
 - **Performance**: Performance is a technical quality requirement. Motion must never compromise usability or Core Web Vitals.
@@ -70,12 +82,12 @@ The portfolio is intentionally not positioned around one fixed industry or a nar
 - **Aesthetic Anti-Patterns `[REJECTED]`**: No generic AI/SaaS aesthetics (purple gradients, generic templates), no pointless Bento grids, no skill percentage bars, no decorative gradient orbs, no glassmorphism for its own sake.
 - **Demo / Working Copy `[WORKING DIRECTION]`**:
   - Hero: *"FROM IDEA TO DIGITAL EXPERIENCE."*
-  - Subline: *"I design and build digital products — from websites and shops to custom software, business systems and AI integrations."*
-  - Statement: *"I'm [Name], a digital designer and software developer based in Austria. I like turning complex ideas into digital products that feel simple, useful and considered."*
+  - Subline: *"Designing thoughtful digital interfaces and engineering robust software systems from concept to production."*
+  - Statement: *"I care about how things work just as much as how they look."*
 
-## Evidence on Hand `[DEFERRED]`
+## Evidence on Hand & Content Strategy `[IN PROGRESS]`
 
-Real client work and substantial project experience already exist, but detailed project selection, case-study content, and evidence population are intentionally deferred until after design exploration. No names, metrics, results, or project details are fabricated or assumed prior to explicit user input.
+Transitioning from visual demo placeholders toward verified, truthful portfolio content. Real project experience and client work exist (candidate pool established in `docs/01-content-inventory.md`), but case-study texts and evidence population require explicit confirmation before final publication. Independent concepts must be transparently labeled. No metrics or client facts may be invented.
 
 ## Product Principles `[CONFIRMED]`
 

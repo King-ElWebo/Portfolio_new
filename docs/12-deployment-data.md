@@ -1,55 +1,43 @@
 # Deployment & Infrastructure Target
 
-> **Status**: CONFIRMED VORGABE (Ziele gesetzt, Tooling-Details noch offen)  
-> **Source of Truth**: Hosting, Cloud-Infrastruktur & Datenbank
+> **Status**: IN PROGRESS (Cloudflare Workers Konfiguration & Vite-Plugin implementiert; Remote-Deployment & Neon unprovisioniert)  
+> **Source of Truth**: Hosting, Cloud-Infrastruktur & Datenbank-Integration
 
 ---
 
 ## 🎯 Bestätigte Zielinfrastruktur `[CONFIRMED]`
 
-| Komponente | Gewählte Technologie / Plattform | Status |
-| :--- | :--- | :--- |
-| **Hosting & Deployment** | **Cloudflare** (Pages / Workers / OpenNext) | `CONFIRMED` |
-| **Datenbank** | **Neon PostgreSQL** (Serverless Postgres) | `CONFIRMED` |
+| Komponente | Gewählte Technologie / Plattform | Aktueller Integrationsstand | Status |
+| :--- | :--- | :--- | :--- |
+| **Hosting & Runtime** | **Cloudflare Workers** (via `@cloudflare/vite-plugin`) | `wrangler.jsonc`, `vite.config.ts` und `workers/app.ts` im Repository konfiguriert. Lokale SSR-Ausführung aktiv. | `CONFIRMED / IMPLEMENTIERT` |
+| **Datenbank** | **Neon PostgreSQL** (Serverless Postgres) | Zielplattform bestätigt. Aktuell **vollständig unprovisioniert und nicht angebunden**. Dateibasierte Inhalte genügen zum Start. | `CONFIRMED ZIEL / UNPROVISIONIERT` |
 
 ---
 
-## 🛑 Wichtige Handlungsregeln für Agents `[CONFIRMED]`
+## 🌐 Cloudflare Workers Implementierungsstand
 
-1. **Keine Vercel-spezifischen Annahmen treffen**:  
-   Das Projekt wird **nicht** auf Vercel gehostet. Es dürfen keine Vercel-exklusiven APIs (`@vercel/analytics`, `@vercel/og`, Vercel Edge Runtime Spezifika) ungeprüft eingeplant werden, es sei denn, sie sind vollständig standardkonform und auf Cloudflare lauffähig.
-2. **Noch keine Blind-Konfigurationen anlegen**:  
-   Es werden zum jetzigen Zeitpunkt **weder `wrangler.json`/`wrangler.toml` noch spezifische Cloudflare-Adapter-Dateien** erzeugt. Diese entstehen erst, wenn das Framework final gewählt wurde.
-3. **Keine Datenbank vorab provisionieren**:  
-   Es wird vorerst kein Neon-Projekt, kein API-Token und keine echte Verbindung angelegt.
-
----
-
-## 🌐 Cloudflare Deployment-Strategie `[OPEN / TO BE EVALUATED]`
-
-Sobald das Framework entschieden ist, wird der offizielle, empfohlene Integrationspfad recherchiert:
-- **Bei Next.js**: Evaluierung des aktuellen Stands von `@opennextjs/cloudflare` oder des nativen Cloudflare-Supportings.
-- **Bei statischen / SSG-Frameworks**: Cloudflare Pages mit standardmäßigen Static Builds und Functions.
-- **Offizielle Dokumentation als Source of Truth**: Ausschließlich [developers.cloudflare.com](https://developers.cloudflare.com) für Konfigurations- und Deploymentfragen heranziehen.
+Das Repository ist für den nativen Betrieb auf Cloudflare Workers vorkonfiguriert:
+- **Konfigurationsdatei**: `wrangler.jsonc` mit Schema, Compatibility Date `2025-03-01`, Flag `nodejs_compat`, Einstiegspunkt `./workers/app.ts` und statischen Assets in `./build/client`.
+- **Vite Plugin**: `@cloudflare/vite-plugin` (1.60.2) in `vite.config.ts` eingebunden (`viteEnvironment: { name: "ssr" }`).
+- **Worker Entry Point**: `workers/app.ts` instanziiert `createRequestHandler` mit `virtual:react-router/server-build` und leitet Anfragen über `ExportedHandler<Env>` weiter.
+- **Lokale Entwicklung**: `npm run dev` simuliert die Cloudflare Workers SSR-Umgebung transparent.
+- **Remote-Status**: Noch kein Remote-Deployment, keine Cloudflare-Bindings (KV, D1, Queues) und kein Custom-Domain-Binding durchgeführt.
 
 ---
 
-## 🐘 Neon PostgreSQL Integrations-Strategie `[OPEN / TO BE EVALUATED]`
+## 🐘 Neon PostgreSQL Integrations-Status
 
-Bei der späteren Anbindung von Neon sind folgende Kernpunkte zu berücksichtigen:
-- **Connection Pooling**: Nutzung des serverless Neon Connection Poolers (`-pooler` Hostname) für Edge-Runtimes.
-- **Serverless Driver**: Einsatz von `@neondatabase/serverless` (HTTP- oder WebSocket-basiert) für extrem schnelle Kaltstarts ohne TCP-Verbindungsüberhang.
-- **Migrationen**: Definition eines sauberen Migrations-Workflows (z. B. via Drizzle Kit), der CI/CD-fähig ist.
-- **Lokale Entwicklung**: Anbindung über Umgebungsvariablen (`.env.local`), die niemals in Git committet werden.
-- **Offizielle Dokumentation als Source of Truth**: Ausschließlich [neon.tech/docs](https://neon.tech/docs) heranziehen.
+- **Status**: **Unprovisioniert**.
+- **Konzept**: Es wurde bewusst noch keine Cloud-Datenbank bei Neon angelegt, da das Portfolio zunächst über lokale typisierte Dateien (`content/projects/`) vollständig autark und latenzfrei betrieben werden kann.
+- **Vorbereitung**: Die `.env.example` enthält den formalen Platzhalter `DATABASE_URL` für die spätere Anbindung.
+- **Sicherheits-Grundsatz**: Falls Neon angebunden wird, erfolgt der Zugriff ausschließlich serverseitig in Loadern/Actions (niemals Client-seitig gebündelt).
 
 ---
 
-## 📋 Noch offene Infrastruktur-Entscheidungen `[OPEN / TODO]`
+## 📋 Noch offene Infrastruktur- & Deployment-Entscheidungen `[OPEN / TODO]`
 
-- [ ] **Framework-Wahl**: Next.js App Router vs. Alternativen.
-- [ ] **Cloudflare Adapter**: Konkreter Build- und Deployment-Adapter für das gewählte Framework.
-- [ ] **ORM / Query Builder**: Drizzle ORM, Kysely oder nativer Neon-Driver.
-- [ ] **E-Mail-Provider für Kontaktanfragen**: Resend, Cloudflare Workers Mail oder SMTP.
-- [ ] **Analytics (DSGVO-konform)**: Cloudflare Web Analytics, Plausible oder Umami (keine Cookies, kein Consent-Banner nötig).
-- [ ] **Asset- & Medien-Storage**: Cloudflare Images / R2 (nur falls dynamischer Media-Upload benötigt wird).
+- [ ] **Remote Cloudflare Provisioning**: Anlegen des Cloudflare Worker Projekts im Cloudflare Dashboard / CLI vor dem Go-Live.
+- [ ] **Domain & DNS**: Finale Festlegung der Domain (Arbeitspräferenz `bywilk`) und Aufschaltung via Cloudflare DNS.
+- [ ] **E-Mail-Provider für Kontaktanfragen**: Auswahl und Anbindung eines Transaktions-Mail-Dienstes (z. B. Resend API oder Cloudflare Workers Mail).
+- [ ] **Datenschutzkonforme Analytics**: Aktivierung von Cloudflare Web Analytics (cookie-frei, DSGVO-konform ohne Consent-Banner).
+- [ ] **Production Secrets**: Hinterlegen von Secrets via `wrangler secret put` erst bei konkretem Bedarf.

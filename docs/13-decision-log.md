@@ -111,31 +111,63 @@ NOTES: [Relevante Einschränkungen oder nachgelagerte Aufgaben]
 
 ### DEC-015: 3D Computational Point-Cloud Sculpture im Hero
 - **DATE**: 2026-10-10
-- **STATUS**: `WORKING DIRECTION` (Visual Art Direction Variant A bestätigt, pausiert für persönlichen Smartphone-3D-Scan)
+- **STATUS**: `PAUSED — awaiting decision on personalized facial geometry`
 - **RATIONALE**: 
-  - Genuiner, GPU-gerenderter 3D Point-Cloud-Bust mittels Three.js BufferGeometry + Custom GLSL Vertex- und Fragment-Shadern.
-  - Echte 3D-Volumetrie statt flacher 2D-Fotofilter: Realistische Tiefenstaffelung (Z) und Chiaroscuro-Studiobeleuchtung mittels echter 3D-Oberflächennormalen.
-  - Farbpalette: 88% architektonisches Warm-White / neutrales Off-White (`#f8f6f0`, `#eae5da`) mit 12% dezenten Champagner-/Gold-Akzenten (`#ebd6b7`, `#d8b27d`) auf Lockenspitzen und Silhouette. 0% fotografische Orangetöne.
-  - Cursor-Interaktion: Sanfte Tiefen- und Wellenperturbation mit Parallax-Kippung statt radialer Punktverdrängung (keine schwarzen Löcher im Gesicht).
-  - Gestaffelte Assembly-Kurve (2.2s), lebendiger Idle-Microdrift und umkehrbarer Scroll-Dissolve.
-- **NOTES**: Visuelle Basis (Variante A: feine Partikelgröße, Chiaroscuro, Obsidian-Negativraum) bestätigt. Das generische Lee-Perry-Smith-Basismesh wird durch einen echten Smartphone-Scan (FaceID/Photogrammetrie) ersetzt, um authentische Gesichtsähnlichkeit ohne Proportionsschätzungen zu gewährleisten. Datensatz liegt vorbereitet in `public/assets/portrait-particles.bin`.
+  - Genuiner, GPU-gerenderter 3D Point-Cloud-Bust mittels Three.js BufferGeometry + Custom GLSL Vertex- und Fragment-Shadern (Variante A: feine Partikelgröße, Chiaroscuro-Licht, Obsidian-Negativraum, PointerMove-Interaktion, Scroll-Dissolve).
+  - Derzeitiges generisches Basismesh ähnelt dem echten Practitioner noch nicht hinreichend.
+  - Die Weiterentwicklung des Porträts ist auf Nutzeranweisung **ausdrücklich pausiert**.
+  - Es wird vorerst kein bestimmter Scan-Workflow (Smartphone FaceID vs. Photogrammetrie) verbindlich vorgeschrieben.
+  - Der bestehende Rendering- und Shader-Code in `app/components/portrait/` bleibt unberührt erhalten.
+- **NOTES**: Vor einem späteren Public-Release muss die Herkunft des aktuellen Basismeshs (Lee Perry Smith Dataset / Infinite-Realities CC-BY) auf Lizenz- und Namensnennungspflichten verifiziert werden. Private Porträtfotos in `assets/portraits/private/` bleiben strikt privat.
 
+### DEC-016: D3.1 — Visual Polish als freigegebene visuelle Implementierungs-Baseline
+- **DATE**: 2026-10-10
+- **STATUS**: `CONFIRMED BASELINE`
+- **RATIONALE**: Nach systematischer Exploration über Stitch MCP (A, B, C, D, D2, D3) wurde Variante D3.1 (Stitch Project `9864955914556862585`, Screen `projects/9864955914556862585/screens/6ee11b79164049f5885ec647cf18a32a`) als visuelle Baseline freigegeben. Der bestehende React-Code in `app/components/` und `app/app.css` wurde an dieses Layout angeglichen.
+- **NOTES**: D3.1 definiert die freigegebene visuelle Makro-Struktur (3-Akt-Dramaturgie, Layout-Hierarchie), nicht die finale Festschreibung jedes Dummy-Textes oder Webfonts.
+
+### DEC-017: Priorisierung der vollständigen Multi-Page-Portfolio-Fertigstellung
+- **DATE**: 2026-10-10
+- **STATUS**: `CONFIRMED`
+- **RATIONALE**: Die Homepage ist das visuelle Fundament, nicht das gesamte Produkt. Um die Proof-of-Work- und Vertrauensfunktion glaubwürdig zu erfüllen, hat die Fertigstellung der eigenständigen Work-Übersicht (`/de/work`), der Case-Study-Routen (`/de/work/:slug`), der funktionalen Kontaktseite (`/de/contact`) und der rechtlichen Seiten (`/de/impressum`, `/de/datenschutz`) Vorrang vor weiteren isolierten Homepage-Animationen.
+- **NOTES**: Alle anstehenden Aufgaben werden im operativen Backlog [`docs/14-implementation-backlog.md`](14-implementation-backlog.md) geführt.
+
+### DEC-018: Domain-Präferenz 'bywilk' als vorläufige Arbeitsrichtung
+- **DATE**: 2026-10-10
+- **STATUS**: `WORKING DIRECTION`
+- **RATIONALE**: Die Domain-Idee `bywilk` (bzw. `bywilk.com` / `bywilk.dev` / `wilk.studio`) ist eine vielversprechende Arbeitspräferenz für das spätere Branding.
+- **NOTES**: Die Domain ist **weder gekauft noch final bestätigt**. Bis zur tatsächlichen DNS-Einrichtung bleibt dieser Status eine reine `WORKING DIRECTION`.
+
+### DEC-019: Lokales, dateibasiertes Content-System für Portfolio-Projekte
+- **DATE**: 2026-10-10
+- **STATUS**: `WORKING DIRECTION`
+- **RATIONALE**: Reale Arbeitserfahrung existiert (Pool aus 10 Kandidatenprojekten in `docs/01-content-inventory.md`). Für die initiale Bereitstellung des Portfolios ist ein lokales, typisiertes Datenmodell in `content/projects/` vollständig ausreichend und latenzfrei.
+- **NOTES**: Weder Headless CMS noch relationale Datenbanken sind für den initialen Content-Launch erforderlich. Die Auswahl der finalen Leitprojekte für "Selected Work" bedarf noch der Bestätigung (`NEEDS CONFIRMATION`).
+
+### DEC-020: Work-Archiv-Design: Variant C (Minimalist Editorial Index) bestätigt
+- **DATE**: 2026-10-10
+- **STATUS**: `CONFIRMED`
+- **RATIONALE**: Nach Analyse von Variant A (Cinematic Gallery) und Variant B (Refined Archive) sowie Einbindung des Referenz-Screenshots (Michael Ocean Inspiration) wurde Variant C (`projects/9864955914556862585/screens/1a80a64291984da0bde44794b4c368c5`) als visuelles Fundament für die eigenständige Work-Archiv-Seite (`/work`) freigegeben.
+- **MERKMALE**: Großzügiger Weißraum, Haarlinien-Teiler, monumentale Titelzeile mit horizontal gekoppeltem dynamischem Projektzähler, diszipliniertes 3-Spalten-Raster, dezente Bild-Hover-Effekte, keine Pseudo-Telemetrie oder Fake-Dashboards.
+- **NOTES**: Visuell in React und CSS vollständig implementiert; läuft aktuell mit 6 klar deklarierten lokalen Vorschau-Kandidaten (`PREVIEW_FIXTURES`), bis reale Kundenprojekte und Bildmaterial freigegeben sind.
 
 ---
 
 ## 🔍 Noch offene Entscheidungen `[OPEN / TODO]`
 
-- **DEC-O1**: Finales Frontend-Framework `[RESOLVED -> DEC-014]`.
-- **DEC-O2**: Cloudflare Adapter & Build-Pipeline `[RESOLVED -> @cloudflare/vite-plugin + React Router]`.
-- **DEC-O3**: ORM / Query Builder (Drizzle ORM vs. Kysely).
-- **DEC-O4**: Konkrete Schriftarten (Headline-Serif/-Grotesk & Body-Font).
-- **DEC-O5**: Exakte Hex-/OKLCH-Farbwerte für Dark- und Cream-Bereiche.
-- **DEC-O6**: Art des Hero-Visuals (Typografisch vs. 3D-Asset vs. Bild).
-- **DEC-O7**: Gewinner der 3 Design-Explorationen (A: Cinematic, B: Editorial, C: Hybrid).
-- **DEC-O8**: Motion-Stack (GSAP + Lenis vs. nativer CSS-Fokus).
-- **DEC-O9**: Transaktions-E-Mail-Provider für Kontaktanfragen (Resend vs. Cloudflare Workers Mail).
-- **DEC-O10**: Datenschutzkonforme Analytics (Cloudflare Web Analytics vs. Plausible/Umami).
-- **DEC-O11**: CMS-Bedarf (Start mit lokalen typisierten Markdown/MDX-Dateien).
+- **DEC-O1**: Finales Frontend-Framework `[RESOLVED -> DEC-014 (React Router v8)]`.
+- **DEC-O2**: Cloudflare Adapter & Build-Pipeline `[RESOLVED -> DEC-014 (@cloudflare/vite-plugin)]`.
+- **DEC-O3**: ORM / Query Builder (Drizzle ORM vs. Kysely) `[DEFERRED -> DB aktuell unprovisioniert]`.
+- **DEC-O4**: Konkrete Schriftarten (Finaler Webfont-Stack vs. kommerzieller Editorial-Schnitt).
+- **DEC-O5**: Exakte Hex-/OKLCH-Farbwerte `[RESOLVED -> D3.1 Baseline in app.css verifiziert]`.
+- **DEC-O6**: Art des Hero-Visuals `[RESOLVED -> DEC-015 (3D Canvas implementiert, pausiert)]`.
+- **DEC-O7**: Gewinner der Design-Explorationen `[RESOLVED -> DEC-016 (D3.1 Visual Polish)]`.
+- **DEC-O8**: Motion-Stack für seitenweites Scrollen (GSAP + Lenis vs. CSS-Fokus) `[OPEN]`.
+- **DEC-O9**: Transaktions-E-Mail-Provider für Kontaktanfragen (Resend vs. Cloudflare Workers Mail) `[OPEN]`.
+- **DEC-O10**: Datenschutzkonforme Analytics (Cloudflare Web Analytics vs. Plausible/Umami) `[OPEN]`.
+- **DEC-O11**: CMS-Bedarf `[RESOLVED -> DEC-019 (Lokale strukturierte Dateien in content/projects/)]`.
+- **DEC-O12**: Auswahl der 2–3 "Selected Work" Leitprojekte aus dem Kandidatenpool `[OPEN / NEEDS CONFIRMATION]`.
+- **DEC-O13**: Finale Domain-Registrierung `[OPEN / NEEDS CONFIRMATION]`.
 
 ---
 

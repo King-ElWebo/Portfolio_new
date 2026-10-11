@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router";
 import type { Translations, Locale } from "~/i18n/translations";
+import { getAlternateLocale, getLocaleSwitchUrl, setLocaleCookie } from "~/i18n/locale";
 
 interface SiteHeaderProps {
   t: Translations;
@@ -11,37 +12,101 @@ export function SiteHeader({ t, locale }: SiteHeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
 
-  const otherLocale: Locale = locale === "de" ? "en" : "de";
-  const switchLocaleUrl = location.pathname.startsWith("/de")
-    ? location.pathname.replace(/^\/de/, "/en")
-    : location.pathname.startsWith("/en")
-    ? location.pathname.replace(/^\/en/, "/de")
-    : `/${otherLocale}`;
+  const otherLocale = getAlternateLocale(locale);
+  const switchLocaleUrl = getLocaleSwitchUrl(location.pathname, location.search, location.hash);
 
-  const navLinks = [
-    { href: `#work`, label: t.header.navWork },
-    { href: `#capabilities`, label: t.header.navCapabilities },
-    { href: `#practitioner`, label: t.header.navPractitioner },
-    { href: `#lab`, label: t.header.navLab },
-    { href: `#contact`, label: t.header.navContact },
+  const isHomePage = location.pathname === `/${locale}` || location.pathname === `/${locale}/`;
+  const isWorkPage = location.pathname.startsWith(`/${locale}/work`);
+  const isContactPage = location.pathname.startsWith(`/${locale}/contact`);
+
+  interface NavItem {
+    label: string;
+    to?: string;
+    href?: string;
+    isActive?: boolean;
+    isPageLink: boolean;
+  }
+
+  const navLinks: NavItem[] = [
+    {
+      label: t.header.navWork,
+      to: `/${locale}/work`,
+      isActive: isWorkPage,
+      isPageLink: true,
+    },
+    {
+      label: t.header.navCapabilities,
+      href: isHomePage ? "#capabilities" : `/${locale}#capabilities`,
+      isPageLink: false,
+    },
+    {
+      label: t.header.navPractitioner,
+      href: isHomePage ? "#practitioner" : `/${locale}#practitioner`,
+      isPageLink: false,
+    },
+    {
+      label: t.header.navLab,
+      href: isHomePage ? "#lab" : `/${locale}#lab`,
+      isPageLink: false,
+    },
+    {
+      label: t.header.navContact,
+      to: `/${locale}/contact`,
+      isActive: isContactPage,
+      isPageLink: true,
+    },
   ];
 
   return (
     <header className="global-header" role="banner">
       <div className="max-w-7xl header-inner">
         {/* Brand Group */}
-        <a href={`/${locale}#hero`} className="brand-link" aria-label="WILK — Digital Designer & Software Developer">
-          <span className="brand-title">{t.header.brand}</span>
-          <span className="brand-subtitle">{t.header.role}</span>
-        </a>
+        {isHomePage ? (
+          <a
+            href="#hero"
+            className="brand-link"
+            aria-label="WILK — Digital Designer & Software Developer"
+          >
+            <span className="brand-title">{t.header.brand}</span>
+            <span className="brand-subtitle">{t.header.role}</span>
+          </a>
+        ) : (
+          <Link
+            to={`/${locale}`}
+            className="brand-link"
+            aria-label="WILK — Digital Designer & Software Developer"
+          >
+            <span className="brand-title">{t.header.brand}</span>
+            <span className="brand-subtitle">{t.header.role}</span>
+          </Link>
+        )}
 
         {/* Desktop Navigation */}
         <nav className="header-nav" aria-label="Main Navigation">
-          {navLinks.map((link) => (
-            <a key={link.href} href={link.href} className="header-nav-link">
-              {link.label}
-            </a>
-          ))}
+          {navLinks.map((link) => {
+            if (link.isPageLink && link.to) {
+              return (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  className={`header-nav-link ${link.isActive ? "active" : ""}`}
+                  aria-current={link.isActive ? "page" : undefined}
+                >
+                  {link.label}
+                </Link>
+              );
+            }
+
+            return (
+              <a
+                key={link.href}
+                href={link.href}
+                className="header-nav-link"
+              >
+                {link.label}
+              </a>
+            );
+          })}
         </nav>
 
         {/* Language Switcher */}
@@ -50,6 +115,9 @@ export function SiteHeader({ t, locale }: SiteHeaderProps) {
             to={switchLocaleUrl}
             className="lang-switch-btn"
             aria-label={`Switch language to ${otherLocale.toUpperCase()}`}
+            onClick={() => {
+              setLocaleCookie(otherLocale);
+            }}
           >
             {locale === "de" ? "DE / [EN]" : "[DE] / EN"}
           </Link>
@@ -85,17 +153,34 @@ export function SiteHeader({ t, locale }: SiteHeaderProps) {
             gap: "1.25rem",
           }}
         >
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="header-nav-link"
-              style={{ fontSize: "14px" }}
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              {link.label}
-            </a>
-          ))}
+          {navLinks.map((link) => {
+            if (link.isPageLink && link.to) {
+              return (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  className={`header-nav-link ${link.isActive ? "active" : ""}`}
+                  aria-current={link.isActive ? "page" : undefined}
+                  style={{ fontSize: "14px" }}
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              );
+            }
+
+            return (
+              <a
+                key={link.href}
+                href={link.href}
+                className="header-nav-link"
+                style={{ fontSize: "14px" }}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {link.label}
+              </a>
+            );
+          })}
         </div>
       )}
     </header>

@@ -176,9 +176,9 @@ Das Portfolio grenzt sich nicht künstlich auf eine einzige Branche ein. Potenzi
 
 ---
 
-## 9. Offene strategische Fragen `[TODO]`
+## 9. Offene strategische Fragen & Arbeitsrichtungen `[OPEN / WORKING DIRECTION]`
 
-- [ ] Finale Festlegung des Namens und finaler Domain-Setup
-- [ ] Auswahl der 2–3 Leitprojekte für die initiale "Selected Work"-Sektion
-- [ ] Klärung, ob Kundenstimmen (Testimonials) als Zitate vorliegen oder noch eingeholt werden
-- [ ] Finale Freigabe der englischen und deutschen Copytexte
+- [ ] **Name & Domain `[WORKING DIRECTION]`**: Die Domain-Idee `bywilk` (bzw. `bywilk.com` / `bywilk.dev` / `wilk.studio`) ist eine vielversprechende Arbeitspräferenz (`WORKING DIRECTION`), jedoch **weder gekauft noch final bestätigt**.
+- [ ] **Auswahl der 2–3 Leitprojekte für die Homepage `[OPEN]`**: Ein Pool aus 10 Kandidatenprojekten wurde identifiziert (siehe [`docs/01-content-inventory.md`](01-content-inventory.md)). Die Auswahl der 2–3 prominentesten Arbeiten für "Selected Work" sowie die Vorbereitung der Case Studies steht noch aus (`NEEDS CONFIRMATION`).
+- [ ] **Kundenstimmen / Testimonials `[OPEN]`**: Klärung, ob Kundenstimmen als freigegebene Zitate vorliegen oder vorerst ausgeblendet bleiben. (Strikte Regel: Keine erfundenen Testimonials!).
+- [ ] **Finale Freigabe der Copytexte (DE / EN) `[OPEN]`**: Aktuelle Texte in `translations.ts` basieren teilweise auf D3.1-Stitch-Demos und müssen vor Livegang redaktionell finalisiert werden.

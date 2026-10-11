@@ -49,16 +49,16 @@ NOTES: [Technische oder dramaturgische Besonderheiten]
 
 ---
 
-## 📂 Beispiel-Eintrag (Vorlage) `[PLACEHOLDER]`
+## 📂 Dokumentierte Referenzen & Benchmarks
 
-#### REFERENCE: *Studio Benchmark (Muster)*
-- **URL**: `https://example.com`
-- **TYPE**: *Digital Design Studio*
-- **WHAT I LIKE**: *Ruhiger Übergang zwischen dunklem Hero und hellem Projektbereich; feines Schriftbild.*
-- **WHAT I DON'T LIKE**: *Lange Ladezeiten durch ungebremste WebGL-Effekte.*
-- **DO NOT COPY**: *Das unübersichtliche Hamburger-Menü auf Desktop.*
-- **USE FOR**: *Dunkel-Hell-Übergang in Sektion 03.*
-- **NOTES**: *Prüfen, ob Farbumschwung rein über CSS-Variablen gelöst wurde.*
+#### REFERENCE: Aimane.dev
+- **URL**: `https://www.aimane.dev/`
+- **TYPE**: *Creative Developer Portfolio*
+- **WHAT I LIKE**: *Faszinierende Interaktion einer 3D-Partikelskulptur / eines Point-Cloud-Kopfes im Hero; hohe haptische Reaktionsfreude auf Cursor-Bewegungen und elegantes Auflösen beim Scrollen.*
+- **WHAT I DON'T LIKE**: *Stark technoid-dunkle Gesamtästhetik ohne warmen, redaktionellen Gegenpol.*
+- **DO NOT COPY**: *Weder das visuelle Gesamterscheinungsbild noch Typografie, Menüführung, Farbpalette oder Shader-Code 1:1 kopieren! Das Portfolio verfolgt mit Cinematic Dark × Warm Editorial eine eigenständige gestalterische Synthese.*
+- **USE FOR**: *Technische Inspiration und Interaktionsmechanik für das Hero Particle Portrait (Three.js BufferGeometry, Chiaroscuro-Licht, Partikelzerstäubung).*
+- **NOTES**: *Die technische Basis für unser Partikel-Porträt wurde in Variante A eigenständig umgesetzt, befindet sich jedoch aktuell im Status PAUSED (Entscheidung über authentische Gesichtsgeometrie ausstehend).*
 
 ---
 

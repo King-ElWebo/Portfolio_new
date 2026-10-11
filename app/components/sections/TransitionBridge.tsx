@@ -34,7 +34,7 @@ export function TransitionBridge({ t }: TransitionBridgeProps) {
               <span className="figma-badge">{p3.visualBadge}</span>
               <div style={{ textAlign: "center", margin: "auto" }}>
                 <span style={{ fontFamily: "var(--font-serif)", fontStyle: "italic", fontSize: "1.75rem", color: "rgba(227, 226, 231, 0.4)" }}>
-                  Adaptive Surface
+                  {p3.title}
                 </span>
               </div>
             </div>

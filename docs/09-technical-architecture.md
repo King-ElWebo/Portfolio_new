@@ -33,14 +33,15 @@
   - ❌ Keine Authentication-Lösung
   ...solange keine konkrete Produktanforderung danach verlangt.
 
-### 3. Framework-Auswahl `[CONFIRMED]`
-- **React Router v8 + Vite + Cloudflare Workers** ist das verbindlich ausgewählte Framework (`DEC-014`).
-- **Rationale**:
-  1. **Nativer Cloudflare Workers Support**: Vollständige Unterstützung über `@cloudflare/vite-plugin` und `@react-router/dev/vite` mit direkter Ausführung im `workerd`-Runtime.
-  2. **Keine Shim-Komplexität**: Im Gegensatz zu Next.js (das auf Cloudflare `@opennextjs/cloudflare` zur Emulation von Node.js/Vercel-APIs benötigt) läuft React Router v8 nativ und schlank.
-  3. **Server-Side-Rendering & Daten-Layer**: Erstklassige Server-Loaders, Actions und Form-Handling direkt im Worker.
-  4. **Volle Neon PostgreSQL Kompatibilität**: Reibungsloser Zugriff über serverless HTTP/WebSocket-Driver in Cloudflare Workers.
-  5. **Sauberes Locale-Routing**: Native Unterstützung von parametrisierten Routen (`/de/...`, `/en/...`).
+### 3. Framework & Runtime-Architektur `[CONFIRMED]`
+- **React Router v8 (8.4.0) + Vite (8.0.3) + Cloudflare Workers** ist das verbindlich ausgewählte Framework (`DEC-014`).
+- **Runtime-Setup**:
+  1. **Nativer Cloudflare Workers Support**: Vollständige Unterstützung über `@cloudflare/vite-plugin` (1.60.2) und `@react-router/dev/vite` mit direkter Ausführung im `workerd`-Runtime.
+  2. **Worker Entry Point**: `workers/app.ts` definiert den Worker-Export (`fetch`), der den Router-Kontext (`createRequestHandler`) bereitstellt.
+  3. **Build-Artefakte**: Client-Assets werden in `./build/client` erzeugt (konfiguriert in `wrangler.jsonc`).
+  4. **Keine Shim-Komplexität**: Im Gegensatz zu Next.js (das auf Cloudflare `@opennextjs/cloudflare` zur Emulation von Node.js/Vercel-APIs benötigt) läuft React Router v8 nativ und schlank.
+  5. **Server-Side-Rendering & Daten-Layer**: Erstklassige Server-Loaders, Actions und Form-Handling direkt im Worker.
+  6. **Sauberes Locale-Routing**: Native Unterstützung von parametrisierten Routen (`/de/...`, `/en/...`) via `@react-router/dev/routes`.
 - **Next.js (App Router)** wurde als Kandidat evaluiert und zugunsten dieser nativen Edge-Architektur als `REJECTED / SUPERSEDED` eingestuft (`DEC-R08`).
 
 ### 4. Rendering & Hydration `[CONFIRMED]`
@@ -50,16 +51,17 @@
   - Direkte Browser-APIs (z. B. Locale-Erkennung, Media-Queries)
   - Interaktive Event-Handler (Buttons, Formular-Inputs)
   - Lokale UI-Zustände (z. B. Menü-Toggle)
-  - Motion & Animations-Trigger (GSAP / Canvas / WebGL)
-  - Interaktive Hero- und Lab-Elemente (Canvas / WebGL)
+  - Motion & Animations-Trigger (Canvas / WebGL)
+  - Interaktive Hero- und Lab-Elemente (Three.js / WebGL)
 
-### 5. Datenbank-Prinzipien (Neon PostgreSQL) `[CONFIRMED]`
-- **Aktueller Status**: Noch kein Schema, keine Tabellen, kein ORM und keine Migrationen.
+### 5. Datenbank-Prinzipien (Neon PostgreSQL) `[CONFIRMED ZIEL / AKTUELL UNPROVISIONIERT]`
+- **Aktueller Status**: **Nicht provisioniert und nicht verbunden**. Es existiert kein Datenbankschema, keine Tabellen, kein ORM und keine aktive Verbindung. Die `.env.example` enthält lediglich den Standard-Verbindungsparameter als Referenz.
+- **Strategie**: Für das Portfolio sind zunächst rein dateibasierte, typisierte lokale Inhalte (`content/projects/`) vollständig ausreichend. Eine Datenbank wird erst angebunden, falls konkrete dynamische Features (z. B. persistente Anfragen, dynamische Telemetrie) dies rechtfertigen.
 - **Sicherheits-Grundregel**:
   - **Ausschließlich serverseitiger Datenbankzugriff**.
   - Niemals direkte Client-to-Database-Verbindungen.
   - Niemals Datenbank-Credentials oder Connection Strings im Client bündeln oder exponieren.
-- **ORM / Query Builder**: Auswahl (z. B. Drizzle oder Kysely) erfolgt erst, wenn ein tatsächliches Schema für dynamische Features benötigt wird.
+- **ORM / Query Builder**: Auswahl (z. B. Drizzle oder Kysely) erfolgt erst, wenn ein tatsächliches Schema benötigt wird.
 
 ### 6. Backend-Funktionalität `[CONFIRMED]`
 - Kein separater Backend-Dienst aus reiner Architektur-Ästhetik.

@@ -1,4 +1,5 @@
-import { useLoaderData, type LoaderFunctionArgs } from "react-router";
+import { useEffect } from "react";
+import { useLoaderData, useLocation, type LoaderFunctionArgs } from "react-router";
 import { getTranslations, type Locale } from "~/i18n/translations";
 import { SiteHeader } from "~/components/layout/SiteHeader";
 import { SiteFooter } from "~/components/layout/SiteFooter";
@@ -36,6 +37,17 @@ export function meta({ data }: { data?: { locale: Locale; t: any } }) {
 
 export default function HomeRoute() {
   const { locale, t } = useLoaderData<typeof loader>();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && location.hash) {
+      const hashId = location.hash.replace("#", "");
+      const elem = document.getElementById(hashId);
+      if (elem) {
+        elem.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [location.hash]);
 
   return (
     <>

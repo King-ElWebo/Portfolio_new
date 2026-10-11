@@ -5,6 +5,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLocation,
 } from "react-router";
 import type { Route } from "./+types/root";
 import stylesheet from "./app.css?url";
@@ -24,8 +25,12 @@ export const links: Route.LinksFunction = () => [
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  const location = useLocation();
+  const isGerman = location.pathname.startsWith("/de");
+  const locale = isGerman ? "de" : "en";
+
   return (
-    <html lang="en">
+    <html lang={locale} dir="ltr">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -89,7 +94,7 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
         {details}
       </p>
       <a
-        href="/de"
+        href={location.pathname.startsWith("/de") ? "/de" : "/en"}
         style={{
           display: "inline-flex",
           padding: "0.75rem 1.5rem",
@@ -100,7 +105,7 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
           textDecoration: "none",
         }}
       >
-        Return to Portfolio
+        {location.pathname.startsWith("/de") ? "Zurück zur Startseite" : "Return to Portfolio"}
       </a>
     </main>
   );

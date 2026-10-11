@@ -42,7 +42,7 @@ export function SelectedWork({ t }: SelectedWorkProps) {
               </div>
               <div style={{ textAlign: "center" }}>
                 <span style={{ fontFamily: "var(--font-serif)", fontStyle: "italic", fontSize: "2rem", color: "rgba(227, 226, 231, 0.4)" }}>
-                  Flagship Architecture
+                  {p1.title}
                 </span>
               </div>
               <div className="media-overlay-bottom">
@@ -77,7 +77,7 @@ export function SelectedWork({ t }: SelectedWorkProps) {
                 </div>
                 <div style={{ textAlign: "center" }}>
                   <span style={{ fontFamily: "var(--font-serif)", fontStyle: "italic", fontSize: "1.75rem", color: "rgba(227, 226, 231, 0.4)" }}>
-                    Spatial Engine
+                    {p2.title}
                   </span>
                 </div>
                 <div className="media-overlay-bottom" style={{ justifyContent: "flex-end" }}>

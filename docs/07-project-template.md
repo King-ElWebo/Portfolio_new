@@ -39,7 +39,15 @@ Die Präsentation jedes Projekts soll die Qualität des Denkens und des Handwerk
 
 ---
 
-## 🧱 Case Study Struktur (`/work/[slug]`) `[CONFIRMED]`
+## 🎨 Projektspezifische Art Direction (Kein monotones Einheitslayout) `[CONFIRMED]`
+
+Obwohl alle Case Studies dieser grundlegenden inhaltlichen Gliederung folgen, gilt:
+- **Jedes Projekt behält seine eigene visuelle Identität**: Farbwelten, Typografie-Nuancen und Medien-Inszenierungen richten sich nach dem Charakter des jeweiligen Kunden bzw. Konzepts.
+- **Keine sterile Schablone**: Das Layout passt sich dem Material an (z. B. Vollbild-Medien für visuelle Flagships vs. dichte UI-/Code-Panels für Systemanwendungen).
+
+---
+
+## 🧱 Case Study Struktur (`/:locale/work/:slug`) `[CONFIRMED]`
 
 ### 1. Hero Section
 - **Projekttitel**: Prägnant und kraftvoll.

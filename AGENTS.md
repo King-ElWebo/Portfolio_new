@@ -43,7 +43,7 @@ Before starting substantial work, read the relevant documentation in `/docs`. Re
 - **Do not implement code** unless the user task explicitly requests implementation.
 - **Planning task != coding task.**
 - **Design exploration != production implementation.**
-- Do not create premature application folders (`app/`, `src/`, `components/`) before the framework is chosen and initialized.
+- **Do not create arbitrary or unauthorized application folders or structural rewrites** outside the confirmed architecture (`app/`, `workers/`, `content/`, `public/`, `assets/`, `docs/`).
 
 ---
 
@@ -57,9 +57,9 @@ Before starting substantial work, read the relevant documentation in `/docs`. Re
 
 ## Architecture Principles
 - **Single application first.** Do not split into separate frontend and backend services without concrete necessity.
-- **Deployment target: Cloudflare** (Workers / Pages / OpenNext).
-- **Database target: Neon PostgreSQL** (Serverless, server-side access only).
-- **Framework: Currently NOT finalized** (Next.js is a strong candidate, but subject to verification).
+- **Deployment target: Cloudflare** (Workers / Pages via `@cloudflare/vite-plugin`).
+- **Database target: Neon PostgreSQL** (Serverless, server-side access only; currently unprovisioned).
+- **Framework: React Router v8 + Vite + Cloudflare Workers** (Confirmed under `DEC-014`).
 - **No Vercel assumptions**: Do not introduce Vercel-specific runtime dependencies or configuration.
 
 ---

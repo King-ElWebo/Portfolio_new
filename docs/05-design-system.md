@@ -1,124 +1,83 @@
-# Design System & Tokens
+# Design System & Token Architecture
 
-> **Zweck**: Systematische Vorbereitung der Design-Tokens, UI-Komponenten und Gestaltungsregeln.  
-> **Wichtig**: Es werden noch **keine konkreten Token-Werte erfunden**. Das Design-System wird erst nach der Auswahl der Art Direction finalisiert.  
-> **Source of Truth**: Token-Architektur & Komponenten-Spezifikation
+> **Zweck**: Systematische Dokumentation der Token-Architektur, UI-Komponenten und Gestaltungsregeln.  
+> **Source of Truth**: Design Tokens & Komponenten-Spezifikation  
+> **Status**: CONFIRMED BASELINE (D3.1 CSS-Tokens in `app/app.css` implementiert; als Arbeitsbasis verifiziert)
 
 ---
 
 ## 🏛 Token-Architekturprinzip `[CONFIRMED]`
 
-Das Design System folgt einer sauberen dreistufigen Token-Architektur:
-
-1. **Primitive Tokens**: Rohwerte (z. B. Farbwerte auf einer neutralen Skala, absolute Pixel- oder Rem-Größen).
-2. **Semantic Tokens**: Bedeutungsbezogene Rollen (z. B. `surface-primary`, `text-heading`, `border-subtle`), die sich je nach Theme (Dark vs. Cream) dynamisch anpassen.
-3. **Component Tokens**: Spezifische Zuweisungen für einzelne Komponenten (z. B. `button-primary-bg`, `card-project-radius`).
-
----
-
-## 1. Semantic Colors `[TODO]`
-
-*Farbdefinitionen werden nach Entscheidung der Art-Direction-Exploration hinterlegt.*
-
-- [ ] **Surface Tokens**:
-  - `surface-canvas-dark` & `surface-canvas-cream`
-  - `surface-elevated` (Karten, Dialoge)
-  - `surface-inset` / `surface-subtle`
-- [ ] **Text & Content Tokens**:
-  - `text-primary` (stärkster Kontrast für Headlines)
-  - `text-secondary` / `text-muted` (Fließtext und Metadaten)
-  - `text-inverted`
-- [ ] **Border & Divider Tokens**:
-  - `border-subtle`, `border-strong`
-- [ ] **Accent & Feedback Tokens**:
-  - `accent-primary` (falls definiert)
-  - `status-active` (z. B. subtiler Indikator für Projektverfügbarkeit)
+Das Design System folgt einer dreistufigen Token-Architektur:
+1. **Primitive Tokens**: Absolute Farb- und Maßwerte (Hex, Rem, px).
+2. **Semantic Tokens**: Rollenbasierte Bezeichner (z. B. `--bg-dark-base`, `--text-cream-primary`), die themenbezogen (Obsidian Dark vs. Warm Paper) eingesetzt werden.
+3. **Component Tokens**: Klassenspezifische Zuweisungen für Karten, Inputs, Buttons und Typo-Elemente.
 
 ---
 
-## 2. Typography `[TODO]`
+## 1. Farb-Tokens (Aktuelle D3.1-Baseline aus `app.css`)
 
-- [ ] **Font Families**:
-  - `font-display` / `font-serif` (Headlines)
-  - `font-body` (Fließtext, hohe Lesbarkeit)
-  - `font-mono` (Metadaten, Jahreszahlen, technische Kennzeichnungen)
-- [ ] **Type Scale (Fluid Typography mit clamp())**:
-  - Display XXL, Display XL
-  - H1, H2, H3, H4
-  - Body Large, Body Default, Body Small
-  - Caption / Label / Overline
-- [ ] **Line Heights & Letter Spacing (Tracking)** für Versalien und Fließtext
+### 1.1 Obsidian Dark Palette (Act I & III)
+| Token | Wert | Semantische Rolle | Status |
+| :--- | :--- | :--- | :--- |
+| `--bg-dark-base` | `#0d0e11` | Haupt-Hintergrund für dunkle Sektionen (Hero, Work, Lab) | `BASELINE` |
+| `--bg-dark-lowest` | `#0d0e12` | Tiefster Hintergrund (Mobile Drawer, Dropdowns) | `BASELINE` |
+| `--bg-dark-surface` | `#121317` | Erhöhte Flächen und Container | `BASELINE` |
+| `--bg-dark-container` | `#1e1f24` | Input-Felder, Kartenrahmen | `BASELINE` |
+| `--border-dark-subtle` | `rgba(70, 70, 75, 0.2)` | Haarlinien und Trennlinien im Dark Theme | `BASELINE` |
+| `--border-dark-medium` | `rgba(70, 70, 75, 0.4)` | Sichtbare Umrandungen | `BASELINE` |
+| `--border-dark-strong` | `rgba(70, 70, 75, 0.7)` | Aktive Ränder | `BASELINE` |
+| `--text-dark-primary` | `#e3e2e7` | Primäre Überschriften & starker Kontrast | `BASELINE` |
+| `--text-dark-secondary` | `#c7c6cb` | Fließtext und Beschreibungen | `BASELINE` |
+| `--text-dark-muted` | `#909095` | Metadaten, Labels, Kicker | `BASELINE` |
+| `--text-dark-dim` | `#7b7b7f` | Sehr dezente Zusätze | `BASELINE` |
 
----
+### 1.2 Warm Cream / Paper Palette (Act II)
+| Token | Wert | Semantische Rolle | Status |
+| :--- | :--- | :--- | :--- |
+| `--bg-cream-base` | `#f6f3ec` | Papier-Hintergrund für Capabilities, About, Collab | `BASELINE` |
+| `--bg-cream-surface` | `#ede9e0` | Leicht abgesetzte Flächen im Cream Theme | `BASELINE` |
+| `--bg-cream-hover` | `#efece4` | Interaktive Hover-Zustände auf Papier | `BASELINE` |
+| `--border-cream` | `#ddd7cb` | Feine Trennlinien im Cream Theme | `BASELINE` |
+| `--text-cream-primary` | `#2a2723` | Dunkler Haupttext auf Cream (hohe Lesbarkeit) | `BASELINE` |
+| `--text-cream-secondary` | `#45423c` | Fließtext in Act II | `BASELINE` |
+| `--text-cream-muted` | `#7c7b76` | Kicker und Metadaten auf Cream | `BASELINE` |
+| `--accent-cream-brown` | `#5f4114` | Tiefer warmer Akzent für feine Akzentuierungen | `BASELINE` |
 
-## 3. Spacing & Section Spacing `[TODO]`
-
-- [ ] **Base Spacing Scale**: Konsistente Schritte (z. B. 4px, 8px, 12px, 16px, 24px, 32px, 48px, 64px, 96px, 128px)
-- [ ] **Section Spacing**: Großzügige vertikale Abstände zwischen den Hauptabschnitten zur Rhythmussteuerung
-
----
-
-## 4. Grid, Content Width & Margins `[TODO]`
-
-- [ ] **Max Content Width**: Begrenzung für Textlesbarkeit vs. Full-Bleed-Breiten für cineastische Medien
-- [ ] **Grid-System**: 12-Spalten-Raster mit flexiblen Unterteilungen
-- [ ] **Screen Margins & Gutters**: Fluid Padding an den Bildschirmrändern
-
----
-
-## 5. Radius (Eckenabrundung) `[TODO]`
-
-- [ ] Radien-Tokens (z. B. `radius-none`, `radius-sm`, `radius-md`)
-- [ ] Differenzierung zwischen Karten, Buttons und interaktiven Badges
-
----
-
-## 6. Z-Index Scale `[TODO]`
-
-- [ ] Strukturierte Skala zur Vermeidung von Konflikten (z. B. `base`, `sticky-nav`, `overlay`, `modal`, `cursor`)
+### 1.3 Akzentfarben (Gold / Bronze)
+| Token | Wert | Semantische Rolle | Status |
+| :--- | :--- | :--- | :--- |
+| `--color-secondary` | `#ebbf87` | Warmer Gold-/Bronze-Akzent (Kicker, Focus, Buttons) | `BASELINE` |
+| `--color-secondary-hover` | `#ffddb5` | Aufhellung bei Hover | `BASELINE` |
+| `--color-on-secondary` | `#2a1800` | Kontrastfarbe für Text auf Gold-Badges | `BASELINE` |
 
 ---
 
-## 7. Motion Tokens `[TODO]`
+## 2. Typografie-Tokens (Aktuelle D3.1-Baseline)
 
-- [ ] **Durations**: Quick (150–200ms), Standard (300–400ms), Narrative/Slow (600–1000ms)
-- [ ] **Easings**: Natural Out, Smooth In-Out, Cinematic Ease
+| Token | Wert / Fallback | Einsatzbereich | Status |
+| :--- | :--- | :--- | :--- |
+| `--font-serif` | `"Playfair Display", Georgia, serif` | Große redaktionelle Headlines & Projekt-Titel | `BASELINE` |
+| `--font-sans` | `"Inter", -apple-system, sans-serif` | Primärer Fließtext, UI-Navigation, Lesbarkeit | `BASELINE` |
+| `--font-mono` | `"JetBrains Mono", Menlo, monospace` | Technische Kicker, Code-Tags, Metadaten | `BASELINE` |
 
----
-
-## 8. Breakpoints & Responsive Behaviour `[TODO]`
-
-- [ ] Breakpoints (Mobile, Tablet, Desktop, Wide)
-- [ ] Touch-Targets (mindestens 44×44px für alle interaktiven Elemente)
-
----
-
-## 9. Buttons & Interactive Controls `[TODO]`
-
-- [ ] Primary Button
-- [ ] Secondary / Outline Button
-- [ ] Text & Arrow Links
-- [ ] Button-Zustände (Default, Hover, Active, Disabled)
+> [!NOTE]
+> Die aktuellen Schriften werden via Google Fonts in `app/root.tsx` geladen. Eine spätere Ablösung durch selbst gehostete Webfonts (Datenschutz / DSGVO) oder finale Typografie-Lizenzen bleibt als Backlog-Task offen.
 
 ---
 
-## 10. Links & Navigation Items `[TODO]`
+## 3. Spacing & Layout Tokens
 
-- [ ] Inline-Links (Unterstreichung, Hover-Transition)
-- [ ] Navigationslinks & aktiver Indikator
-- [ ] Language Switcher Komponente (DE / EN)
-
----
-
-## 11. Focus & Accessibility States `[CONFIRMED VORGABE / TODO WERTE]`
-
-- [ ] `focus-visible`: Jeder interaktive Zustand muss per Tastatur klar sichtbar fokussierbar sein.
-- [ ] Kontrastverhältnisse gemäß WCAG AA (mindestens 4.5:1 für Fließtext, 3:1 für große Headlines).
+| Token | Wert | Semantische Rolle | Status |
+| :--- | :--- | :--- | :--- |
+| `--container-max` | `1280px` | Maximale Inhaltsbreite (`max-w-7xl`) | `BASELINE` |
+| `--gutter-x` | `clamp(1.5rem, 3.5vw, 3rem)` | Dynamisches horizontales Seiten-Padding | `BASELINE` |
 
 ---
 
-## 12. Media & Image Treatment `[TODO]`
+## 4. UI-Komponenten & Barrierefreiheit `[CONFIRMED]`
 
-- [ ] Feste Seitenverhältnisse (16:9, 4:3, 1:1, Panorama)
-- [ ] Bildkanten, Abrundungen oder feine Einfassungen
-- [ ] Hover-Verhalten bei Projektkacheln
+- **Fokus-Zustände (`:focus-visible`)**: Verbindlich auf `2px solid var(--color-secondary)` mit `2px outline-offset` gesetzt.
+- **Text-Selection**: `::selection` nutzt `background: var(--color-secondary)` mit dunklem Kontrast.
+- **Touch-Targets**: Mindestgröße von 44×44px für Buttons und mobile Menü-Trigger.
+- **Semantische HTML-Struktur**: Verbindliche Nutzung von `<header>`, `<main>`, `<section>`, `<article>`, `<footer>`.

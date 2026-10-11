@@ -1,5 +1,7 @@
 import React from "react";
+import { Link, useLocation } from "react-router";
 import type { Translations, Locale } from "~/i18n/translations";
+import { getAlternateLocale, getLocaleSwitchUrl, setLocaleCookie } from "~/i18n/locale";
 
 interface SiteFooterProps {
   t: Translations;
@@ -8,7 +10,9 @@ interface SiteFooterProps {
 
 export function SiteFooter({ t, locale }: SiteFooterProps) {
   const f = t.footer;
-  const otherLocale = locale === "de" ? "en" : "de";
+  const otherLocale = getAlternateLocale(locale);
+  const location = useLocation();
+  const switchLocaleUrl = getLocaleSwitchUrl(location.pathname, location.search, location.hash);
 
   return (
     <footer className="global-footer" role="contentinfo">
@@ -39,9 +43,15 @@ export function SiteFooter({ t, locale }: SiteFooterProps) {
           <a href="#hero" className="label-md" style={{ color: "var(--text-dark-secondary)" }}>
             {f.legal}
           </a>
-          <a href={`/${otherLocale}`} className="label-md" style={{ color: "var(--color-secondary)" }}>
+          <Link
+            to={switchLocaleUrl}
+            className="label-md"
+            style={{ color: "var(--color-secondary)" }}
+            aria-label={`Switch language to ${otherLocale.toUpperCase()}`}
+            onClick={() => setLocaleCookie(otherLocale)}
+          >
             {otherLocale.toUpperCase()}
-          </a>
+          </Link>
         </nav>
       </div>
     </footer>

@@ -15,8 +15,8 @@
    Wenn Framework, Deployment-Adapter, Schriftarten oder Datenmodelle nicht in `/docs` dokumentiert sind, frage den Nutzer oder präsentiere Optionen, anstatt willkürliche Fakten zu schaffen.
 4. **Keine Code-Implementierung in Planungsphasen**:
    Plane, strukturiere und dokumentiere, wenn Planung gefordert ist. Schreibe keinen UI- oder Anwendungs-Code, solange keine explizite Implementierungsfreigabe vorliegt.
-5. **Keine spekulativen Verzeichnisse oder Abhängigkeiten**:
-   Erstelle keine leeren App-Ordner (`app/`, `src/`) und installiere keine npm-Packages ohne ausdrückliche Bestätigung.
+5. **Keine unautorisierten Verzeichnisse, Struktur-Umbauten oder Abhängigkeiten**:
+   Das Framework ist in `app/` initialisiert. Erstelle keine spekulativen neuen Architektur-Ordner und installiere keine neuen npm-Packages oder Runtime-Dependencies ohne ausdrückliche Bestätigung des Nutzers.
 6. **Schlankes Skill-Set nutzen**:
    Wähle stets die kleinste sinnvolle Skill-Kombination (maximal 2–3) passend zur aktuellen Teilaufgabe gemäß [`docs/11-agent-workflow.md`](../../docs/11-agent-workflow.md).
 7. **Visuelle Design-Tasks (Stitch & Impeccable)**:
