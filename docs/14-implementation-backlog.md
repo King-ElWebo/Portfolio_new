@@ -16,8 +16,8 @@
 | :--- | :--- | :--- | :--- |
 | **EPIC A** | **Foundation & Documentation Synchronization** | Bereinigung aller Widersprüche und Etablierung des realen Ist-Zustands | `COMPLETED` |
 | **EPIC B** | **Multi-Page Routing & Navigation Architecture** | Fehlerfreie Navigation über alle Unterseiten, Locale-Persistierung & HTML-Shell | `IN PROGRESS` (NAV-001 & NAV-002 abgeschlossen) |
-| **EPIC C** | **Content System & Truthful Project Modeling** | Typisiertes lokales Datenmodell & Erfassung realer Projektfakten (Weg von D3.1-Demos) | `READY FOR IMPLEMENTATION` |
-| **EPIC D** | **Work Archive & Individual Case Study Pages** | Eigenständige Work-Page (`/work`) & Case-Study-Routen (`/work/:slug`) nach Template | `IN PROGRESS` (WORK-001 visuell implementiert) |
+| **EPIC C** | **Content System & Truthful Project Modeling** | Typisiertes lokales Datenmodell & Erfassung realer Projektfakten (Weg von D3.1-Demos) | `COMPLETED` |
+| **EPIC D** | **Work Archive & Individual Case Study Pages** | Eigenständige Work-Page (`/work`) & alle 7 Case-Study-Routen (`/work/:slug`) | `COMPLETED` (WORK-001, CASE-001 & CASE-002 vollständig umgesetzt & verifiziert) |
 | **EPIC E** | **Production Contact & Statutory Legal Pages** | Echtes Server-Handling für Formulare, E-Mail-Provider & gesetzeskonforme Legal-Pages | `PLANNED` |
 | **EPIC F** | **Design Refinement, Motion & Paused Portrait** | Scroll-Scrubbing der Dark-Cream-Bridge, Lab-Interaktionen & Porträt-Wiederaufnahme | `PLANNED / PAUSED` |
 | **EPIC G** | **Quality Gates, Tooling, SEO & Cloudflare Launch** | Linter/Test-Setup, SEO (Hreflang, Sitemap), WCAG 2.2 AA Audit & Cloudflare Go-Live | `PLANNED` |
@@ -148,29 +148,29 @@
 
 ### `CASE-001`: Dynamische Case Study Route (`/:locale/work/:slug`) & Basis-Template
 - **Zweck**: Detaillierte Einzelfallstudien nach [`docs/07-project-template.md`](07-project-template.md).
-- **Aktueller Status**: `READY FOR IMPLEMENTATION`
+- **Aktueller Status**: `COMPLETED` (Alle 7 Case Studies vollständig über die dynamische Route `work/:slug` mit Typisierung, bilingualem SSR Loader und responsivem Layout implementiert und visuell verifiziert)
 - **Priorität**: `P0`
 - **Abhängigkeiten**: `routes.ts`, `CONT-001`
 - **Akzeptanzkriterien**:
   1. Route `route("work/:slug", "routes/case-study.tsx")` in `app/routes.ts` registriert.
   2. Loader lädt Projektdaten anhand von `:locale` und `:slug`; wirft 404 bei unbekanntem Slug.
-  3. Vollständige Umsetzung des Schemas: Hero, Overview, Problem, Idee, UX, Visual Design, Tech Highlights, Resultat/Learnings.
-  4. "Next Project"-Sektion am Seitenende für nahtlosen Lesefluss.
+  3. Vollständige Umsetzung des redaktionellen Schemas: Hero, Overview, Challenge/Friction, Dual-Device-Redesign, Custom CMS/Fachsoftware Deep-Dive, Engineering Architecture, Resultat & Learnings, zyklische Next-Project-Navigation.
+  4. "Next Project"-Sektion am Seitenende für nahtlosen Lesefluss (vollständiger Zyklus über alle 7 Projekte).
   5. Dynamische SEO-Metadaten (Title, Description, OG-Image) im `meta`-Export.
-- **Betroffene Dateien**: `app/routes.ts`, `app/routes/case-study.tsx`, `app/components/case-study/`.
+- **Betroffene Dateien**: `app/routes.ts`, `app/routes/case-study.tsx`, `app/components/case-study/`, `app/types/case-study.ts`, `app/data/case-studies/`.
 - **Empfohlene Skills**: `frontend-design`, `emil-design-eng`
-- **Nutzer-Input erforderlich**: Nein (Template-Architektur kann unabhängig von finalen Inhalten gebaut werden).
+- **Nutzer-Input erforderlich**: Nein.
 
 ### `CASE-002`: Projektspezifische Art Direction & Medien-Layouts
 - **Zweck**: Vermeidung eines monotonen Einheitslayouts; jede Case Study transportiert den individuellen visuellen Charakter des Projekts.
-- **Aktueller Status**: `PLANNED`
+- **Aktueller Status**: `COMPLETED` (Für alle 7 Projekte mit individueller Palette, warmem Editorial-Rhythmus, authentischen Desktop- (1440px) & Mobile-Screenshots (390px), Fachsoftware-Cockpits und echten Medien fertiggestellt)
 - **Priorität**: `P1`
 - **Abhängigkeiten**: `CASE-001`
 - **Akzeptanzkriterien**:
-  1. Template unterstützt projektspezifische Farb-Akzente (z. B. via CSS-Variablen-Override im Page-Wrapper).
-  2. Unterstützung unterschiedlicher Medienformate: Fullscreen-Hero, 16:9 Vergleichs-Stills, UI-Code-Panels, interaktive Prototypen-Frames.
-- **Betroffene Dateien**: `app/components/case-study/`.
-- **Nutzer-Input erforderlich**: Bildmaterial zu den jeweiligen Projekten.
+  1. Template unterstützt projektspezifische Farb-Akzente (`#c2a284`, `#8a9a86`, `#c25d48`, `#d4a373`, `#4a7c59`, `#b87333`, `#a3907c` etc.).
+  2. Unterstützung unterschiedlicher Medienformate: Fullscreen-Hero, Dual-Device-Mockups (Desktop 1440px + Mobile 390px), authentische Vorher-Gegenüberstellung, Lookbook-Streifen, interaktive Admin-Shells, sensorische Radare, Licht-Konfiguratoren und Werkstatt-Auftragsansichten.
+- **Betroffene Dateien**: `app/components/case-study/`, `app/app.css`, `app/data/case-studies/`.
+- **Nutzer-Input erforderlich**: Nein (Authentische Screenshots aus lokalen Live-Demos extrahiert).
 
 ---
 

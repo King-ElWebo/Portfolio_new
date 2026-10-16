@@ -9,13 +9,6 @@ interface HeroProps {
 export function Hero({ t }: HeroProps) {
   return (
     <section className="hero-section max-w-7xl" id="hero" aria-label="Hero Overview">
-      {/* Top Hairline Kicker */}
-      <div className="hero-top-kicker">
-        <span className="label-sm" style={{ color: "var(--text-dark-muted)" }}>
-          {t.hero.kicker}
-        </span>
-      </div>
-
       {/* Hero Center Grid */}
       <div className="hero-grid">
         {/* Left Column: Two-line Serif Headline, Subheadline & Subtle Link */}
@@ -41,17 +34,6 @@ export function Hero({ t }: HeroProps) {
         <div className="hero-right">
           <HeroPortraitArtifact />
         </div>
-      </div>
-
-      {/* Bottom Hairline Bar */}
-      <div className="hero-bottom-bar">
-        <span className="hero-bottom-tag">
-          {t.hero.bottomTag}
-        </span>
-        <a href="#work" className="hero-bottom-scroll">
-          <span>{t.hero.bottomScroll}</span>
-          <span aria-hidden="true">↓</span>
-        </a>
       </div>
     </section>
   );

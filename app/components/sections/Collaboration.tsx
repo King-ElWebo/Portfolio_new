@@ -1,4 +1,3 @@
-import React from "react";
 import type { Translations } from "~/i18n/translations";
 
 interface CollaborationProps {
@@ -9,26 +8,37 @@ export function Collaboration({ t }: CollaborationProps) {
   const c = t.collaboration;
 
   return (
-    <section className="max-w-7xl collaboration-container" id="collaboration" aria-label="Collaboration Models">
-      <div style={{ borderBottom: "1px solid var(--border-cream)", paddingBottom: "1rem", marginBottom: "4rem" }}>
-        <div className="cream-kicker-bar">
-          <span className="cream-kicker-tag">{c.kicker}</span>
-          <span className="label-sm" style={{ color: "var(--text-cream-muted)" }}>{c.badge}</span>
-        </div>
-        <h2 className="cream-headline-xl" style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", marginTop: "0.5rem" }}>
-          {c.headline}
-        </h2>
-      </div>
+    <section className="max-w-7xl collaboration-container" id="collaboration" aria-label={c.label}>
+      <h2 className="collaboration-heading">
+        {c.headline.lead}<br /><em>{c.headline.accent}</em>
+      </h2>
+      <p className="collaboration-intro">{c.intro}</p>
 
-      {/* 3 Open Horizontal Rows (No cards!) */}
-      <div className="collab-rows">
-        {c.rows.map((row) => (
-          <div key={row.code} className="collab-row">
-            <span className="label-sm" style={{ color: "var(--text-cream-muted)" }}>{row.code}</span>
-            <h3 className="collab-row-title">{row.title}</h3>
-            <p className="collab-row-desc">{row.description}</p>
-          </div>
-        ))}
+      <div className="collaboration-network">
+        <figure className="collaboration-source">
+          <img
+            className="collaboration-sculpture"
+            src="/assets/collaboration/interwoven-bands-960.webp"
+            srcSet="/assets/collaboration/interwoven-bands-480.webp 480w, /assets/collaboration/interwoven-bands-960.webp 960w"
+            sizes="(max-width: 760px) 280px, (max-width: 1100px) 40vw, 448px"
+            width={960}
+            height={960}
+            loading="lazy"
+            decoding="async"
+            alt=""
+          />
+          <figcaption className="collaboration-wordmark">WILK</figcaption>
+        </figure>
+
+        <div className="collaboration-models">
+          {c.models.map((model) => (
+            <article className="collaboration-model" key={model.id}>
+              <span className="collaboration-connector" aria-hidden="true" />
+              <h3>{model.title}</h3>
+              <p>{model.description}</p>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   );

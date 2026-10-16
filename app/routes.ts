@@ -8,6 +8,7 @@ export default [
   ...prefix(":locale", [
     index("routes/home.tsx"),
     route("work", "routes/work.tsx"),
+    route("work/:slug", "routes/case-study.tsx"),
     route("contact", "routes/contact.tsx"),
   ]),
 ] satisfies RouteConfig;

@@ -1,34 +1,47 @@
-import React from "react";
 import type { Translations } from "~/i18n/translations";
+import { CapabilityLayers } from "./CapabilityLayers";
+import "~/styles/capabilities.css";
 
 interface CapabilitiesProps {
   t: Translations;
 }
 
 export function Capabilities({ t }: CapabilitiesProps) {
+  const copy = t.capabilities;
+
   return (
-    <section className="max-w-7xl" id="capabilities" aria-label="Capabilities and Practice">
-      <div style={{ borderBottom: "1px solid var(--border-cream)", paddingBottom: "1.5rem", marginBottom: "4rem" }}>
-        <div className="cream-kicker-bar">
-          <span className="cream-kicker-tag">{t.capabilities.kicker}</span>
-          <span className="label-sm" style={{ color: "var(--text-cream-muted)" }}>{t.capabilities.badge}</span>
+    <section
+      className="capabilities-editorial max-w-7xl"
+      id="capabilities"
+      aria-labelledby="capabilities-heading"
+    >
+      <div className="capabilities-editorial-intro">
+        <div>
+          <h2 className="capabilities-editorial-heading" id="capabilities-heading">
+            {copy.headline}
+          </h2>
+          <p className="capabilities-editorial-subline">{copy.subline}</p>
         </div>
-        <h2 className="cream-headline-xl">{t.capabilities.headline}</h2>
-        <p className="cream-subline-lg">{t.capabilities.subline}</p>
+        <CapabilityLayers labels={copy.visual} />
       </div>
 
-      <div className="capabilities-rows">
-        {t.capabilities.rows.map((row) => (
-          <div key={row.code} className="cap-row">
-            <span className="label-sm" style={{ color: "var(--text-cream-muted)" }}>{row.code}</span>
-            <h3 className="cap-row-title">{row.title}</h3>
-            <p className="cap-row-desc">{row.description}</p>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", justifyContent: "flex-end" }}>
-              {row.tags.map((tag) => (
-                <span key={tag} className="cap-tag-cream">{tag}</span>
+      <div className="capabilities-editorial-columns">
+        {copy.rows.map((capability) => (
+          <article
+            className="capability-column"
+            key={capability.id}
+            aria-labelledby={"capability-" + capability.id}
+          >
+            <h3 className="capability-column-title" id={"capability-" + capability.id}>
+              {capability.title}
+            </h3>
+            <p className="capability-column-description">{capability.description}</p>
+            <ul className="capability-column-examples" role="list">
+              {capability.examples.map((example) => (
+                <li key={example}>{example}</li>
               ))}
-            </div>
-          </div>
+            </ul>
+          </article>
         ))}
       </div>
     </section>

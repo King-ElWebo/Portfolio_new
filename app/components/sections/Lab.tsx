@@ -1,116 +1,142 @@
-import React from "react";
-import type { Translations } from "~/i18n/translations";
+import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router";
+import type { Locale, Translations } from "~/i18n/translations";
+import { LabSurface, type LabConceptKey } from "./LabSurface";
+import "~/styles/lab.css";
 
 interface LabProps {
   t: Translations;
+  locale: Locale;
 }
 
-export function Lab({ t }: LabProps) {
+const concepts = [
+  { key: "lumen", slug: "lumenwerk-studio", directory: "lumenwerk", title: "LUMENWERK Studio" },
+  { key: "roest", slug: "roestwerk-1070", directory: "roestwerk", title: "RÖSTWERK 1070" },
+  { key: "kern", slug: "kern-field", directory: "kern-field", title: "KERN / FIELD" },
+] as const;
+
+function imageBase(directory: string) {
+  return "/assets/projects/" + directory + "/lab-preview";
+}
+
+export function Lab({ t, locale }: LabProps) {
+  const [selection, setSelection] = useState<{ key: LabConceptKey; animate: boolean }>({ key: "lumen", animate: false });
+  const sectionRef = useRef<HTMLElement>(null);
+  const ghostRef = useRef<HTMLImageElement>(null);
+  const previousKey = useRef<LabConceptKey>("lumen");
+  const pointerSelection = useRef(false);
   const lab = t.lab;
 
+  useEffect(() => {
+    const section = sectionRef.current;
+    const ghost = ghostRef.current;
+    const oldKey = previousKey.current;
+    previousKey.current = selection.key;
+    if (!section || !ghost || oldKey === selection.key || !selection.animate || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const oldImage = section.querySelector<HTMLImageElement>(`[data-concept="${oldKey}"] .lab-project-image`);
+    const nextImage = section.querySelector<HTMLImageElement>(`[data-concept="${selection.key}"] .lab-project-image`);
+    if (!oldImage || !nextImage || typeof nextImage.animate !== "function") return;
+
+    let cancelled = false;
+    let animations: Animation[] = [];
+    ghost.src = oldImage.currentSrc || oldImage.src;
+    ghost.hidden = false;
+    const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    function stop() {
+      cancelled = true;
+      animations.forEach((animation) => animation.cancel());
+      ghost!.hidden = true;
+    }
+
+    function transition() {
+      if (cancelled || preference.matches || document.hidden) { stop(); return; }
+      const options = { duration: 650, easing: "cubic-bezier(0.23, 1, 0.32, 1)" };
+      const exit = ghost!.animate(
+        [{ opacity: 1, transform: "translateY(0)" }, { opacity: 0, transform: "translateY(-12px)" }], options,
+      );
+      const enter = nextImage!.animate(
+        [{ transform: "translateY(14px) scale(1.015)" }, { transform: "translateY(0) scale(1)" }], options,
+      );
+      animations = [exit, enter];
+      exit.onfinish = () => { ghost!.hidden = true; };
+    }
+
+    function visibilityChange() { if (document.hidden) stop(); }
+    if (nextImage.complete) transition();
+    else {
+      nextImage.addEventListener("load", transition, { once: true });
+      nextImage.addEventListener("error", stop, { once: true });
+    }
+    preference.addEventListener("change", stop);
+    document.addEventListener("visibilitychange", visibilityChange);
+    return () => {
+      stop();
+      nextImage.removeEventListener("load", transition);
+      nextImage.removeEventListener("error", stop);
+      preference.removeEventListener("change", stop);
+      document.removeEventListener("visibilitychange", visibilityChange);
+    };
+  }, [selection]);
+
   return (
-    <section className="max-w-7xl lab-container" id="lab" aria-label="The Lab">
-      {/* Header */}
-      <div className="section-divider-header">
-        <div>
-          <span className="section-kicker-gold">{lab.kicker}</span>
-          <h2 className="project-title-serif" style={{ fontSize: "clamp(1.75rem, 3.2vw, 2.75rem)", marginTop: "0.5rem" }}>
-            {lab.headline}
-          </h2>
+    <section className="max-w-7xl lab-container lab-stage-section" id="lab" aria-labelledby="lab-heading" ref={sectionRef}>
+      <header className="lab-heading-block">
+        <p className="lab-kicker">{lab.kicker}</p>
+        <h2 className="lab-heading" id="lab-heading">{lab.headline.lead}<em>{lab.headline.accent}</em></h2>
+        <p className="lab-intro">{lab.intro}</p>
+      </header>
+
+      <div className="lab-stage-layout">
+        <div className="lab-project-stage" aria-live="polite" aria-atomic="true">
+          {concepts.map((concept) => {
+            const copy = lab.concepts[concept.key];
+            const base = imageBase(concept.directory);
+            return (
+              <article className={"lab-project-panel lab-project-" + concept.key} id={"lab-panel-" + concept.key} data-concept={concept.key} key={concept.key}>
+                <Link className="lab-case-link" to={"/" + locale + "/work/" + concept.slug} aria-label={concept.title + " — " + lab.caseStudyLink}>
+                  <figure>
+                  <div className="lab-project-picture">
+                    <img className="lab-project-image" src={base + "-1080.webp"} srcSet={base + "-720.webp 720w, " + base + "-1080.webp 1080w"}
+                      sizes="(max-width: 760px) calc(100vw - 3rem), (max-width: 1280px) 57vw, 720px"
+                      alt={copy.imageAlt} width={1080} height={675} loading="lazy" decoding="async" />
+                  </div>
+                  <figcaption>
+                    <p className="lab-concept-kind">{lab.conceptLabel}</p>
+                    <h3 className="lab-project-title">{concept.title}</h3>
+                    <p className="lab-project-description">{copy.description}</p>
+                    <span className="lab-case-action">{lab.caseStudyLink}<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10" /></svg></span>
+                  </figcaption>
+                  </figure>
+                </Link>
+              </article>
+            );
+          })}
+          <img className="lab-project-ghost" src="/assets/projects/lumenwerk/lab-preview-1080.webp" alt="" width={1080} height={675} loading="lazy" decoding="async" hidden aria-hidden="true" ref={ghostRef} />
         </div>
-        <span className="label-sm" style={{ color: "var(--text-dark-muted)" }}>{lab.badge}</span>
+        <LabSurface concept={selection.key} animateSelection={selection.animate} description={lab.surfaceDescription} caption={lab.surfaceCaption} />
       </div>
 
-      {/* 3 Experimental Cards */}
-      <div className="lab-cards-grid">
-        {/* Card 01: Halftone Shaders & WebGPU Trail */}
-        <div className="lab-card-d3">
-          <div>
-            <div className="lab-card-media">
-              <span className="label-sm" style={{ position: "absolute", top: "0.75rem", left: "0.75rem", color: "var(--text-dark-muted)" }}>
-                {lab.cards[0].badge}
-              </span>
-              <svg width="120" height="120" viewBox="0 0 100 100" fill="none" style={{ opacity: 0.85 }}>
-                <circle cx="50" cy="50" r="38" stroke="rgba(235, 191, 135, 0.4)" strokeWidth="1" />
-                <circle cx="50" cy="50" r="24" stroke="rgba(235, 191, 135, 0.7)" strokeWidth="1" strokeDasharray="3 3" />
-                <circle cx="50" cy="50" r="6" fill="#ebbf87" />
-              </svg>
+      <fieldset className="lab-concept-index" onPointerDown={() => { pointerSelection.current = true; }} onKeyDown={() => { pointerSelection.current = false; }}>
+        <legend className="lab-visually-hidden">{lab.selectionLabel}</legend>
+        {concepts.map((concept) => {
+          const base = imageBase(concept.directory);
+          return (
+            <div className="lab-concept-choice" key={concept.key}>
+              <input className="lab-choice-input" type="radio" name="lab-concept" id={"lab-choice-" + concept.key} value={concept.key}
+                checked={selection.key === concept.key} aria-controls={"lab-panel-" + concept.key}
+                onChange={() => setSelection({ key: concept.key, animate: pointerSelection.current })} />
+              <label className="lab-choice-label" htmlFor={"lab-choice-" + concept.key}>
+                <img src={base + "-720.webp"} srcSet={base + "-720.webp 720w, " + base + "-1080.webp 1080w"}
+                  sizes="(max-width: 760px) 28vw, (max-width: 1280px) 28vw, 380px" alt="" width={720} height={450} loading="lazy" decoding="async" />
+                <span>{concept.title}</span>
+              </label>
             </div>
-            <h3 className="lab-card-title">{lab.cards[0].title}</h3>
-            <p className="lab-card-desc">{lab.cards[0].description}</p>
-          </div>
-
-          <div className="lab-card-footer">
-            <span className="label-sm" style={{ color: "var(--text-dark-muted)" }}>{lab.cards[0].tech}</span>
-            <span className="label-sm" style={{ color: "var(--color-secondary)" }}>
-              {lab.cards[0].action} <span aria-hidden="true">↗</span>
-            </span>
-          </div>
-        </div>
-
-        {/* Card 02: Dynamic Surface & Material Physics */}
-        <div className="lab-card-d3">
-          <div>
-            <div className="lab-card-media">
-              <span className="label-sm" style={{ position: "absolute", top: "0.75rem", left: "0.75rem", color: "var(--text-dark-muted)" }}>
-                {lab.cards[1].badge}
-              </span>
-              <div
-                style={{
-                  width: "70px",
-                  height: "70px",
-                  border: "1px solid rgba(144, 144, 149, 0.4)",
-                  transform: "rotate(45deg)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  background: "linear-gradient(135deg, rgba(235, 191, 135, 0.25) 0%, transparent 70%)",
-                }}
-              />
-            </div>
-            <h3 className="lab-card-title">{lab.cards[1].title}</h3>
-            <p className="lab-card-desc">{lab.cards[1].description}</p>
-          </div>
-
-          <div className="lab-card-footer">
-            <span className="label-sm" style={{ color: "var(--text-dark-muted)" }}>{lab.cards[1].tech}</span>
-            <span className="label-sm" style={{ color: "var(--color-secondary)" }}>
-              {lab.cards[1].action} <span aria-hidden="true">↗</span>
-            </span>
-          </div>
-        </div>
-
-        {/* Card 03: Kinetic Variable Typography */}
-        <div className="lab-card-d3">
-          <div>
-            <div className="lab-card-media">
-              <span className="label-sm" style={{ position: "absolute", top: "0.75rem", left: "0.75rem", color: "var(--text-dark-muted)" }}>
-                {lab.cards[2].badge}
-              </span>
-              <span
-                style={{
-                  fontFamily: "var(--font-serif)",
-                  fontSize: "4rem",
-                  fontStyle: "italic",
-                  color: "rgba(235, 191, 135, 0.4)",
-                  letterSpacing: "0.1em",
-                }}
-              >
-                Aa
-              </span>
-            </div>
-            <h3 className="lab-card-title">{lab.cards[2].title}</h3>
-            <p className="lab-card-desc">{lab.cards[2].description}</p>
-          </div>
-
-          <div className="lab-card-footer">
-            <span className="label-sm" style={{ color: "var(--text-dark-muted)" }}>{lab.cards[2].tech}</span>
-            <span className="label-sm" style={{ color: "var(--color-secondary)" }}>
-              {lab.cards[2].action} <span aria-hidden="true">↗</span>
-            </span>
-          </div>
-        </div>
-      </div>
+          );
+        })}
+      </fieldset>
+      <p className="lab-background-type" aria-hidden="true">Never finished.</p>
     </section>
   );
 }

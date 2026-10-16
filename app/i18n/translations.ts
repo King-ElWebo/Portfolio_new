@@ -1,5 +1,12 @@
 export type Locale = "de" | "en";
 
+export interface SelectedWorkProjectCopy {
+  title: string;
+  kind: string;
+  description: string;
+  imageAlt: string;
+}
+
 export interface Project01 {
   badge: string;
   title: string;
@@ -27,24 +34,21 @@ export interface Project03 {
 }
 
 export interface CapabilityRow {
-  code: string;
+  id: "web" | "systems" | "automation";
   title: string;
   description: string;
-  tags: string[];
+  examples: string[];
 }
 
-export interface CollaborationRow {
-  code: string;
+export interface CollaborationModel {
+  id: "project" | "agency" | "team";
   title: string;
   description: string;
 }
 
-export interface LabCard {
-  badge: string;
-  title: string;
+export interface LabConceptCopy {
   description: string;
-  tech: string;
-  action: string;
+  imageAlt: string;
 }
 
 export interface Translations {
@@ -56,6 +60,7 @@ export interface Translations {
     brand: string;
     role: string;
     navWork: string;
+    navAbout: string;
     navCapabilities: string;
     navPractitioner: string;
     navLab: string;
@@ -64,19 +69,31 @@ export interface Translations {
   };
   hero: {
     kicker: string;
+    statusBadge: string;
     headlinePart1: string;
     headlineItalic: string;
     headlinePart2: string;
     subheadline: string;
     cta: string;
+    secondaryCta: string;
     bottomTag: string;
     bottomScroll: string;
+    discipline1: string;
+    discipline2: string;
+    discipline3: string;
   };
   work: {
+    heading: string;
+    caseStudyLink: string;
+    featured: Record<"checkpot" | "bloom" | "speiche", SelectedWorkProjectCopy>;
     kicker: string;
     subtitle: string;
     project01: Project01;
     project02: Project02;
+    project03?: Project03;
+    archiveBarTitle?: string;
+    archiveBarSub?: string;
+    archiveBarCta?: string;
   };
   workArchive: {
     metaTitle: string;
@@ -99,36 +116,62 @@ export interface Translations {
     heading: string;
   };
   capabilities: {
-    kicker: string;
-    badge: string;
     headline: string;
     subline: string;
     rows: CapabilityRow[];
+    visual: {
+      description: string;
+      interface: string;
+      logic: string;
+      data: string;
+    };
   };
   practitioner: {
-    kicker: string;
-    portraitLabel: string;
-    portraitSubtext: string;
-    figureCaption: string;
-    quote: string;
+    heading: string;
+    portraitAlt: string;
+    quote: { before: string; emphasis: string; after: string };
     p1: string;
     p2: string;
-    corePracticeLabel: string;
-    corePracticeValue: string;
-    focusLabel: string;
-    focusValue: string;
   };
   collaboration: {
-    kicker: string;
-    badge: string;
-    headline: string;
-    rows: CollaborationRow[];
+    label: string;
+    headline: { lead: string; accent: string };
+    intro: string;
+    models: CollaborationModel[];
   };
   lab: {
     kicker: string;
-    badge: string;
-    headline: string;
-    cards: LabCard[];
+    headline: { lead: string; accent: string };
+    intro: string;
+    conceptLabel: string;
+    selectionLabel: string;
+    caseStudyLink: string;
+    surfaceDescription: string;
+    surfaceCaption: string;
+    concepts: { lumen: LabConceptCopy; roest: LabConceptCopy; kern: LabConceptCopy };
+  };
+  homeContact: {
+    regionLabel: string;
+    email: string;
+    headline: { lead: string; accent: string };
+    intro: string;
+    openForm: string;
+    helper: string;
+    form: {
+      headline: { lead: string; accent: string };
+      intro: string;
+      back: string;
+      nameLabel: string;
+      namePlaceholder: string;
+      emailLabel: string;
+      emailPlaceholder: string;
+      messageLabel: string;
+      messagePlaceholder: string;
+      submitLabel: string;
+      mailHint: string;
+      directLabel: string;
+      subjectPrefix: string;
+    };
   };
   contact: {
     kicker: string;
@@ -164,13 +207,14 @@ export interface Translations {
 export const translations: Record<Locale, Translations> = {
   en: {
     meta: {
-      title: "D3 — Refined Cinematic Editorial Portfolio | Wilk Studio & Lab",
+      title: "WILK — Digital Designer & Software Developer",
       description: "Designing thoughtful digital interfaces and engineering robust software systems from concept to production.",
     },
     header: {
       brand: "WILK",
       role: "— Digital Designer & Software Developer",
       navWork: "Work",
+      navAbout: "About",
       navCapabilities: "Capabilities",
       navPractitioner: "Practitioner",
       navLab: "The Lab",
@@ -179,15 +223,42 @@ export const translations: Record<Locale, Translations> = {
     },
     hero: {
       kicker: "[ DIGITAL DESIGNER & SOFTWARE DEVELOPER ]",
+      statusBadge: "● AVAILABLE FOR SELECTED COMMISSIONS",
       headlinePart1: "FROM IDEA TO",
       headlineItalic: "DIGITAL",
       headlinePart2: "EXPERIENCE.",
       subheadline: "Designing thoughtful digital interfaces and engineering robust software systems from concept to production.",
       cta: "Explore Selected Work",
+      secondaryCta: "Project Archive",
       bottomTag: "WILK // CRAFT & SYSTEMS ARCHITECTURE",
       bottomScroll: "SCROLL TO EXPLORE WORK",
+      discipline1: "UI/UX & Design Systems",
+      discipline2: "Full-Stack Web & Edge",
+      discipline3: "Custom CMS & Systems",
     },
     work: {
+      heading: "Selected work",
+      caseStudyLink: "View case study",
+      featured: {
+        "checkpot": {
+          "title": "Checkpot Hietzing",
+          "kind": "Client project",
+          "description": "A fashion boutique’s website with a custom content management system.",
+          "imageAlt": "The Checkpot Hietzing fashion boutique homepage."
+        },
+        "bloom": {
+          "title": "Let It Bloom",
+          "kind": "Client project",
+          "description": "A floral web presence with a tailored mini-CMS.",
+          "imageAlt": "The Let It Bloom website with floral imagery and a warm, natural palette."
+        },
+        "speiche": {
+          "title": "SPEICHE",
+          "kind": "Independent concept",
+          "description": "A bicycle workshop management app, from repair orders to parts inventory.",
+          "imageAlt": "SPEICHE workshop management interface with repair jobs and workshop planning."
+        }
+      },
       kicker: "01 / SELECTED WORK",
       subtitle: "— CURATED ARCHIVE",
       project01: {
@@ -202,6 +273,9 @@ export const translations: Record<Locale, Translations> = {
         description: "Bespoke digital presence for a Vienna floral atelier featuring a password-protected mini-CMS for seasonal selections and curated photography.",
         tags: ["Next.js 15", "React 19", "Tailwind CSS v4", "Vercel KV / Blob"],
       },
+      archiveBarTitle: "Explore all 7 client commissions and computational studies in the archive",
+      archiveBarSub: "LUMENWERK · RÖSTWERK 1070 · KERN / FIELD · FKW-G",
+      archiveBarCta: "View Full Archive",
     },
     workArchive: {
       metaTitle: "Projects — WILK // Digital Designer & Software Developer",
@@ -234,93 +308,138 @@ export const translations: Record<Locale, Translations> = {
       heading: "CRAFT & METHODOLOGY",
     },
     capabilities: {
-      kicker: "02 / CAPABILITIES",
-      badge: "CORE PRACTICE",
-      headline: "How ideas become working software.",
-      subline: "A unified practice eliminating the gap between design vision and software execution.",
-      rows: [
+      "headline": "What I design and build.",
+      "subline": "Websites, applications, and useful automation – from design to technical implementation.",
+      "rows": [
         {
-          code: "01 // WEB",
-          title: "Websites & Commerce",
-          description: "Thoughtful websites, commerce platforms, and digital experiences combining strong visual direction with reliable implementation.",
-          tags: ["[UX]", "[UI]", "[Motion]", "[Frontend]"],
+          "id": "web",
+          "title": "Websites & Commerce",
+          "description": "Websites and shops that fit your business – clearly designed and reliably built.",
+          "examples": [
+            "Websites",
+            "Online shops",
+            "Content systems"
+          ]
         },
         {
-          code: "02 // SYS",
-          title: "Apps & Business Systems",
-          description: "Custom applications, internal tools, and systems designed around clear workflows and real operational needs.",
-          tags: ["[UI]", "[Frontend]", "[Backend]", "[Data]"],
+          "id": "systems",
+          "title": "Apps & Business Systems",
+          "description": "Custom applications that make workflows easier to follow and support everyday work.",
+          "examples": [
+            "Order management",
+            "Internal tools",
+            "Data overviews"
+          ]
         },
         {
-          code: "03 // INT",
-          title: "AI & Automation",
-          description: "Useful AI integrations, intelligent interfaces, and automated workflows where they genuinely improve the product.",
-          tags: ["[UX]", "[AI]", "[Frontend]"],
-        },
+          "id": "automation",
+          "title": "AI & Automation",
+          "description": "AI and automated workflows where they make everyday work easier.",
+          "examples": [
+            "AI integrations",
+            "Automated workflows",
+            "System integrations"
+          ]
+        }
       ],
+      "visual": {
+        "description": "Interface, logic, and data as connected layers of a digital product.",
+        "interface": "Interface",
+        "logic": "Logic",
+        "data": "Data"
+      }
     },
     practitioner: {
-      kicker: "03 / PRACTITIONER",
-      portraitLabel: "[AUTHENTIC STUDIO PORTRAIT]",
-      portraitSubtext: "Workspace & practitioner portrait",
-      figureCaption: "FIGURE 01 — PRACTITIONER // WILK",
-      quote: "“I care about how things work just as much as how they look.”",
-      p1: "Bridging visual art direction and modern software engineering as a single craftsperson. Eliminating the friction between concept and execution.",
-      p2: "Working across the full lifecycle from interface typography and interaction dynamics to production software architecture. Code is treated not as a secondary implementation phase, but as the raw material for design validation.",
-      corePracticeLabel: "CORE PRACTICE",
-      corePracticeValue: "Design & Software Engineering",
-      focusLabel: "FOCUS",
-      focusValue: "Web Platforms / Interactive Systems",
+      "heading": "About me",
+      "portraitAlt": "Portrait of the designer behind WILK",
+      "quote": {
+        "before": "“I care about ",
+        "emphasis": "how things work",
+        "after": " just as much as how they look.”"
+      },
+      "p1": "I design and build digital products. I care about the details in the interface just as much as the structure behind it.",
+      "p2": "For me, concept, design, and development belong together – from the first idea to a working product."
     },
     collaboration: {
-      kicker: "04 / COLLABORATION",
-      badge: "ENGAGEMENT",
-      headline: "Flexible collaboration across the project lifecycle.",
-      rows: [
+      "label": "Collaboration",
+      "headline": {
+        "lead": "Your project.",
+        "accent": "Three ways."
+      },
+      "intro": "A complete project or focused support – we can find the way of working together that fits your project.",
+      "models": [
         {
-          code: "01 // DIRECT",
-          title: "Independent Projects",
-          description: "Leading end-to-end design and software development from brief to deployment. Ideal for flagships, founder platforms, and bespoke digital ventures.",
+          "id": "project",
+          "title": "For your project",
+          "description": "From the first idea to a working product: I take care of design and development."
         },
         {
-          code: "02 // STUDIO",
-          title: "Agency Collaboration",
-          description: "Partnering with creative studios and agencies on senior design engineering and interactive builds where visual fidelity cannot be compromised.",
+          "id": "agency",
+          "title": "With your agency",
+          "description": "I support your studio with technical implementation and work closely with your team."
         },
         {
-          code: "03 // EMBEDDED",
-          title: "Existing Product Teams",
-          description: "Embedding into product and engineering teams for complex UI systems or core feature initiatives requiring refined craft and performance precision.",
-        },
-      ],
+          "id": "team",
+          "title": "In your product team",
+          "description": "Focused support with interfaces, applications, and the continued development of existing systems."
+        }
+      ]
     },
     lab: {
-      kicker: "05 / THE LAB",
-      badge: "EXPERIMENTS & SKETCHES",
-      headline: "Creative computation, shader experiments, and interaction prototypes.",
-      cards: [
-        {
-          badge: "[INTERACTIVE EXPERIMENT]",
-          title: "Halftone Shaders & WebGPU Trail",
-          description: "Procedural dot grids driven by cursor turbulence and inertial dampening shaders for fluid dynamic typography.",
-          tech: "GLSL / WGSL",
-          action: "DEMO",
+      "kicker": "05 / THE LAB",
+      "headline": {
+        "lead": "Ideas in progress.",
+        "accent": "Curiosity in motion."
+      },
+      "intro": "Independent concepts and digital experiments. A space to explore design and code further.",
+      "conceptLabel": "Independent concept",
+      "selectionLabel": "Choose a concept for the large preview",
+      "caseStudyLink": "View case study",
+      "surfaceDescription": "Golden lines form a folded surface in space. Its shape changes with the selected project.",
+      "surfaceCaption": "Motion as a material.",
+      "concepts": {
+        "lumen": {
+          "description": "Light as an architectural material.",
+          "imageAlt": "LUMENWERK: a dark website with a golden spherical pendant light"
         },
-        {
-          badge: "[WEBGL STUDY]",
-          title: "Dynamic Surface & Material Physics",
-          description: "Real-time material reflection models, anisotropic microfacet simulations, and inertial spring interaction kinetics.",
-          tech: "THREE.JS / PBR",
-          action: "RUN",
+        "roest": {
+          "description": "A distinctive presence for good coffee.",
+          "imageAlt": "RÖSTWERK 1070: a cream-colored website for a coffee roastery"
         },
-        {
-          badge: "[MOTION PROTOTYPE]",
-          title: "Kinetic Variable Typography",
-          description: "Variable font axis deformation tethered to viewport scroll velocity and directional inertia curves.",
-          tech: "OPEN-TYPE / WASM",
-          action: "INSPECT",
+        "kern": {
+          "description": "Architecture, with room for typography.",
+          "imageAlt": "KERN / FIELD: a typography-led website for an architecture studio"
+        }
+      }
+    },
+    homeContact: {
+      "regionLabel": "Contact",
+      "email": "bywilk@office.at",
+      "headline": {
+        "lead": "Got an idea?",
+        "accent": "Let’s talk."
+      },
+      "intro": "For a new project or to rethink something that already exists.",
+      "openForm": "Write a message",
+      "helper": "A few lines are enough to get started.",
+      "form": {
+        "headline": {
+          "lead": "Tell me",
+          "accent": "about it."
         },
-      ],
+        "intro": "What would you like to create or develop further?",
+        "back": "Back",
+        "nameLabel": "Your name",
+        "namePlaceholder": "What’s your name?",
+        "emailLabel": "Your email",
+        "emailPlaceholder": "Where can I reach you?",
+        "messageLabel": "Your idea",
+        "messagePlaceholder": "What do you have in mind?",
+        "submitLabel": "Prepare email",
+        "mailHint": "Opens a draft in your email app. You send it from there.",
+        "directLabel": "Or email me directly:",
+        "subjectPrefix": "Project enquiry"
+      }
     },
     contact: {
       kicker: "06 / CONTACT",
@@ -354,13 +473,14 @@ export const translations: Record<Locale, Translations> = {
   },
   de: {
     meta: {
-      title: "D3 — Verfeinertes Cinematic Editorial Portfolio | Wilk Studio & Lab",
+      title: "WILK — Digital Designer & Software Developer",
       description: "Gestaltung durchdachter digitaler Interfaces und Entwicklung robuster Softwaresysteme vom Konzept bis zur Produktion.",
     },
     header: {
       brand: "WILK",
       role: "— Digital Designer & Software Developer",
       navWork: "Arbeiten",
+      navAbout: "Über mich",
       navCapabilities: "Kompetenzen",
       navPractitioner: "Profil",
       navLab: "Labor",
@@ -369,15 +489,42 @@ export const translations: Record<Locale, Translations> = {
     },
     hero: {
       kicker: "[ DIGITAL DESIGNER & SOFTWARE DEVELOPER ]",
+      statusBadge: "● VERFÜGBAR FÜR PROJEKTE 2026",
       headlinePart1: "VON DER IDEE ZUR",
       headlineItalic: "DIGITALEN",
       headlinePart2: "ERFAHRUNG.",
       subheadline: "Gestaltung durchdachter digitaler Interfaces und Entwicklung robuster Softwaresysteme vom Konzept bis zur Produktion.",
       cta: "Ausgewählte Arbeiten ansehen",
+      secondaryCta: "Projektarchiv",
       bottomTag: "WILK // HANDWERK & SYSTEMARCHITEKTUR",
       bottomScroll: "SCROLLEN ZU DEN ARBEITEN",
+      discipline1: "UI/UX & Design-Systeme",
+      discipline2: "Fullstack-Web & Edge",
+      discipline3: "Custom CMS & Fachsoftware",
     },
     work: {
+      heading: "Ausgewählte Arbeiten",
+      caseStudyLink: "Case Study ansehen",
+      featured: {
+        "checkpot": {
+          "title": "Checkpot Hietzing",
+          "kind": "Kundenprojekt",
+          "description": "Die Website einer Modeboutique mit maßgeschneidertem Content-Management-System.",
+          "imageAlt": "Die Startseite der Modeboutique Checkpot Hietzing."
+        },
+        "bloom": {
+          "title": "Let It Bloom",
+          "kind": "Kundenprojekt",
+          "description": "Eine florale Webpräsenz mit einem maßgeschneiderten Mini-CMS.",
+          "imageAlt": "Die Website von Let It Bloom mit Blumenmotiven und warmer, natürlicher Farbgebung."
+        },
+        "speiche": {
+          "title": "SPEICHE",
+          "kind": "Eigenständiges Konzept",
+          "description": "Eine Fachanwendung für Fahrradwerkstätten – von Aufträgen bis zur Teileverwaltung.",
+          "imageAlt": "Die Auftragsübersicht und Werkstattplanung des Werkstattmanagers SPEICHE."
+        }
+      },
       kicker: "01 / AUSGEWÄHLTE ARBEITEN",
       subtitle: "— KURATIERTES ARCHIV",
       project01: {
@@ -392,6 +539,9 @@ export const translations: Record<Locale, Translations> = {
         description: "Bespoke digitale Präsenz für ein Wiener Floristik-Atelier mit passwortgeschütztem Mini-CMS für saisonale Werkstücke und Bildergalerie.",
         tags: ["Next.js 15", "React 19", "Tailwind CSS v4", "Vercel KV / Blob"],
       },
+      archiveBarTitle: "Alle 7 Kundenprojekte & Forschungsarbeiten im Archiv entdecken",
+      archiveBarSub: "LUMENWERK · RÖSTWERK 1070 · KERN / FIELD · FKW-G",
+      archiveBarCta: "Zum Archiv",
     },
     workArchive: {
       metaTitle: "Projekte — WILK // Digital Designer & Software Developer",
@@ -424,93 +574,138 @@ export const translations: Record<Locale, Translations> = {
       heading: "CRAFT & METHODOLOGY",
     },
     capabilities: {
-      kicker: "02 / KOMPETENZEN",
-      badge: "KERNPRAXIS",
-      headline: "Wie Ideen zu funktionierender Software werden.",
-      subline: "Eine ganzheitliche Praxis, die den Spalt zwischen gestalterischer Vision und technischer Umsetzung schließt.",
-      rows: [
+      "headline": "Was ich gestalte und entwickle.",
+      "subline": "Websites, Anwendungen und sinnvolle Automatisierung – von der Gestaltung bis zur technischen Umsetzung.",
+      "rows": [
         {
-          code: "01 // WEB",
-          title: "Websites & Commerce",
-          description: "Durchdachte Websites, Commerce-Plattformen und digitale Erlebnisse, die klare gestalterische Führung mit zuverlässiger Umsetzung vereinen.",
-          tags: ["[UX]", "[UI]", "[Motion]", "[Frontend]"],
+          "id": "web",
+          "title": "Websites & Commerce",
+          "description": "Websites und Shops, die zu deinem Unternehmen passen – klar gestaltet und zuverlässig umgesetzt.",
+          "examples": [
+            "Websites",
+            "Onlineshops",
+            "Content-Systeme"
+          ]
         },
         {
-          code: "02 // SYS",
-          title: "Apps & Business-Systeme",
-          description: "Individuelle Webanwendungen, interne Tools und Systeme, entwickelt entlang klarer Workflows und konkreter betrieblicher Anforderungen.",
-          tags: ["[UI]", "[Frontend]", "[Backend]", "[Daten]"],
+          "id": "systems",
+          "title": "Apps & Business-Systeme",
+          "description": "Individuelle Anwendungen, die Abläufe übersichtlich machen und im Arbeitsalltag unterstützen.",
+          "examples": [
+            "Auftragsverwaltung",
+            "Interne Tools",
+            "Datenübersichten"
+          ]
         },
         {
-          code: "03 // INT",
-          title: "KI & Automatisierung",
-          description: "Sinnvolle KI-Integrationen, intelligente Interfaces und automatisierte Abläufe dort, wo sie das Produkt nachweislich verbessern.",
-          tags: ["[UX]", "[KI]", "[Frontend]"],
-        },
+          "id": "automation",
+          "title": "KI & Automatisierung",
+          "description": "KI und automatisierte Abläufe dort einsetzen, wo sie im Alltag konkret weiterhelfen.",
+          "examples": [
+            "KI-Integrationen",
+            "Automatisierte Workflows",
+            "Systemverknüpfungen"
+          ]
+        }
       ],
+      "visual": {
+        "description": "Oberfläche, Logik und Daten als zusammenhängende Ebenen eines digitalen Produkts.",
+        "interface": "Oberfläche",
+        "logic": "Logik",
+        "data": "Daten"
+      }
     },
     practitioner: {
-      kicker: "03 / DAS PROFIL",
-      portraitLabel: "[AUTHENTISCHES STUDIO-PORTRÄT]",
-      portraitSubtext: "Arbeitsumgebung & Porträt",
-      figureCaption: "ABBILDUNG 01 — PRAKTIKER // WILK",
-      quote: "„Mich interessiert die Funktionsweise genauso sehr wie das Aussehen.“",
-      p1: "Die Verbindung von visueller Art Direction und modernem Software-Engineering aus einer Hand. Beseitigung von Reibungsverlusten zwischen Konzept und Umsetzung.",
-      p2: "Begleitung des gesamten Lebenszyklus von Interface-Typografie und Interaktionsdynamik bis hin zur Software-Architektur. Code ist kein nachgelagerter Schritt, sondern das Fundament gestalterischer Validierung.",
-      corePracticeLabel: "KERNPRAXIS",
-      corePracticeValue: "Design & Software-Engineering",
-      focusLabel: "FOKUS",
-      focusValue: "Web-Plattformen / Interaktive Systeme",
+      "heading": "Über mich",
+      "portraitAlt": "Porträt des Gestalters hinter WILK",
+      "quote": {
+        "before": "„Mich interessiert die ",
+        "emphasis": "Funktionsweise",
+        "after": " genauso sehr wie das Aussehen.“"
+      },
+      "p1": "Ich gestalte und entwickle digitale Produkte. Dabei interessieren mich die Details im Interface genauso wie die Struktur dahinter.",
+      "p2": "Konzept, Design und Entwicklung gehören für mich zusammen – vom ersten Gedanken bis zum funktionierenden Produkt."
     },
     collaboration: {
-      kicker: "04 / ZUSAMMENARBEIT",
-      badge: "ENGAGEMENT",
-      headline: "Flexible Zusammenarbeit über den gesamten Projektzyklus.",
-      rows: [
+      "label": "Zusammenarbeit",
+      "headline": {
+        "lead": "Dein Projekt.",
+        "accent": "Drei Wege."
+      },
+      "intro": "Ein ganzes Projekt oder gezielte Unterstützung – wir finden die Zusammenarbeit, die zu deinem Vorhaben passt.",
+      "models": [
         {
-          code: "01 // DIREKT",
-          title: "Eigenständige Projekte",
-          description: "Ganzheitliche Begleitung von Design und Softwareentwicklung vom Briefing bis zum Deployment. Ideal für Flagships, Gründerplattformen und maßgeschneiderte Vorhaben.",
+          "id": "project",
+          "title": "Für dein Projekt",
+          "description": "Von der Idee bis zum fertigen Produkt: Ich übernehme Gestaltung und Entwicklung."
         },
         {
-          code: "02 // STUDIO",
-          title: "Agentur-Partnerschaften",
-          description: "Zusammenarbeit mit Designstudios und Agenturen für anspruchsvolles Design Engineering und interaktive Umsetzungen mit höchster Detailtreue.",
+          "id": "agency",
+          "title": "Mit deiner Agentur",
+          "description": "Ich ergänze euer Studio bei der technischen Umsetzung und arbeite eng mit eurem Team zusammen."
         },
         {
-          code: "03 // EINGEBETTET",
-          title: "Bestehende Produktteams",
-          description: "Verstärkung von Produkt- und Entwicklungsteams für komplexe UI-Systeme oder Kernfeatures mit hohem Anspruch an Handwerk und Performance.",
-        },
-      ],
+          "id": "team",
+          "title": "In deinem Produktteam",
+          "description": "Gezielte Unterstützung bei Interfaces, Anwendungen und der Weiterentwicklung bestehender Systeme."
+        }
+      ]
     },
     lab: {
-      kicker: "05 / DAS LABOR",
-      badge: "EXPERIMENTE & SKIZZEN",
-      headline: "Creative Coding, Shader-Experimente und Interaktions-Prototypen.",
-      cards: [
-        {
-          badge: "[INTERAKTIVES EXPERIMENT]",
-          title: "Halftone-Shader & WebGPU-Trail",
-          description: "Prozedurale Punktraster, gesteuert durch Cursorturbulenz und Trägheitsdämpfungs-Shader für flüssige dynamische Typografie.",
-          tech: "GLSL / WGSL",
-          action: "DEMO",
+      "kicker": "05 / DAS LABOR",
+      "headline": {
+        "lead": "Ideen im Aufbau.",
+        "accent": "Neugier in Bewegung."
+      },
+      "intro": "Freie Konzepte und digitale Versuche. Ein Raum, um Gestaltung und Code weiterzudenken.",
+      "conceptLabel": "Eigenständiges Konzept",
+      "selectionLabel": "Konzept für die große Vorschau wählen",
+      "caseStudyLink": "Case Study ansehen",
+      "surfaceDescription": "Goldene Linien bilden eine räumlich gefaltete Fläche. Ihre Form verändert sich beim Projektwechsel.",
+      "surfaceCaption": "Bewegung als Material.",
+      "concepts": {
+        "lumen": {
+          "description": "Licht als architektonischer Baustoff.",
+          "imageAlt": "LUMENWERK: dunkles Webdesign mit goldener Kugelleuchte"
         },
-        {
-          badge: "[WEBGL-STUDIE]",
-          title: "Dynamische Oberflächen & Materialphysik",
-          description: "Echtzeit-Materialreflexionsmodelle, anisotrope Simulationen und physikalische Federinteraktions-Kinetik.",
-          tech: "THREE.JS / PBR",
-          action: "START",
+        "roest": {
+          "description": "Ein eigener Auftritt für guten Kaffee.",
+          "imageAlt": "RÖSTWERK 1070: cremefarbene Website einer Kaffeerösterei"
         },
-        {
-          badge: "[MOTION-PROTOTYP]",
-          title: "Kinetische Variable Typografie",
-          description: "Schriftachsen-Deformation gekoppelt an Scroll-Geschwindigkeit und Trägheitskurven des Viewports.",
-          tech: "OPEN-TYPE / WASM",
-          action: "INSPEKTION",
+        "kern": {
+          "description": "Architektur, mit Raum für Typografie.",
+          "imageAlt": "KERN / FIELD: typografische Website für ein Architekturstudio"
+        }
+      }
+    },
+    homeContact: {
+      "regionLabel": "Kontakt",
+      "email": "bywilk@office.at",
+      "headline": {
+        "lead": "Eine Idee im Kopf?",
+        "accent": "Lass uns reden."
+      },
+      "intro": "Für ein neues Projekt oder um etwas Bestehendes weiterzudenken.",
+      "openForm": "Nachricht schreiben",
+      "helper": "Ein paar Sätze reichen für den Anfang.",
+      "form": {
+        "headline": {
+          "lead": "Erzähl mir",
+          "accent": "davon."
         },
-      ],
+        "intro": "Was möchtest du gestalten oder weiterentwickeln?",
+        "back": "Zurück",
+        "nameLabel": "Dein Name",
+        "namePlaceholder": "Wie heißt du?",
+        "emailLabel": "Deine E-Mail",
+        "emailPlaceholder": "Wo kann ich dich erreichen?",
+        "messageLabel": "Deine Idee",
+        "messagePlaceholder": "Worum geht’s?",
+        "submitLabel": "E-Mail vorbereiten",
+        "mailHint": "Öffnet einen Entwurf in deinem E-Mail-Programm. Du versendest ihn dort.",
+        "directLabel": "Oder direkt per E-Mail:",
+        "subjectPrefix": "Projektanfrage"
+      }
     },
     contact: {
       kicker: "06 / KONTAKT",

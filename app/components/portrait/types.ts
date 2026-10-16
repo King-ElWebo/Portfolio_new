@@ -1,50 +1,35 @@
 export interface ParticleConfig {
-  /** Maximum particles to draw on desktop (default: 42000) */
+  /** Maximum particles to draw on desktop */
   maxDesktopParticles: number;
-  /** Maximum particles to draw on tablet (default: 26000) */
+  /** Maximum particles to draw on tablet */
   maxTabletParticles: number;
-  /** Maximum particles to draw on mobile (default: 16000) */
+  /** Maximum particles to draw on mobile */
   maxMobileParticles: number;
-  /** Radius of pointer influence in 3D world space (default: 0.48) */
+  /** Radius of pointer influence in local portrait units */
   pointerInfluence: number;
-  /** Maximum repulsion strength under cursor (default: 0.32) */
+  /** Maximum depth displacement under the cursor */
   repulsionStrength: number;
-  /** Damping / lerp factor for pointer tracking (default: 0.075) */
+  /** Damping at 60 Hz, adjusted to the actual frame interval */
   damping: number;
-  /** Idle noise amplitude for breathing and living motion (default: 0.025) */
+  /** Idle surface drift amplitude */
   idleNoiseAmp: number;
-  /** Depth parallax response to cursor (default: 0.035) */
+  /** Depth parallax response to cursor, in radians */
   depthParallaxAmp: number;
-  /** Duration of initial assembly animation in seconds (default: 2.2) */
+  /** Duration of initial assembly animation in seconds */
   assemblyDuration: number;
 }
 
 export const DEFAULT_PARTICLE_CONFIG: ParticleConfig = {
-  maxDesktopParticles: 42000,
-  maxTabletParticles: 26000,
-  maxMobileParticles: 16000,
-  pointerInfluence: 0.48,
-  repulsionStrength: 0.32,
-  damping: 0.075,
-  idleNoiseAmp: 0.025,
-  depthParallaxAmp: 0.035,
-  assemblyDuration: 2.2,
+  maxDesktopParticles: 32000,
+  maxTabletParticles: 22000,
+  maxMobileParticles: 14000,
+  pointerInfluence: 0.30,
+  repulsionStrength: 0.028,
+  damping: 0.10,
+  idleNoiseAmp: 0.0025,
+  depthParallaxAmp: 0.026,
+  assemblyDuration: 2.8,
 };
-
-export interface ParticleDatasetMeta {
-  particleCount: number;
-  strideFloats: number;
-  strideBytes: number;
-  bounds: {
-    minX: number;
-    maxX: number;
-    minY: number;
-    maxY: number;
-    minZ: number;
-    maxZ: number;
-  };
-  version: string;
-}
 
 export interface ParticlePortraitProps {
   className?: string;

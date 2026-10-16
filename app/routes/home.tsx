@@ -10,7 +10,8 @@ import { Capabilities } from "~/components/sections/Capabilities";
 import { Practitioner } from "~/components/sections/Practitioner";
 import { Collaboration } from "~/components/sections/Collaboration";
 import { Lab } from "~/components/sections/Lab";
-import { Contact } from "~/components/sections/Contact";
+import { HomeContact } from "~/components/sections/HomeContact";
+import "~/styles/homepage.css";
 
 export function loader({ params }: LoaderFunctionArgs) {
   const rawLocale = params.locale;
@@ -26,7 +27,7 @@ export function loader({ params }: LoaderFunctionArgs) {
 
 export function meta({ data }: { data?: { locale: Locale; t: any } }) {
   if (!data?.t) {
-    return [{ title: "WILK — Portfolio" }];
+    return [{ title: "WILK — Digital Designer & Software Developer" }];
   }
   return [
     { title: data.t.meta.title },
@@ -55,7 +56,7 @@ export default function HomeRoute() {
       <main id="main-content" style={{ width: "100%", overflow: "hidden" }}>
         {/* ACT 1: Cinematic Obsidian Dark */}
         <Hero t={t} />
-        <SelectedWork t={t} />
+        <SelectedWork t={t} locale={locale} />
         <TransitionBridge t={t} />
 
         {/* ACT 2: Warm Editorial Cream / Paper */}
@@ -67,11 +68,11 @@ export default function HomeRoute() {
 
         {/* ACT 3: Return to Cinematic Obsidian Dark */}
         <div className="dark-act3-wrap">
-          <Lab t={t} />
-          <Contact t={t} />
+          <Lab t={t} locale={locale} />
+          <HomeContact t={t} />
         </div>
       </main>
-      <SiteFooter t={t} locale={locale} />
+      <SiteFooter t={t} locale={locale} email={t.homeContact.email} />
     </>
   );
 }

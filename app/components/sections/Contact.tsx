@@ -16,127 +16,136 @@ export function Contact({ t }: ContactProps) {
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmitted(true);
-    }, 500);
+    }, 400);
   };
 
   return (
-    <section className="max-w-7xl contact-container" id="contact" aria-label="Contact and Inquiries">
-      <div className="contact-grid">
-        {/* Left Column: Direct Inquiries */}
-        <div className="contact-left-col">
-          <span className="section-kicker-gold">{c.kicker}</span>
-          <h2 className="project-title-serif" style={{ fontSize: "clamp(2rem, 3.8vw, 3.25rem)", lineHeight: 1.15 }}>
-            {c.headline}
-          </h2>
-          <p style={{ fontSize: "18px", color: "var(--text-dark-secondary)", fontWeight: 300, maxWidth: "28rem" }}>
-            {c.subline}
-          </p>
+    <section className="hp-contact-section" id="contact" aria-label="Contact and Inquiries">
+      <div className="hp-container-wide">
+        <div className="hp-contact-grid">
+          {/* Left Column: Direct Inquiries & Framing */}
+          <div>
+            <span className="hp-section-kicker">{c.kicker}</span>
+            <h2 className="hp-contact-headline">
+              {c.headline}
+            </h2>
+            <p className="hp-contact-lead">
+              {c.subline}
+            </p>
 
-          <div style={{ display: "flex", flexDirection: "column", gap: "1rem", marginTop: "2rem" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-              <span className="label-sm" style={{ color: "var(--text-dark-muted)" }}>{c.directLabel}</span>
-              <a
-                href={`mailto:${c.directEmail}`}
-                className="label-sm"
-                style={{ color: "var(--text-dark-primary)", textDecoration: "underline", textUnderlineOffset: "4px" }}
-              >
-                {c.directEmail}
-              </a>
-            </div>
+            <div className="hp-contact-links">
+              <div className="hp-contact-link-row">
+                <span style={{ fontFamily: "var(--font-mono)", fontSize: "11px", letterSpacing: "0.08em", color: "var(--text-dark-muted)", minWidth: "120px" }}>
+                  {c.directLabel}
+                </span>
+                <a
+                  href={`mailto:${c.directEmail}`}
+                  style={{ fontFamily: "var(--font-mono)", fontSize: "13px", color: "var(--text-dark-primary)", textDecoration: "underline", textUnderlineOffset: "4px" }}
+                >
+                  {c.directEmail}
+                </a>
+              </div>
 
-            <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-              <span className="label-sm" style={{ color: "var(--text-dark-muted)" }}>{c.networkLabel}</span>
-              <a
-                href={`https://${c.networkUrl}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="label-sm"
-                style={{ color: "var(--text-dark-primary)", textDecoration: "underline", textUnderlineOffset: "4px" }}
-              >
-                {c.networkUrl}
-              </a>
+              <div className="hp-contact-link-row">
+                <span style={{ fontFamily: "var(--font-mono)", fontSize: "11px", letterSpacing: "0.08em", color: "var(--text-dark-muted)", minWidth: "120px" }}>
+                  {c.networkLabel}
+                </span>
+                <a
+                  href={`https://${c.networkUrl}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ fontFamily: "var(--font-mono)", fontSize: "13px", color: "var(--text-dark-primary)", textDecoration: "underline", textUnderlineOffset: "4px" }}
+                >
+                  {c.networkUrl}
+                </a>
+              </div>
+
+              <div className="hp-contact-link-row">
+                <span style={{ fontFamily: "var(--font-mono)", fontSize: "11px", letterSpacing: "0.08em", color: "var(--text-dark-muted)", minWidth: "120px" }}>
+                  LOCATION:
+                </span>
+                <span style={{ fontFamily: "var(--font-mono)", fontSize: "13px", color: "var(--text-dark-secondary)" }}>
+                  Wien, Österreich · Remote DACH & Global
+                </span>
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Right Column: Clean Form */}
-        <div>
-          {submitted ? (
-            <div
-              style={{
-                backgroundColor: "var(--bg-dark-lowest)",
-                border: "1px solid var(--color-secondary)",
-                padding: "2rem",
-                color: "var(--color-secondary)",
-                fontFamily: "var(--font-mono)",
-                fontSize: "12px",
-              }}
-              role="status"
-              aria-live="polite"
-            >
-              ✓ {c.form.successMsg}
-            </div>
-          ) : (
-            <form className="contact-form-box" onSubmit={handleSubmit}>
-              <div className="contact-field-wrap">
-                <label htmlFor="name" className="label-sm" style={{ color: "var(--text-dark-muted)" }}>
-                  {c.form.nameLabel}
-                </label>
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  required
-                  placeholder={c.form.namePlaceholder}
-                  className="contact-input-line"
-                />
-              </div>
-
-              <div className="contact-field-wrap">
-                <label htmlFor="email" className="label-sm" style={{ color: "var(--text-dark-muted)" }}>
-                  {c.form.emailLabel}
-                </label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  placeholder={c.form.emailPlaceholder}
-                  className="contact-input-line"
-                />
-              </div>
-
-              <div className="contact-field-wrap">
-                <label htmlFor="message" className="label-sm" style={{ color: "var(--text-dark-muted)" }}>
-                  {c.form.messageLabel}
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  required
-                  rows={3}
-                  placeholder={c.form.messagePlaceholder}
-                  className="contact-input-line"
-                  style={{ resize: "none" }}
-                />
-              </div>
-
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="contact-submit-btn"
+          {/* Right Column: Accessible Form */}
+          <div>
+            {submitted ? (
+              <div
+                style={{
+                  backgroundColor: "var(--bg-dark-surface)",
+                  border: "1px solid var(--color-secondary)",
+                  padding: "2.5rem",
+                  color: "var(--color-secondary)",
+                  fontFamily: "var(--font-mono)",
+                  fontSize: "13px",
+                  borderRadius: "3px",
+                  lineHeight: "1.6",
+                }}
+                role="status"
+                aria-live="polite"
               >
-                <span>{isSubmitting ? c.form.submittingBtn : c.form.submitBtn}</span>
-                <span aria-hidden="true">→</span>
-              </button>
-            </form>
-          )}
-        </div>
-      </div>
+                <div style={{ fontSize: "18px", marginBottom: "0.5rem" }}>✓</div>
+                {c.form.successMsg}
+              </div>
+            ) : (
+              <form className="hp-contact-form-box" onSubmit={handleSubmit}>
+                <div className="hp-form-field">
+                  <label htmlFor="hp-name" className="hp-form-label">
+                    {c.form.nameLabel}
+                  </label>
+                  <input
+                    id="hp-name"
+                    name="name"
+                    type="text"
+                    required
+                    placeholder={c.form.namePlaceholder}
+                    className="hp-form-input"
+                  />
+                </div>
 
-      {/* Colophon Note */}
-      <div className="contact-colophon-note">
-        <p>{c.colophon}</p>
+                <div className="hp-form-field">
+                  <label htmlFor="hp-email" className="hp-form-label">
+                    {c.form.emailLabel}
+                  </label>
+                  <input
+                    id="hp-email"
+                    name="email"
+                    type="email"
+                    required
+                    placeholder={c.form.emailPlaceholder}
+                    className="hp-form-input"
+                  />
+                </div>
+
+                <div className="hp-form-field">
+                  <label htmlFor="hp-message" className="hp-form-label">
+                    {c.form.messageLabel}
+                  </label>
+                  <textarea
+                    id="hp-message"
+                    name="message"
+                    required
+                    rows={4}
+                    placeholder={c.form.messagePlaceholder}
+                    className="hp-form-textarea"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="hp-form-btn"
+                >
+                  {isSubmitting ? c.form.submittingBtn : c.form.submitBtn}
+                </button>
+              </form>
+            )}
+          </div>
+        </div>
       </div>
     </section>
   );

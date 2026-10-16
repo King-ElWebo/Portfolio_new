@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router";
 import type { Translations, Locale } from "~/i18n/translations";
 import type { ProjectEntry } from "~/types/project";
 
@@ -19,9 +20,8 @@ export function ProjectCard({ project, locale, t }: ProjectCardProps) {
   const summaryText = project.summary[locale] || project.summary.en;
   const imageAltText = project.imageAlt[locale] || project.imageAlt.en;
 
-  // Render clickable container only if there is a real destination (e.g. liveUrl)
-  // When Case Studies routes exist in the future, this can navigate to `/${locale}/work/${project.slug}`
-  const hasDestination = Boolean(project.liveUrl);
+  const internalHref = project.hasCaseStudy ? `/${locale}/work/${project.slug}` : null;
+  const externalHref = !project.hasCaseStudy && project.liveUrl ? project.liveUrl : null;
 
   const cardContent = (
     <>
@@ -76,9 +76,17 @@ export function ProjectCard({ project, locale, t }: ProjectCardProps) {
 
   return (
     <article className="work-card group">
-      {hasDestination ? (
+      {internalHref ? (
+        <Link
+          to={internalHref}
+          className="work-card-link-wrapper"
+          aria-label={`${project.title} — ${descriptorText} (${actionLabel})`}
+        >
+          {cardContent}
+        </Link>
+      ) : externalHref ? (
         <a
-          href={project.liveUrl}
+          href={externalHref}
           target="_blank"
           rel="noopener noreferrer"
           className="work-card-link-wrapper"

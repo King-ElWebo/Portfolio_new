@@ -1,0 +1,24 @@
+{
+  "version": "variant-a-surface-refinement-1",
+  "particleCount": 29803,
+  "strideFloats": 16,
+  "strideBytes": 64,
+  "source": "portrait-particles.bin",
+  "sourceSha256": "14f1c4c07e3bcd8e2d985712803450d2837178e4e5f8f8c855e3360d338d119c",
+  "geometry": "Existing generic Variant A positions, unchanged; no personal reconstruction",
+  "normals": "Approximate local PCA surface normals, oriented towards the hero camera",
+  "bounds": {
+    "x": [
+      -1.4017001390457153,
+      1.2799527645111084
+    ],
+    "y": [
+      -1.3573640584945679,
+      1.2209681272506714
+    ],
+    "z": [
+      -0.8333837985992432,
+      0.7260229587554932
+    ]
+  }
+}

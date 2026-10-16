@@ -1,92 +1,78 @@
-import React from "react";
-import type { Translations } from "~/i18n/translations";
+import { Link } from "react-router";
+import type { Locale, Translations } from "~/i18n/translations";
+import "~/styles/selected-work.css";
 
 interface SelectedWorkProps {
   t: Translations;
+  locale: Locale;
 }
 
-export function SelectedWork({ t }: SelectedWorkProps) {
-  const p1 = t.work.project01;
-  const p2 = t.work.project02;
+const featuredProjects = [
+  { key: "checkpot", backdrop: "CHECKPOT", slug: "checkpot-hietzing", assetDirectory: "checkpot" },
+  { key: "bloom", backdrop: "BLOOM", slug: "let-it-bloom", assetDirectory: "let-it-bloom" },
+  { key: "speiche", backdrop: "SPEICHE", slug: "speiche-werkstattmanager", assetDirectory: "speiche" },
+] as const;
 
+export function SelectedWork({ t, locale }: SelectedWorkProps) {
   return (
-    <section className="work-section max-w-7xl" id="work" aria-label="Selected Work">
-      {/* Section Divider Header */}
-      <div className="section-divider-header">
-        <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
-          <span className="section-kicker-gold">{t.work.kicker}</span>
-          <span className="section-kicker-muted">{t.work.subtitle}</span>
-        </div>
-      </div>
+    <section className="selected-work-section max-w-7xl" id="work" aria-labelledby="selected-work-heading">
+      <h2 className="selected-work-heading" id="selected-work-heading">
+        {t.work.heading}
+      </h2>
 
-      <div className="work-articles-stack">
-        {/* Project 01: Full-width 16/9 Media Emphasis */}
-        <article className="project-01-wrap">
-          <div className="project-meta-header">
-            <div>
-              <span className="project-badge-mono">{p1.badge}</span>
-              <h2 className="project-title-serif">{p1.title}</h2>
-            </div>
-            <div className="project-tags-wrap">
-              {p1.tags.map((tag) => (
-                <span key={tag} className="project-tag-mono">{tag}</span>
-              ))}
-            </div>
-          </div>
+      <div className="selected-work-list">
+        {featuredProjects.map((project, index) => {
+          const copy = t.work.featured[project.key];
+          const imageBase = "/assets/projects/" + project.assetDirectory + "/selected-work";
 
-          <div className="project-01-media">
-            <div className="media-mockup-frame">
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", opacity: 0.6 }}>
-                <span className="label-sm" style={{ color: "var(--text-dark-muted)" }}>CANVAS_VIEWPORT // 01</span>
-                <span className="label-sm" style={{ color: "var(--text-dark-muted)" }}>16:9 UHD</span>
+          return (
+            <article key={project.slug} className="selected-work-project">
+              <div className="selected-work-backdrop" aria-hidden="true">
+                <span>{project.backdrop}</span>
               </div>
-              <div style={{ textAlign: "center" }}>
-                <span style={{ fontFamily: "var(--font-serif)", fontStyle: "italic", fontSize: "2rem", color: "rgba(227, 226, 231, 0.4)" }}>
-                  {p1.title}
-                </span>
-              </div>
-              <div className="media-overlay-bottom">
-                <span className="label-sm" style={{ color: "var(--text-dark-muted)" }}>{p1.meta}</span>
-                <span className="arrow-badge" aria-hidden="true">↗</span>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        {/* Project 02: Asymmetric 4/8 Grid */}
-        <article className="project-02-wrap">
-          <div className="project-02-grid">
-            <div className="project-02-info">
-              <div>
-                <span className="project-badge-mono">{p2.badge}</span>
-                <h2 className="project-title-serif">{p2.title}</h2>
-              </div>
-              <p className="project-02-desc">{p2.description}</p>
-              <div className="project-tags-wrap" style={{ paddingTop: "0.5rem" }}>
-                {p2.tags.map((tag) => (
-                  <span key={tag} className="project-tag-mono">{tag}</span>
-                ))}
-              </div>
-            </div>
-
-            <div className="project-02-media">
-              <div className="media-mockup-frame">
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", opacity: 0.6 }}>
-                  <span className="label-sm" style={{ color: "var(--text-dark-muted)" }}>CANVAS_VIEWPORT // 02</span>
-                  <span className="label-sm" style={{ color: "var(--text-dark-muted)" }}>16:10 SPATIAL</span>
+              <Link
+                to={"/" + locale + "/work/" + project.slug}
+                className={"selected-work-row" + (index % 2 === 1 ? " selected-work-row-reversed" : "")}
+                aria-label={copy.title + " — " + t.work.caseStudyLink}
+              >
+                <div className="selected-work-media">
+                  <img
+                    className="selected-work-image"
+                    src={imageBase + "-1080.webp"}
+                    srcSet={imageBase + "-720.webp 720w, " + imageBase + "-1080.webp 1080w"}
+                    sizes="(max-width: 760px) calc(100vw - 3rem), (max-width: 1280px) 42vw, 520px"
+                    alt={copy.imageAlt}
+                    width={1080}
+                    height={675}
+                    loading="lazy"
+                    decoding="async"
+                  />
                 </div>
-                <div style={{ textAlign: "center" }}>
-                  <span style={{ fontFamily: "var(--font-serif)", fontStyle: "italic", fontSize: "1.75rem", color: "rgba(227, 226, 231, 0.4)" }}>
-                    {p2.title}
+
+                <div className="selected-work-copy">
+                  <span className="selected-work-kind">{copy.kind}</span>
+                  <h3 className="selected-work-title">{copy.title}</h3>
+                  <p className="selected-work-description">{copy.description}</p>
+                  <span className="selected-work-action">
+                    {t.work.caseStudyLink}
+                    <svg
+                      className="selected-work-arrow"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      aria-hidden="true"
+                    >
+                      <path d="M7 17 17 7M7 7h10v10" />
+                    </svg>
                   </span>
                 </div>
-                <div className="media-overlay-bottom" style={{ justifyContent: "flex-end" }}>
-                  <span className="arrow-badge" aria-hidden="true">↗</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </article>
+              </Link>
+            </article>
+          );
+        })}
       </div>
     </section>
   );

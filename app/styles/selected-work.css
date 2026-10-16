@@ -1,0 +1,202 @@
+/* Selected Work — approved editorial project rows. */
+.selected-work-section {
+  --selected-work-row-gap: clamp(2rem, 4vw, 3.5rem);
+  --selected-work-column-gap: clamp(2rem, 4vw, 4rem);
+  padding-block: clamp(4rem, 6vw, 6rem);
+}
+
+.selected-work-heading {
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  color: var(--text-dark-primary);
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+.selected-work-list {
+  display: grid;
+  gap: var(--selected-work-row-gap);
+}
+
+.selected-work-project {
+  position: relative;
+  isolation: isolate;
+  padding-top: clamp(3.5rem, 5vw, 5rem);
+}
+
+.selected-work-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: clip;
+  pointer-events: none;
+  user-select: none;
+}
+
+.selected-work-backdrop span {
+  position: relative;
+  left: 22%;
+  display: block;
+  color: var(--text-dark-primary);
+  opacity: 0.065;
+  font-family: var(--font-serif);
+  font-size: clamp(5.25rem, 15vw, 13.5rem);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.055em;
+  white-space: nowrap;
+}
+
+.selected-work-project:nth-child(even) .selected-work-backdrop span {
+  left: -1.5rem;
+}
+
+.selected-work-row {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 44fr) minmax(0, 56fr);
+  grid-template-areas: "media copy";
+  gap: var(--selected-work-column-gap);
+  align-items: center;
+  color: var(--text-dark-primary);
+  text-decoration: none;
+}
+
+.selected-work-row-reversed {
+  grid-template-columns: minmax(0, 56fr) minmax(0, 44fr);
+  grid-template-areas: "copy media";
+}
+
+.selected-work-media {
+  grid-area: media;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  background-color: var(--bg-dark-container);
+}
+
+.selected-work-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 280ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.selected-work-copy {
+  grid-area: copy;
+  min-width: 0;
+}
+
+.selected-work-kind {
+  display: block;
+  margin-bottom: 0.75rem;
+  color: var(--text-dark-muted);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.selected-work-title {
+  color: var(--text-dark-primary);
+  font-family: var(--font-serif);
+  font-size: clamp(1.75rem, 3vw, 2.75rem);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+  transition: color 180ms ease;
+}
+
+.selected-work-description {
+  max-width: 36ch;
+  margin-top: 1rem;
+  color: var(--text-dark-secondary);
+  font-family: var(--font-sans);
+  font-size: clamp(1rem, 1.4vw, 1.125rem);
+  font-weight: 400;
+  line-height: 1.65;
+}
+
+.selected-work-action {
+  display: inline-flex;
+  gap: 0.75rem;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 1.25rem;
+  color: var(--color-secondary);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.selected-work-arrow {
+  flex: none;
+  transition: transform 180ms ease;
+}
+
+.selected-work-row:focus-visible {
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 12px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .selected-work-row:hover .selected-work-image {
+    transform: scale(1.025);
+  }
+
+  .selected-work-row:hover .selected-work-title {
+    color: var(--color-secondary);
+  }
+
+  .selected-work-row:hover .selected-work-arrow {
+    transform: translate(2px, -2px);
+  }
+}
+
+@media (max-width: 760px) {
+  .selected-work-section {
+    --selected-work-row-gap: 2.75rem;
+    --selected-work-column-gap: 1.5rem;
+  }
+
+  .selected-work-project {
+    padding-top: clamp(3.75rem, 18vw, 4.75rem);
+  }
+
+  .selected-work-backdrop span,
+  .selected-work-project:nth-child(even) .selected-work-backdrop span {
+    left: -0.5rem;
+    font-size: clamp(4.25rem, 19vw, 6.75rem);
+  }
+
+  .selected-work-row,
+  .selected-work-row-reversed {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "media" "copy";
+  }
+
+  .selected-work-description {
+    max-width: 38ch;
+  }
+
+  .selected-work-row:focus-visible {
+    outline-offset: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .selected-work-image,
+  .selected-work-title,
+  .selected-work-arrow {
+    transition: none;
+  }
+
+  .selected-work-row:hover .selected-work-image,
+  .selected-work-row:hover .selected-work-arrow {
+    transform: none;
+  }
+}

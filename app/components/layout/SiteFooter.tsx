@@ -1,18 +1,15 @@
 import React from "react";
-import { Link, useLocation } from "react-router";
 import type { Translations, Locale } from "~/i18n/translations";
-import { getAlternateLocale, getLocaleSwitchUrl, setLocaleCookie } from "~/i18n/locale";
+import { LanguageSwitch } from "./LanguageSwitch";
 
 interface SiteFooterProps {
   t: Translations;
   locale: Locale;
+  email?: string;
 }
 
-export function SiteFooter({ t, locale }: SiteFooterProps) {
+export function SiteFooter({ t, locale, email = "wilk@studio.lab" }: SiteFooterProps) {
   const f = t.footer;
-  const otherLocale = getAlternateLocale(locale);
-  const location = useLocation();
-  const switchLocaleUrl = getLocaleSwitchUrl(location.pathname, location.search, location.hash);
 
   return (
     <footer className="global-footer" role="contentinfo">
@@ -33,8 +30,8 @@ export function SiteFooter({ t, locale }: SiteFooterProps) {
         </p>
 
         {/* Links */}
-        <nav style={{ display: "flex", alignItems: "center", gap: "1.5rem" }}>
-          <a href="mailto:wilk@studio.lab" className="label-md" style={{ color: "var(--text-dark-secondary)" }}>
+        <nav className="footer-links" style={{ display: "flex", alignItems: "center", gap: "1.5rem" }}>
+          <a href={"mailto:" + email} className="label-md" style={{ color: "var(--text-dark-secondary)" }}>
             {f.email}
           </a>
           <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="label-md" style={{ color: "var(--text-dark-secondary)" }}>
@@ -43,15 +40,7 @@ export function SiteFooter({ t, locale }: SiteFooterProps) {
           <a href="#hero" className="label-md" style={{ color: "var(--text-dark-secondary)" }}>
             {f.legal}
           </a>
-          <Link
-            to={switchLocaleUrl}
-            className="label-md"
-            style={{ color: "var(--color-secondary)" }}
-            aria-label={`Switch language to ${otherLocale.toUpperCase()}`}
-            onClick={() => setLocaleCookie(otherLocale)}
-          >
-            {otherLocale.toUpperCase()}
-          </Link>
+          <LanguageSwitch locale={locale} />
         </nav>
       </div>
     </footer>

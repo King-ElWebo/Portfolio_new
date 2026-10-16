@@ -28,8 +28,9 @@ In der aktuellen Codebasis (`app/i18n/translations.ts`) befinden sich noch über
 | `work.project01` | *Digital Flagship Platform & Design System* | `FICTIONAL PLACEHOLDER` | Ersetzen durch echtes Referenzprojekt nach Nutzerbestätigung. |
 | `work.project02` | *Interactive Spatial Experience & Web Application* | `FICTIONAL PLACEHOLDER` | Ersetzen durch echtes Referenzprojekt nach Nutzerbestätigung. |
 | `bridge.project03` | *Adaptive Data Surface & System Shell* | `FICTIONAL PLACEHOLDER` | Ersetzen durch echtes Independent Concept oder reales Projekt. |
-| `lab.cards[0..2]` | *Halftone Shaders, Dynamic Surface, Variable Typo* | `PARTIALLY DEMO` | Lab-Prototypen schärfen oder durch reale interaktive Studien belegen. |
+| `lab` | LUMENWERK Studio, RÖSTWERK 1070, KERN / FIELD & gefaltete Linienfläche | `IMPLEMENTED / INDEPENDENT CONCEPTS` | Gemeinsame Homepage-Bühne mit echten Vorschauen, Case-Study-Links und integrierter SVG-Bewegung (DEC-028). |
 | `contact.directEmail` | `wilk@studio.lab` | `PLACEHOLDER` | Ersetzen durch reale, bestätigte Kontaktadresse. |
+| `homeContact.email` | `bywilk@office.at` | `CONFIRMED` | Vom Nutzer bestätigte Adresse. Homepage-Formular öffnet einen E-Mail-Entwurf; kein serverseitiger Versand (DEC-029). |
 | `contact.networkUrl` | `linkedin.com/in/wilk-studio` | `PLACEHOLDER` | Ersetzen durch reale LinkedIn-URL des Practitioners. |
 | `meta.title` | *D3 — Refined Cinematic Editorial Portfolio...* | `PLACEHOLDER` | Bereinigen um interne Stitch-Versionskürzel. |
 
@@ -59,19 +60,19 @@ Um Projekte aus dem Kandidatenpool systematisch zu vollständigen Case Studies a
 
 ---
 
-## 3. Verifizierter Projektbestand im Portfolio (`app/data/projects.ts`) `[VERIFIED / PUBLISHED]`
+## 3. Verifizierter Projektbestand im Portfolio (`app/data/projects.ts`) `[VERIFIED / IMPLEMENTED]`
 
-Folgende 7 Projekte sind nun direkt in `app/data/projects.ts` und dem Work-Archiv integriert. Alle Daten basieren auf verifizierten Codebasen, Live-Deployments und GitHub-Repositories:
+Folgende 7 Projekte sind nun direkt in `app/data/projects.ts`, dem Work-Archiv und als individuelle Case Studies unter `/work/:slug` integriert. Alle Daten basieren auf verifizierten Codebasen, Live-Deployments und GitHub-Repositories:
 
-| # | Projekt | Typ / Ausrichtung | Client vs. Concept | Freigabe- & Verifikationsstatus | Technische Basis & Quelle |
-| :-: | :--- | :--- | :--- | :--- | :--- |
-| **01** | **Checkpot Hietzing** | Modeboutique & Lookbook mit Custom CMS | Client Project | `VERIFIED / PUBLISHED` | Next.js, Tailwind, Neon PostgreSQL, Cloudflare Workers, R2, Resend. Live: `checkpot-hietzing.at` |
-| **02** | **Let It Bloom** | Florales Atelier mit Mini-CMS | Client Project | `VERIFIED / PUBLISHED` | Next.js 15, React 19, Tailwind v4, Vercel KV/Blob, Web3Forms. Live: `letitbloom.at` |
-| **03** | **FKW-G** | Barrierearmes Vereinsportal | Client Project | `VERIFIED / PUBLISHED` | Custom WordPress Theme, PHP, Tailwind CSS, barrierearmes Design, PayPal. GitHub: `fkw-g` |
-| **04** | **LUMENWERK Studio** | Architektonisches Licht & Konfigurator | Independent Concept / Lab | `VERIFIED / PUBLISHED` | Next.js 16, Tailwind, Konfigurator, B2B-Händleransicht, Static Export. GitHub: `Demo-leuchten-online-shop` |
-| **05** | **SPEICHE** | Fahrrad-Werkstattmanager | Independent Concept / Lab | `VERIFIED / PUBLISHED` | React 19, Next.js, Tailwind, Client-Side State, Fachanwendung. GitHub: `Werkstattmanager-Demo` |
-| **06** | **RÖSTWERK 1070** | Mikrorösterei, Sensorik-Radar & Rechner | Independent Concept / Lab | `VERIFIED / PUBLISHED` | Next.js, React 19, Tailwind, Sensorik-Finder, Brührechner. GitHub: `Kaffeer-sterei-Demo` |
-| **07** | **KERN / FIELD** | Architekturstudio & räumliche Monografie | Independent Concept / Lab | `VERIFIED / PUBLISHED` | Next.js, Tailwind, Editorial Grid, Responsive Art Direction. GitHub: `Architecture-Demo` |
+| # | Projekt | Typ / Ausrichtung | Client vs. Concept | Freigabe- & Verifikationsstatus | Technische Basis & Quelle | Case Study Route |
+| :-: | :--- | :--- | :--- | :--- | :--- | :--- |
+| **01** | **Checkpot Hietzing** | Modeboutique & Lookbook mit Custom CMS | Client Project | `VERIFIED / IMPLEMENTED` | Next.js, Tailwind, Neon PostgreSQL, Cloudflare Workers, R2, Resend. Live: `checkpot-hietzing.at` | `/work/checkpot-hietzing` |
+| **02** | **Let It Bloom** | Florales Atelier mit Mini-CMS | Client Project | `VERIFIED / IMPLEMENTED` | Next.js 15, React 19, Tailwind v4, Vercel KV/Blob, Web3Forms. Live: `letitbloom.at` | `/work/let-it-bloom` |
+| **03** | **FKW-G** | Barrierearmes Vereinsportal | Client Project | `VERIFIED / IMPLEMENTED` | Custom WordPress Theme, PHP, Tailwind CSS, barrierearmes Design, PayPal. GitHub: `fkw-g` | `/work/fkw-g` |
+| **04** | **LUMENWERK Studio** | Architektonisches Licht & Konfigurator | Independent Concept / Lab | `VERIFIED / IMPLEMENTED` | Next.js 16, Tailwind, Konfigurator, B2B-Händleransicht, Static Export. GitHub: `Demo-leuchten-online-shop` | `/work/lumenwerk-studio` |
+| **05** | **SPEICHE** | Fahrrad-Werkstattmanager | Independent Concept / Lab | `VERIFIED / IMPLEMENTED` | React 19, Next.js, Tailwind, Client-Side State, Fachanwendung. GitHub: `Werkstattmanager-Demo` | `/work/speiche-werkstattmanager` |
+| **06** | **RÖSTWERK 1070** | Mikrorösterei, Sensorik-Radar & Rechner | Independent Concept / Lab | `VERIFIED / IMPLEMENTED` | Next.js, React 19, Tailwind, Sensorik-Finder, Brührechner. GitHub: `Kaffeer-sterei-Demo` | `/work/roestwerk-1070` |
+| **07** | **KERN / FIELD** | Architekturstudio & räumliche Monografie | Independent Concept / Lab | `VERIFIED / IMPLEMENTED` | Next.js, Tailwind, Editorial Grid, Responsive Art Direction. GitHub: `Architecture-Demo` | `/work/kern-field` |
 
 ### Weitere Kandidaten & interne Werkzeuge `[NEEDS CONFIRMATION / IN PROGRESS]`
 
@@ -103,6 +104,6 @@ Folgende 7 Projekte sind nun direkt in `app/data/projects.ts` und dem Work-Archi
 | **Name des Practitioners** | *WILK* (Arbeitsbezeichnung) | `WORKING DIRECTION` | Offizielle Namensnennung bestätigen. |
 | **Standort** | Österreich | `CONFIRMED` | Genaue Formulierung prüfen. |
 | **Vita / Werdegang** | `content/experience/` (aktuell `.gitkeep`) | `MISSING` | Relevante Stationen erfassen. |
-| **Authentisches Foto** | `assets/portraits/private/` (vorhanden, privat) | `PRIVATE / UNVERIFIED` | Auswahl für Practitioner-Sektion treffen. |
+| **Authentisches Foto** | `public/assets/profile/wilk-portrait.webp` aus dem privaten Original `front.jpg` | `CONFIRMED` (gewählter Entwurf, DEC-026) | Aktuell gewähltes Porträt der Profilsektion; private Originaldatei unverändert. |
 | **3D Partikel-Porträt** | Variante A vorbereitet, Geometrie pausiert | `PAUSED` | Entscheidung über Gesichtsgeometrie ausstehend. |
 | **Testimonials** | `content/testimonials/` (aktuell `.gitkeep`) | `MISSING / OPTIONAL` | Reale Kundenfreigaben einholen oder Sektion überspringen. |

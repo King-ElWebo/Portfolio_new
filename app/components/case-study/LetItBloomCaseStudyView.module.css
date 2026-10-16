@@ -1,0 +1,54 @@
+/* Scoped styles for Let It Bloom final polish */
+
+.adminPillarsTwoCol {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+  .adminPillarsTwoCol {
+    grid-template-columns: 1fr;
+  }
+}
+
+.closingMetaBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  padding: 1.25rem 1.75rem;
+  background-color: var(--bg-dark-surface, #141414);
+  border: 1px solid var(--border-dark-subtle, rgba(255, 255, 255, 0.08));
+  margin-top: 2rem;
+  margin-bottom: clamp(2.5rem, 4vw, 3.5rem);
+}
+
+.techLine {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.techLineLabel {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  color: var(--text-dark-dim, rgba(255, 255, 255, 0.4));
+  text-transform: uppercase;
+}
+
+.techPills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.liveAction {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}

@@ -151,8 +151,120 @@ NOTES: [Relevante Einschränkungen oder nachgelagerte Aufgaben]
 - **MERKMALE**: Großzügiger Weißraum, Haarlinien-Teiler, monumentale Titelzeile mit horizontal gekoppeltem dynamischem Projektzähler, diszipliniertes 3-Spalten-Raster, dezente Bild-Hover-Effekte, keine Pseudo-Telemetrie oder Fake-Dashboards.
 - **NOTES**: Visuell in React und CSS vollständig implementiert; läuft aktuell mit 6 klar deklarierten lokalen Vorschau-Kandidaten (`PREVIEW_FIXTURES`), bis reale Kundenprojekte und Bildmaterial freigegeben sind.
 
+### DEC-021: Case-Study-Architektur & Checkpot Hietzing Implementierung
+- **DATE**: 2026-10-11
+- **STATUS**: `CONFIRMED`
+- **RATIONALE**:
+  - Implementierung der ersten vollwertigen, individuellen Case Study für *Checkpot Hietzing* unter der dynamischen Route `/:locale/work/:slug` (`app/routes/case-study.tsx`).
+  - Google Stitch MCP Exploration Screen `projects/9864955914556862585/screens/1acb89b830dc4c8fae1b3de0be1a28ed` (Cinematic Dark Hero, Warm Cream Editorial `#f6f3ec`, dezente Champagner-/Boutique-Akzente `#c2a284`).
+  - 8 modulare, wiederverwendbare Sektionskomponenten in `app/components/case-study/` (`Hero`, `Overview`, `Challenge`, `Redesign`, `CustomCms`, `Engineering`, `Outcome`, `Navigation`).
+  - Einbindung von 12 authentischen Projekt-Assets (Wayback-Machine-Archiv 2019, hochauflösende Desktop- und Mobile-Screenshots, reale Boutique- und Lookbook-Fotografien) unter `public/assets/projects/checkpot/`.
+  - Interaktive CMS-Showcase-Komponente demonstriert den proprietären Admin-Bereich (Outfits, Brands, Store, Media) ohne Backend-Abhängigkeit.
+  - Strenge Einhaltung der Content-Integrität: keine erfundenen Metriken, keine Fake-Testimonials, transparente Darstellung der realen Leistungen (End-to-End-Neukonzeption, Custom CMS, Next.js / Neon / Cloudflare Stack).
+- **NOTES**: Dient als Referenzarchitektur für alle künftigen Case Studies des Portfolios.
+
 ---
 
+### DEC-022: Hero-Partikel-Porträt — Wiederaufnahme und Verfeinerung von Variante A
+- **DATE**: 2026-10-11
+- **STATUS**: `CONFIRMED — rendering refinement; personal geometry remains OPEN`
+- **RATIONALE**: Explizite Nutzeranweisung zur Wiederaufnahme des bestehenden Three.js-Porträts. Die Pause aus DEC-015 ist für diese Aufgabe aufgehoben. Variante A, Homepage-Komposition, Branding und bestehender Stack bleiben erhalten.
+- **NOTES**:
+  - Bestehende generische Punktkoordinaten werden erhalten und deterministisch ausgedünnt; lokale Oberflächennormalen dienen der Lichtzeichnung. Keine neue persönliche Gesichtsrekonstruktion und keine Behauptung verbesserter persönlicher Ähnlichkeit.
+  - Private Fotos bleiben lokal und ignoriert. Keine externen Uploads, kein Deployment, Commit oder Push.
+  - Assembly, Idle, Pointer und Scroll-Dissolve werden im bestehenden Renderer verfeinert; WebGL-Lifecycle, Reduced Motion, Touch-Scrolling und Fallback werden geprüft.
+  - Technischer Bericht, Grenzen und lokale Vergleichsaufnahmen: [Portrait-Verfeinerung](15-particle-portrait-refinement.md). Mesh-Herkunft und Lizenzpflichten aus DEC-015 bleiben vor einem Public-Release zu klären.
+
+---
+
+### DEC-023: Homepage Selected Work als redaktionelle Projektzeilen
+- **DATE**: 2026-10-13
+- **STATUS**: `CONFIRMED`
+- **RATIONALE**: Der Nutzer hat die Chat-Skizze „Projektzeilen“ ausdrücklich gewählt und die Implementierung freigegeben: drei ruhige Zeilen mit abwechselnder Bild-/Text-Anordnung, aktuellen Projektvorschaubildern, kurzen Titeln, einer Beschreibung und direktem Case-Study-Link.
+- **NOTES**:
+  - Reihenfolge: Checkpot Hietzing, Let It Bloom, SPEICHE. Kundenprojekte und eigenständiges Konzept bleiben transparent gekennzeichnet.
+  - SPEICHE ist die dritte Projektzeile; die zusätzliche alte SPEICHE-Platzhalterkarte am Übergang entfällt. Die vorhandene dunkle/cremefarbene Dramaturgie und große „CRAFT & METHODOLOGY“-Typografie bleiben erhalten.
+  - Aktuelle Case-Study-Bilder erhalten eigene responsive WebP-Vorschaudateien. Bestehende Case-Study-Inhalte, Assets und Routen bleiben unverändert.
+  - Änderung ist auf diesen Homepage-Bereich begrenzt; vereinfachte Navbar, reduzierter Hero, Porträtlogik und übrige Homepage-Sektionen bleiben erhalten. Kein Commit, Push oder Deployment.
+
+---
+### DEC-024: Typografische Tiefe für die Homepage-Projektzeilen
+- **DATE**: 2026-10-16
+- **STATUS**: CONFIRMED
+- **RATIONALE**: Der Nutzer hat die gezeigte Richtung „Typografische Tiefe“ ausdrücklich gewählt. Große, sehr dezente Projektnamen greifen die bestehende Hintergrundtypografie auf.
+- **NOTES**:
+  - CHECKPOT, BLOOM und SPEICHE liegen als dekorative, nicht interaktive Ebene hinter den abwechselnden Projektzeilen; auf Mobile stehen sie über der jeweiligen Vorschau.
+  - Vorhandene Bilder, Texte, DE-/EN-Links und Fokuszustände bleiben erhalten. Die zusätzliche Schrift ist für assistive Technologien ausgeblendet.
+  - Keine Änderungen an Navbar, Hero, Porträt, Case Studies, übrigen Sektionen oder CRAFT & METHODOLOGY am Schwarz-Creme-Übergang.
+
+---
+### DEC-025: Offene Kompetenzspalten mit „Produkt in Schichten“
+- **DATE**: 2026-10-16
+- **STATUS**: CONFIRMED
+- **RATIONALE**: Der Nutzer hat offene Spalten als Richtung gewählt und anschließend „Produkt in Schichten“ als ergänzendes Gestaltungselement bestätigt.
+- **NOTES**:
+  - Drei offene Spalten ersetzen die technische Tabelle. Kürzel, nummerierte Kicker, Hover-Fläche und Tech-Tags entfallen; konkrete Beschreibungen und Beispiele werden in DE und EN verwendet.
+  - Eine kleine CSS-3D-Grafik verbindet Oberfläche, Logik und Daten. Beim ersten Sichtbarwerden spielt eine begrenzte Sequenz einmal ab; danach bleibt die Grafik ruhig.
+  - Statische Darstellung ohne JavaScript und bei reduzierter Bewegung; keine zusätzliche Bibliothek und keine Änderung der Porträtlogik.
+  - Selected Work samt typografischer Tiefe, Schwarz-Creme-Übergang, Navbar, Hero, übrige Sektionen und Case Studies bleiben erhalten.
+
+---
+### DEC-026: Persönliche Profilsektion als „Editoriales Porträt“
+- **DATE**: 2026-10-16
+- **STATUS**: CONFIRMED
+- **RATIONALE**: Der Nutzer ist mit einem eigenen Porträt einverstanden und hat den gezeigten Entwurf „Editoriales Porträt“ als Favoriten bestätigt.
+- **NOTES**:
+  - Das im gewählten Entwurf verwendete Foto aus `assets/portraits/private/front.jpg` wird als optimierte WebP-Kopie in der Profilsektion eingebunden. Die private Originaldatei bleibt unverändert; die endgültige Bildauswahl kann später ersetzt werden.
+  - Foto links, bestehendes Zitat mit kursiver Betonung rechts, zwei kurze Ich-Absätze und WILK als Abschluss; auf Mobile untereinander.
+  - Platzhalterrahmen, technische Bildunterschrift, nummerierter Kicker und Kernpraxis-/Fokus-Metadaten entfallen. Die Texte aus dem Entwurf werden in DE und EN verwendet; keine biografischen Angaben ergänzt.
+  - Beide Anker `#about` und `#practitioner` bleiben erhalten. Keine neue Animation, Bibliothek oder Änderung des Three.js-Porträts, der Navbar, anderer Homepage-Sektionen oder Case Studies.
+
+---
+### DEC-027: Zusammenarbeit als „Räumliches Gefüge“
+- **DATE**: 2026-10-16
+- **STATUS**: WORKING DIRECTION / IMPLEMENTATION APPROVED
+- **RATIONALE**: Der Nutzer hat das Verbindungskonzept und die gezeigte Variante „Räumliches Gefüge“ zur lokalen Implementierung freigegeben. Die Gestaltung ist eine aktuelle Arbeitsfassung und darf später weiterentwickelt werden; sie ist nicht als endgültige visuelle Lösung bestätigt.
+- **NOTES**:
+  - Drei verschränkte Bänder in Creme, Dunkel und Bronze ergänzen die drei Formen: eigenes Projekt, Agentur und Produktteam. Verwendet wird die im Chat erzeugte Illustration, als transparente WebP-Dateien in 480 und 960 px unter `public/assets/collaboration/`.
+  - Die ausgewählten Texte und „Dein Projekt. Drei Wege.“ ersetzen in DE und EN die technische Tabelle samt Codes, Kicker und Engagement-Badge.
+  - Desktop: Grafik links und drei verbundene Textbereiche rechts. Mobile: Grafik über den Texten. Statische CSS-Verbindungen funktionieren ohne JavaScript; keine Animation und keine neue Bibliothek.
+  - Nur diese Homepage-Sektion wird geändert. Navbar, Profilfoto, Three.js-Porträt, übrige Sektionen und Case Studies bleiben unverändert. Kein Commit, Push oder Deployment.
+
+---
+### DEC-028: Labor als gemeinsame Bühne mit integrierter Linienfläche
+- **DATE**: 2026-10-16
+- **STATUS**: CONFIRMED
+- **RATIONALE**: Der Nutzer hat die gemeinsame Projektbühne gewählt, das separate Interaktionsmenü verworfen und den gezeigten Entwurf mit integrierter Bewegung ausdrücklich zur Implementierung freigegeben.
+- **NOTES**:
+  - LUMENWERK Studio, RÖSTWERK 1070 und KERN / FIELD werden mit realen Vorschaubildern und lokalen DE-/EN-Case-Study-Links gezeigt; jedes Projekt bleibt als eigenständiges Konzept gekennzeichnet. SPEICHE bleibt in Selected Work.
+  - Native Radio-Auswahl wechselt die große Vorschau auch ohne JavaScript. Die drei technischen Platzhalterkarten und ihre unbelegten Technologieversprechen entfallen.
+  - Eine goldene gefaltete Linienfläche ist Teil der Komposition. Sie entfaltet sich einmal beim Sichtbarwerden und reagiert begrenzt auf Projektwechsel und feine Zeigerbewegungen; keine Regler, Modi oder Endlosschleifen. Statische SVG-Ausgabe ohne JavaScript und bei reduzierter Bewegung, vollständiges Aufräumen von Beobachtern, Listenern und Animationen.
+  - Native Browser-Animationen und SVG ohne neue Abhängigkeit. Bestehende Bildquellen bleiben unverändert; eigene responsive WebP-Vorschauen werden hinzugefügt.
+  - Umfang: ausschließlich Labor auf der Homepage und notwendige Locale-Weitergabe. Andere Sektionen, Navbar, Three.js-Porträt, Case-Study-Dateien und deren Inhalte bleiben unverändert. Kein Commit, Push oder Deployment. Weitere seitenweite Animationen sind nicht Teil dieser Freigabe.
+
+---
+### DEC-029: Homepage-Kontakt als „Offene Einladung“
+- **DATE**: 2026-10-16
+- **STATUS**: CONFIRMED DESIGN / LOCAL IMPLEMENTATION
+- **RATIONALE**: Der Nutzer hat „Offene Einladung“ als Favoriten bestätigt und `bywilk@office.at` als echte Kontaktadresse genannt.
+- **NOTES**:
+  - Große persönliche Einladung und dezentes WILK als Abschluss ersetzen technische Kicker, Formularrahmen und Colophon. Ein natives Disclosure öffnet das reduzierte Formular; DE und EN, Tastaturfokus, Zurück/Escape und Nutzung ohne JavaScript bleiben verfügbar.
+  - Der native Kontaktweg bereitet eine E-Mail an `bywilk@office.at` im Mailprogramm vor. Button und Hinweis benennen diesen Ablauf ausdrücklich; keine simulierte Versandbestätigung. Direktmail-Link als Alternative. Ein serverseitiger Maildienst bleibt offen und wird nicht eingerichtet.
+  - Eigene Homepage-Texte statt Änderungen an der separaten Kontaktseite. Der Footer erhält nur auf der Homepage die bestätigte E-Mail über einen optionalen Prop; andere Seiten behalten die bisherige Ausgabe.
+  - Keine neue Animation oder Abhängigkeit. Alle übrigen Homepage-Sektionen, Navbar, Porträtlogik, Case Studies und die separate Kontaktseite bleiben unverändert. Kein Commit, Push oder Deployment.
+
+---
+### DEC-030: Dezenter Sprachlink ohne Scrollsprung
+- **DATE**: 2026-10-16
+- **STATUS**: CONFIRMED / USER-REQUESTED REFINEMENT
+- **RATIONALE**: Der Nutzer meldet einen Sprung zum Seitenende beim Sprachwechsel nach manuellem Hochscrollen und bittet um eine passendere, reduzierte Gestaltung.
+- **NOTES**:
+  - Ein einzelner Textlink „English“ beziehungsweise „Deutsch“ ersetzt den eingerahmten DE-/EN-Schalter mit Klammern. Gemeinsame Komponente für Header und Footer, sichtbarer Fokus und ausreichend großes Touch-Ziel.
+  - Sprachlinks erhalten Pfad und Query, übernehmen jedoch keine möglicherweise veraltete Abschnittsmarke. `preventScrollReset` erhält beim clientseitigen Wechsel die aktuelle Scrollposition; der Router wird nicht global verändert.
+  - Manuelle Sprachwahl bleibt über Cookie und Local Storage gespeichert. Direkte Abschnittslinks, normale Navigation und Case-Study-Pfade bleiben erhalten. Ohne JavaScript bleibt der Sprachlink eine normale Navigation.
+  - Kein Umbau der übrigen Navbar, keine Änderung von Homepage-Sektionen, Case-Study-Inhalten oder Porträtlogik. Keine neue Abhängigkeit; kein Commit, Push oder Deployment.
+
+---
 ## 🔍 Noch offene Entscheidungen `[OPEN / TODO]`
 
 - **DEC-O1**: Finales Frontend-Framework `[RESOLVED -> DEC-014 (React Router v8)]`.
@@ -166,7 +278,7 @@ NOTES: [Relevante Einschränkungen oder nachgelagerte Aufgaben]
 - **DEC-O9**: Transaktions-E-Mail-Provider für Kontaktanfragen (Resend vs. Cloudflare Workers Mail) `[OPEN]`.
 - **DEC-O10**: Datenschutzkonforme Analytics (Cloudflare Web Analytics vs. Plausible/Umami) `[OPEN]`.
 - **DEC-O11**: CMS-Bedarf `[RESOLVED -> DEC-019 (Lokale strukturierte Dateien in content/projects/)]`.
-- **DEC-O12**: Auswahl der 2–3 "Selected Work" Leitprojekte aus dem Kandidatenpool `[OPEN / NEEDS CONFIRMATION]`.
+- **DEC-O12**: Homepage-Auswahl der drei "Selected Work" Projekte `[RESOLVED -> DEC-023]`.
 - **DEC-O13**: Finale Domain-Registrierung `[OPEN / NEEDS CONFIRMATION]`.
 
 ---

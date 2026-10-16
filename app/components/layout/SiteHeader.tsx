@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router";
 import type { Translations, Locale } from "~/i18n/translations";
-import { getAlternateLocale, getLocaleSwitchUrl, setLocaleCookie } from "~/i18n/locale";
+import { LanguageSwitch } from "./LanguageSwitch";
 
 interface SiteHeaderProps {
   t: Translations;
@@ -12,8 +12,6 @@ export function SiteHeader({ t, locale }: SiteHeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
 
-  const otherLocale = getAlternateLocale(locale);
-  const switchLocaleUrl = getLocaleSwitchUrl(location.pathname, location.search, location.hash);
 
   const isHomePage = location.pathname === `/${locale}` || location.pathname === `/${locale}/`;
   const isWorkPage = location.pathname.startsWith(`/${locale}/work`);
@@ -27,6 +25,7 @@ export function SiteHeader({ t, locale }: SiteHeaderProps) {
     isPageLink: boolean;
   }
 
+  // Refined intentional 3-item navigation architecture
   const navLinks: NavItem[] = [
     {
       label: t.header.navWork,
@@ -35,31 +34,22 @@ export function SiteHeader({ t, locale }: SiteHeaderProps) {
       isPageLink: true,
     },
     {
-      label: t.header.navCapabilities,
-      href: isHomePage ? "#capabilities" : `/${locale}#capabilities`,
-      isPageLink: false,
-    },
-    {
-      label: t.header.navPractitioner,
-      href: isHomePage ? "#practitioner" : `/${locale}#practitioner`,
-      isPageLink: false,
-    },
-    {
-      label: t.header.navLab,
-      href: isHomePage ? "#lab" : `/${locale}#lab`,
+      label: t.header.navAbout || (locale === "de" ? "Über mich" : "About"),
+      href: isHomePage ? "#about" : `/${locale}#about`,
       isPageLink: false,
     },
     {
       label: t.header.navContact,
-      to: `/${locale}/contact`,
+      to: isHomePage ? undefined : `/${locale}/contact`,
+      href: isHomePage ? "#contact" : undefined,
       isActive: isContactPage,
-      isPageLink: true,
+      isPageLink: !isHomePage,
     },
   ];
 
   return (
     <header className="global-header" role="banner">
-      <div className="max-w-7xl header-inner">
+      <div className="hp-header-inner header-inner">
         {/* Brand Group */}
         {isHomePage ? (
           <a
@@ -82,14 +72,14 @@ export function SiteHeader({ t, locale }: SiteHeaderProps) {
         )}
 
         {/* Desktop Navigation */}
-        <nav className="header-nav" aria-label="Main Navigation">
+        <nav className="header-nav hp-nav-links" aria-label="Main Navigation">
           {navLinks.map((link) => {
             if (link.isPageLink && link.to) {
               return (
                 <Link
                   key={link.to}
                   to={link.to}
-                  className={`header-nav-link ${link.isActive ? "active" : ""}`}
+                  className={`header-nav-link hp-nav-link ${link.isActive ? "active" : ""}`}
                   aria-current={link.isActive ? "page" : undefined}
                 >
                   {link.label}
@@ -101,7 +91,7 @@ export function SiteHeader({ t, locale }: SiteHeaderProps) {
               <a
                 key={link.href}
                 href={link.href}
-                className="header-nav-link"
+                className="header-nav-link hp-nav-link"
               >
                 {link.label}
               </a>
@@ -109,23 +99,14 @@ export function SiteHeader({ t, locale }: SiteHeaderProps) {
           })}
         </nav>
 
-        {/* Language Switcher */}
+        {/* Language Switcher & Mobile Toggle */}
         <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-          <Link
-            to={switchLocaleUrl}
-            className="lang-switch-btn"
-            aria-label={`Switch language to ${otherLocale.toUpperCase()}`}
-            onClick={() => {
-              setLocaleCookie(otherLocale);
-            }}
-          >
-            {locale === "de" ? "DE / [EN]" : "[DE] / EN"}
-          </Link>
+          <LanguageSwitch locale={locale} />
 
           {/* Mobile menu toggle */}
           <button
             type="button"
-            className="mobile-nav-toggle"
+            className="mobile-nav-toggle hp-mobile-toggle"
             aria-expanded={mobileMenuOpen}
             aria-label="Toggle navigation menu"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -147,7 +128,7 @@ export function SiteHeader({ t, locale }: SiteHeaderProps) {
           style={{
             backgroundColor: "var(--bg-dark-lowest)",
             borderBottom: "1px solid var(--border-dark-subtle)",
-            padding: "1.5rem var(--gutter-x)",
+            padding: "1.75rem var(--hp-gutter, var(--gutter-x))",
             display: "flex",
             flexDirection: "column",
             gap: "1.25rem",
@@ -161,7 +142,7 @@ export function SiteHeader({ t, locale }: SiteHeaderProps) {
                   to={link.to}
                   className={`header-nav-link ${link.isActive ? "active" : ""}`}
                   aria-current={link.isActive ? "page" : undefined}
-                  style={{ fontSize: "14px" }}
+                  style={{ fontSize: "15px", padding: "0.5rem 0" }}
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {link.label}
@@ -174,7 +155,7 @@ export function SiteHeader({ t, locale }: SiteHeaderProps) {
                 key={link.href}
                 href={link.href}
                 className="header-nav-link"
-                style={{ fontSize: "14px" }}
+                style={{ fontSize: "15px", padding: "0.5rem 0" }}
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {link.label}

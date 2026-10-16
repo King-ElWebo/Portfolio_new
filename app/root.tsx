@@ -93,20 +93,25 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
       <p style={{ color: "#9da3af", maxWidth: "45ch", marginBottom: "2rem" }}>
         {details}
       </p>
-      <a
-        href={location.pathname.startsWith("/de") ? "/de" : "/en"}
-        style={{
-          display: "inline-flex",
-          padding: "0.75rem 1.5rem",
-          backgroundColor: "#f4f4f6",
-          color: "#0c0d10",
-          borderRadius: "4px",
-          fontWeight: 500,
-          textDecoration: "none",
-        }}
-      >
-        {location.pathname.startsWith("/de") ? "Zurück zur Startseite" : "Return to Portfolio"}
-      </a>
+      {(() => {
+        const isDe = typeof location !== "undefined" && location?.pathname?.startsWith("/de");
+        return (
+          <a
+            href={isDe ? "/de" : "/en"}
+            style={{
+              display: "inline-flex",
+              padding: "0.75rem 1.5rem",
+              backgroundColor: "#f4f4f6",
+              color: "#0c0d10",
+              borderRadius: "4px",
+              fontWeight: 500,
+              textDecoration: "none",
+            }}
+          >
+            {isDe ? "Zurück zur Startseite" : "Return to Portfolio"}
+          </a>
+        );
+      })()}
     </main>
   );
 }
