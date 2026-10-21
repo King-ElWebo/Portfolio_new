@@ -200,7 +200,7 @@ NOTES: [Relevante Einschränkungen oder nachgelagerte Aufgaben]
 ---
 ### DEC-025: Offene Kompetenzspalten mit „Produkt in Schichten“
 - **DATE**: 2026-10-16
-- **STATUS**: CONFIRMED
+- **STATUS**: SUPERSEDED BY DEC-034 (Text und Komposition); Ebenengrafik und begrenzte Animation bleiben erhalten
 - **RATIONALE**: Der Nutzer hat offene Spalten als Richtung gewählt und anschließend „Produkt in Schichten“ als ergänzendes Gestaltungselement bestätigt.
 - **NOTES**:
   - Drei offene Spalten ersetzen die technische Tabelle. Kürzel, nummerierte Kicker, Hover-Fläche und Tech-Tags entfallen; konkrete Beschreibungen und Beispiele werden in DE und EN verwendet.
@@ -215,6 +215,7 @@ NOTES: [Relevante Einschränkungen oder nachgelagerte Aufgaben]
 - **RATIONALE**: Der Nutzer ist mit einem eigenen Porträt einverstanden und hat den gezeigten Entwurf „Editoriales Porträt“ als Favoriten bestätigt.
 - **NOTES**:
   - Das im gewählten Entwurf verwendete Foto aus `assets/portraits/private/front.jpg` wird als optimierte WebP-Kopie in der Profilsektion eingebunden. Die private Originaldatei bleibt unverändert; die endgültige Bildauswahl kann später ersetzt werden.
+  - **Bildauswahl aktualisiert am 2026-10-21**: Auf ausdrücklichen Nutzerwunsch ersetzt das neu bereitgestellte Foto am Telefon die bisherige öffentliche WebP-Kopie. Die Einbindung bleibt lokal; keine externe Bildverarbeitung. Bestehende Bildrahmen bleiben erhalten, intrinsische Bildmaße und zentrierter Ausschnitt werden dem neuen Foto angepasst. Private Referenzfotos bleiben unverändert.
   - Foto links, bestehendes Zitat mit kursiver Betonung rechts, zwei kurze Ich-Absätze und WILK als Abschluss; auf Mobile untereinander.
   - Platzhalterrahmen, technische Bildunterschrift, nummerierter Kicker und Kernpraxis-/Fokus-Metadaten entfallen. Die Texte aus dem Entwurf werden in DE und EN verwendet; keine biografischen Angaben ergänzt.
   - Beide Anker `#about` und `#practitioner` bleiben erhalten. Keine neue Animation, Bibliothek oder Änderung des Three.js-Porträts, der Navbar, anderer Homepage-Sektionen oder Case Studies.
@@ -265,6 +266,53 @@ NOTES: [Relevante Einschränkungen oder nachgelagerte Aufgaben]
   - Kein Umbau der übrigen Navbar, keine Änderung von Homepage-Sektionen, Case-Study-Inhalten oder Porträtlogik. Keine neue Abhängigkeit; kein Commit, Push oder Deployment.
 
 ---
+### DEC-031: Homepage-Abschluss „Editoriale Signatur“
+- **DATE**: 2026-10-21
+- **STATUS**: CONFIRMED / LOCAL IMPLEMENTATION
+- **RATIONALE**: Der Nutzer hat nach zwei vergleichbaren Entwürfen „Editoriale Signatur“ gewählt und ausdrücklich zur Umsetzung freigegeben.
+- **NOTES**:
+  - Kontakt und Footer bilden einen zusammenhängenden Abschluss auf Obsidian. Die große WILK-Signatur zieht aus dem Kontaktbereich in einen eigenen Homepage-Footer; Rolle, Navigation und Copyright sind klar zugeordnet.
+  - Trennlinie über dem Labor-Index, aktive lange Unterstreichung, Kontakt-Trennlinie und abgesetzte Footer-Leiste entfallen. Aktive Labor-Auswahl bleibt durch Bildhelligkeit, goldenen Titel, native Radio-Semantik und Tastaturfokus erkennbar. Die Linie von „Nachricht schreiben“ wird dezent in Champagner betont.
+  - Native Kontakt-Disclosure, Fokusführung, Escape, E-Mail-Entwurf und DE/EN bleiben erhalten. Footer-Links führen zum Work-Archiv, zum About-Abschnitt und zum Hero. Das Copyright-Jahr kommt aus dem serverseitigen Loader.
+  - Impressum und Datenschutz stehen wie im ausgewählten Entwurf vorerst als Text: Es bestehen noch keine entsprechenden Routen oder freigegebenen Inhalte. Keine erfundenen Rechtstexte, Platzhalterziele oder Links auf nicht existierende Seiten.
+  - Die neue `HomeFooter`-Komponente wird ausschließlich auf der Homepage verwendet. Bestehender `SiteFooter`, andere Homepage-Bereiche, Work-/Case-Study-Inhalte, Navigation und Porträtlogik bleiben erhalten. Keine neue Abhängigkeit; kein Commit, Push oder Deployment.
+
+---
+### DEC-032: Ruhiges Aufklappen des Homepage-Kontakts
+- **DATE**: 2026-10-21
+- **STATUS**: USER-REQUESTED REFINEMENT / LOCAL IMPLEMENTATION
+- **RATIONALE**: Der Nutzer empfindet den bisherigen Klick auf „Nachricht schreiben“ als abrupt und visuell unruhig. Ursache waren das Ausblenden der Einladung, ein Größenwechsel des Auslösers sowie sofortiges Scrollen und Fokussieren.
+- **NOTES**:
+  - Einladung und großer Auslöser bleiben an ihrer Position. Das kompakter gesetzte Formular öffnet sich darunter in 280 ms und schließt in 200 ms; ein kurzer Fade mit minimaler Verschiebung begleitet den Übergang. Wiederholtes Klicken setzt am aktuellen Animationsstand an.
+  - Pointer-Klicks erzwingen weder Scrollen noch Eingabefokus. Tastaturbedienung öffnet unmittelbar und führt zum Namensfeld; Escape schließt und bringt den Fokus zum Auslöser zurück. Eingaben bleiben beim Schließen erhalten.
+  - Native `details`-Semantik und Nutzbarkeit ohne JavaScript bleiben erhalten. Reduced Motion überspringt die Animation. Größenänderungen, geänderte Motion-Präferenz und unsichtbarer Tab beenden laufende Übergänge sauber; Animationen und Listener werden beim Unmount aufgeräumt.
+  - Keine neue Abhängigkeit, kein Versanddienst und keine Änderung am Footer, Porträt oder an anderen Seiten. Der vorhandene E-Mail-Entwurf bleibt der Versandweg.
+
+---
+### DEC-033: Persönliches, foto-basiertes 2D-Partikelporträt
+- **DATE**: 2026-10-21
+- **STATUS**: CONFIRMED / LOCAL IMPLEMENTATION
+- **RATIONALE**: Nach der erneuten Analyse von aimane.dev akzeptiert der Nutzer ausdrücklich eine 2D-Fassung und beauftragt deren Umsetzung. Keine kostenpflichtige Scan-App. Die tatsächliche Referenz verwendet Fotopixel mit 2D-Partikelbewegung, kein gescanntes Kopfmodell.
+- **NOTES**:
+  - Das vorhandene private `front.jpg` liefert die persönliche Form und Tonwerte. Lokale, auf die Bildfarben abgestimmte Freistellung; keine Veränderung der Gesichtsproportionen, erfundene Anatomie oder geschätzte Gesichtstiefe. Alle ruhenden Z-Koordinaten sind exakt null. Die Fotoqualität und der bestehende Ausschnitt begrenzen die Detailtreue.
+  - Bestehender Three.js-Renderer und Lifecycle bleiben erhalten; orthografische Kamera, GPU-Punkte und angepasste Shader bilden das Foto in einer Ebene ab. Aufbau, sehr ruhiges Idle, örtlich begrenzte Mausverdrängung und reversible Scroll-Auflösung bleiben Teil des Effekts. Keine Kopfrotation oder Tiefenrekonstruktion wird behauptet.
+  - Der Nutzerauftrag erlaubt die lokale Einbindung des abgeleiteten persönlichen Punktassets und dessen statischer Punktvorschau. Rohfotos bleiben privat und Git-ignoriert, werden weder in `public/` kopiert noch an externe Dienste übertragen. Kein Commit, Push oder Deployment.
+  - Neue aktive Assets: `portrait-photo.bin`, `portrait-photo-meta.json`, `portrait-photo-static.png`. Historische generische Assets und Generatoren bleiben unverändert erhalten und werden vom aktiven Renderer nicht geladen.
+  - Keine neue Abhängigkeit. Ausschließlich Porträtcode, lokaler Generator, vorhandene Porträtprüfung und relevante Dokumentation ändern sich; vorherige Navbar-, Kontakt-, Footer- und Profilfoto-Änderungen bleiben erhalten. Einzelheiten und Prüfbelege: [Foto-Partikelporträt](16-photo-particle-portrait.md).
+
+---
+### DEC-034: Kompakte Kompetenzsektion „Design & Code“
+- **DATE**: 2026-10-21
+- **STATUS**: CONFIRMED / LOCAL IMPLEMENTATION
+- **RATIONALE**: Der Nutzer empfindet die bisherige Sektion als zu textlastig und gleichförmig. Nach zwei vergleichbaren Entwürfen wählt er ausdrücklich „Design & Code“ zur Umsetzung.
+- **NOTES**:
+  - Große zweizeilige Aussage „Design & Code. Aus einer Hand.“ mit kursiver brauner Betonung, daneben eine größere Fassung der vorhandenen Ebenengrafik. Englische Fassung: „Design & Code. From one source.“
+  - Drei kurze Bereiche ersetzen Absätze und Beispiel-Listen: Websites & Shops / Dein digitaler Auftritt; Apps & Systeme / Für deinen Arbeitsalltag; KI & Automatisierung / Für wiederkehrende Aufgaben. Gleichwertige kurze englische Texte, keine neuen Leistungsversprechen.
+  - Desktop: drei offene Spalten mit bewusst gesetzten Titelumbrüchen. Mobile: Aussage, Grafik und kompakte Leistungsbereiche untereinander. Vorhandene Farb- und Schrifttokens bleiben erhalten; keine Karten, neuen Trennlinien oder zusätzlichen CTAs.
+  - Bestehende einmalige 3-Sekunden-Sequenz der Ebenengrafik, statische Darstellung ohne JavaScript und Reduced Motion bleiben erhalten. Keine neue Animationslogik oder Abhängigkeit.
+  - Umfang: ausschließlich Kompetenzkomponente, zugehöriges Stylesheet, typisierte DE-/EN-Texte und diese Dokumentation. Hero, Porträt, Navigation, übrige Sektionen und Case Studies bleiben erhalten. Kein Commit, Push oder Deployment.
+
+---
 ## 🔍 Noch offene Entscheidungen `[OPEN / TODO]`
 
 - **DEC-O1**: Finales Frontend-Framework `[RESOLVED -> DEC-014 (React Router v8)]`.
@@ -272,7 +320,7 @@ NOTES: [Relevante Einschränkungen oder nachgelagerte Aufgaben]
 - **DEC-O3**: ORM / Query Builder (Drizzle ORM vs. Kysely) `[DEFERRED -> DB aktuell unprovisioniert]`.
 - **DEC-O4**: Konkrete Schriftarten (Finaler Webfont-Stack vs. kommerzieller Editorial-Schnitt).
 - **DEC-O5**: Exakte Hex-/OKLCH-Farbwerte `[RESOLVED -> D3.1 Baseline in app.css verifiziert]`.
-- **DEC-O6**: Art des Hero-Visuals `[RESOLVED -> DEC-015 (3D Canvas implementiert, pausiert)]`.
+- **DEC-O6**: Art des Hero-Visuals `[RESOLVED -> DEC-033 (persönliches foto-basiertes 2D-Partikelporträt)]`.
 - **DEC-O7**: Gewinner der Design-Explorationen `[RESOLVED -> DEC-016 (D3.1 Visual Polish)]`.
 - **DEC-O8**: Motion-Stack für seitenweites Scrollen (GSAP + Lenis vs. CSS-Fokus) `[OPEN]`.
 - **DEC-O9**: Transaktions-E-Mail-Provider für Kontaktanfragen (Resend vs. Cloudflare Workers Mail) `[OPEN]`.

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useLoaderData, useLocation, type LoaderFunctionArgs } from "react-router";
 import { getTranslations, type Locale } from "~/i18n/translations";
 import { SiteHeader } from "~/components/layout/SiteHeader";
-import { SiteFooter } from "~/components/layout/SiteFooter";
+import { HomeFooter } from "~/components/layout/HomeFooter";
 import { Hero } from "~/components/sections/Hero";
 import { SelectedWork } from "~/components/sections/SelectedWork";
 import { TransitionBridge } from "~/components/sections/TransitionBridge";
@@ -22,7 +22,7 @@ export function loader({ params }: LoaderFunctionArgs) {
   const locale = rawLocale as Locale;
   const { t } = getTranslations(locale);
 
-  return { locale, t };
+  return { locale, t, year: new Date().getUTCFullYear() };
 }
 
 export function meta({ data }: { data?: { locale: Locale; t: any } }) {
@@ -37,7 +37,7 @@ export function meta({ data }: { data?: { locale: Locale; t: any } }) {
 }
 
 export default function HomeRoute() {
-  const { locale, t } = useLoaderData<typeof loader>();
+  const { locale, t, year } = useLoaderData<typeof loader>();
   const location = useLocation();
 
   useEffect(() => {
@@ -67,12 +67,12 @@ export default function HomeRoute() {
         </div>
 
         {/* ACT 3: Return to Cinematic Obsidian Dark */}
-        <div className="dark-act3-wrap">
+        <div className="dark-act3-wrap home-ending">
           <Lab t={t} locale={locale} />
           <HomeContact t={t} />
         </div>
       </main>
-      <SiteFooter t={t} locale={locale} email={t.homeContact.email} />
+      <HomeFooter t={t} locale={locale} year={year} />
     </>
   );
 }

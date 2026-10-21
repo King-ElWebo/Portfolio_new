@@ -1,38 +1,132 @@
-import { useEffect, useRef, type FormEvent, type SyntheticEvent } from "react";
+import { useEffect, useRef, type FormEvent, type MouseEvent } from "react";
 import type { Translations } from "~/i18n/translations";
 import { createContactDraft } from "./contactDraft";
 import "~/styles/home-contact.css";
 
 interface HomeContactProps { t: Translations }
 
-function Arrow({ back = false }: { back?: boolean }) {
+function Arrow() {
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
-      <path d={back ? "M19 12H5m7 7-7-7 7-7" : "M7 17 17 7M7 7h10v10"} />
+      <path d="M7 17 17 7M7 7h10v10" />
     </svg>
   );
 }
 
 export function HomeContact({ t }: HomeContactProps) {
   const c = t.homeContact;
-  const sectionRef = useRef<HTMLElement>(null);
+  const disclosureRef = useRef<HTMLDetailsElement>(null);
+  const composerRef = useRef<HTMLDivElement>(null);
   const summaryRef = useRef<HTMLElement>(null);
   const nameRef = useRef<HTMLInputElement>(null);
-  const shouldFocus = useRef(false);
-  const frameRef = useRef(0);
+  const animationsRef = useRef<Animation[]>([]);
+  const targetOpenRef = useRef(false);
+  const contentHeightRef = useRef(0);
 
-  useEffect(() => () => window.cancelAnimationFrame(frameRef.current), []);
+  function finishTransition() {
+    const disclosure = disclosureRef.current;
+    if (!disclosure) return;
+    const animations = animationsRef.current;
+    animationsRef.current = [];
+    disclosure.open = targetOpenRef.current;
+    disclosure.style.removeProperty("height");
+    disclosure.style.removeProperty("overflow");
+    delete disclosure.dataset.closing;
+    if (composerRef.current) composerRef.current.inert = false;
+    animations.forEach((animation) => animation.cancel());
+  }
 
-  function handleToggle(event: SyntheticEvent<HTMLDetailsElement>) {
-    if (!shouldFocus.current) return;
-    shouldFocus.current = false;
-    const isOpen = event.currentTarget.open;
-    window.cancelAnimationFrame(frameRef.current);
-    frameRef.current = window.requestAnimationFrame(() => {
-      sectionRef.current?.scrollIntoView({ block: "start", behavior: "instant" });
-      if (isOpen) nameRef.current?.focus({ preventScroll: true });
-      else summaryRef.current?.focus({ preventScroll: true });
+  useEffect(() => {
+    const disclosure = disclosureRef.current;
+    const composer = composerRef.current;
+    const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const finish = () => { if (animationsRef.current.length) finishTransition(); };
+    const motionChange = () => { if (preference.matches) finish(); };
+    const visibilityChange = () => { if (document.hidden) finish(); };
+    const resize = new ResizeObserver(() => {
+      if (composer && composer.getBoundingClientRect().height !== contentHeightRef.current) finish();
     });
+    if (composer) resize.observe(composer);
+    preference.addEventListener("change", motionChange);
+    window.addEventListener("resize", finish);
+    document.addEventListener("visibilitychange", visibilityChange);
+    return () => {
+      resize.disconnect();
+      preference.removeEventListener("change", motionChange);
+      window.removeEventListener("resize", finish);
+      document.removeEventListener("visibilitychange", visibilityChange);
+      animationsRef.current.forEach((animation) => animation.cancel());
+      animationsRef.current = [];
+      disclosure?.style.removeProperty("height");
+      disclosure?.style.removeProperty("overflow");
+    };
+  }, []);
+
+  function toggleDisclosure(open: boolean, keyboard = false) {
+    const disclosure = disclosureRef.current;
+    const composer = composerRef.current;
+    const summary = summaryRef.current;
+    if (!disclosure || !composer || !summary) return;
+
+    const wasOpen = disclosure.open;
+    const startHeight = disclosure.getBoundingClientRect().height;
+    const contentStyle = getComputedStyle(composer);
+    const startOpacity = wasOpen ? contentStyle.opacity : "0";
+    const startTransform = wasOpen ? contentStyle.transform : "translateY(6px)";
+    // Capture the current frame before cancelling: rapid reversals continue
+    // from the visible height rather than restarting at either endpoint.
+    disclosure.style.height = `${startHeight}px`;
+    animationsRef.current.forEach((animation) => animation.cancel());
+    animationsRef.current = [];
+    targetOpenRef.current = open;
+    composer.inert = !open;
+    if (!open && composer.contains(document.activeElement)) summary.focus({ preventScroll: true });
+
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (keyboard || reduced || typeof disclosure.animate !== "function") {
+      finishTransition();
+      if (keyboard) {
+        const target = open ? nameRef.current : summary;
+        target?.focus({ preventScroll: true });
+        const rect = target?.getBoundingClientRect();
+        if (target && rect) {
+          const margin = parseFloat(getComputedStyle(target).scrollMarginTop) || 0;
+          if (rect.top < margin || rect.bottom > window.innerHeight) {
+            target.scrollIntoView({ block: "nearest", behavior: "instant" });
+          }
+        }
+      }
+      return;
+    }
+
+    // Keep native details open until the closing animation finishes. Without
+    // JavaScript the same markup remains an ordinary, fully usable disclosure.
+    disclosure.open = true;
+    disclosure.dataset.closing = String(!open);
+    disclosure.style.overflow = "hidden";
+    contentHeightRef.current = composer.getBoundingClientRect().height;
+    const endHeight = summary.getBoundingClientRect().height + (open ? contentHeightRef.current : 0);
+    const easing = getComputedStyle(disclosure).getPropertyValue("--hp-ease-out").trim()
+      || "cubic-bezier(0.16, 1, 0.3, 1)";
+    const height = disclosure.animate(
+      [{ height: `${startHeight}px` }, { height: `${endHeight}px` }],
+      { duration: open ? 280 : 200, easing, fill: "both" },
+    );
+    const content = composer.animate(
+      [{ opacity: startOpacity, transform: startTransform },
+        { opacity: open ? 1 : 0, transform: open ? "translateY(0)" : "translateY(4px)" }],
+      { duration: open ? 220 : 150, easing, fill: "both" },
+    );
+    animationsRef.current = [height, content];
+    height.onfinish = () => {
+      if (animationsRef.current[0] === height) finishTransition();
+    };
+  }
+
+  function handleToggleClick(event: MouseEvent<HTMLElement>) {
+    event.preventDefault();
+    const open = animationsRef.current.length ? targetOpenRef.current : disclosureRef.current?.open;
+    toggleDisclosure(!open, event.detail === 0);
   }
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -48,29 +142,30 @@ export function HomeContact({ t }: HomeContactProps) {
   }
 
   return (
-    <section className="max-w-7xl home-contact-section" id="contact" aria-label={c.regionLabel} ref={sectionRef}>
+    <section className="max-w-7xl home-contact-section" id="contact" aria-label={c.regionLabel}>
       <header className="home-contact-invitation">
         <h2 className="home-contact-heading">{c.headline.lead}<em>{c.headline.accent}</em></h2>
         <p className="home-contact-intro">{c.intro}</p>
       </header>
 
-      <details className="home-contact-disclosure" id="home-contact-disclosure" onToggle={handleToggle}
+      <details className="home-contact-disclosure" id="home-contact-disclosure" ref={disclosureRef}
         onKeyDown={(event) => {
           if (event.key === "Escape" && event.currentTarget.open) {
             event.preventDefault();
-            shouldFocus.current = true;
-            event.currentTarget.open = false;
+            toggleDisclosure(false, true);
           }
         }}>
-        <summary className="home-contact-toggle" onClick={() => { shouldFocus.current = true; }} ref={summaryRef}>
+        <summary className="home-contact-toggle" onClick={handleToggleClick} ref={summaryRef}>
           <span className="home-contact-open-label">{c.openForm}</span>
-          <span className="home-contact-back-label"><Arrow back />{c.form.back}</span>
-          <span className="home-contact-open-arrow"><Arrow /></span>
+          <span className="home-contact-toggle-icon" aria-hidden="true">
+            <span className="home-contact-icon-open"><Arrow /></span>
+            <svg className="home-contact-icon-close" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M5 12h14" /></svg>
+          </span>
         </summary>
-        <div className="home-contact-composer">
-          <h2 className="home-contact-compose-heading">{c.form.headline.lead}<em>{c.form.headline.accent}</em></h2>
-          <p className="home-contact-intro">{c.form.intro}</p>
-          <form className="home-contact-form" action={"mailto:" + c.email} method="post" encType="text/plain" onSubmit={handleSubmit}>
+        <div className="home-contact-composer" ref={composerRef}>
+          <h3 className="home-contact-compose-heading" id="home-contact-compose-heading">{c.form.headline.lead} <em>{c.form.headline.accent}</em></h3>
+          <p className="home-contact-compose-intro">{c.form.intro}</p>
+          <form className="home-contact-form" aria-labelledby="home-contact-compose-heading" action={"mailto:" + c.email} method="post" encType="text/plain" onSubmit={handleSubmit}>
             <div className="home-contact-fields">
               <label className="home-contact-field" htmlFor="home-contact-name">{c.form.nameLabel}
                 <input id="home-contact-name" name="name" type="text" autoComplete="name" placeholder={c.form.namePlaceholder} maxLength={120} required ref={nameRef} />
@@ -84,7 +179,6 @@ export function HomeContact({ t }: HomeContactProps) {
             </label>
             <button className="home-contact-draft-button" type="submit">{c.form.submitLabel}<Arrow /></button>
             <p className="home-contact-mail-hint">{c.form.mailHint}</p>
-            <p className="home-contact-direct"><span>{c.form.directLabel}</span><a href={"mailto:" + c.email}>{c.email}</a></p>
           </form>
         </div>
       </details>
@@ -92,7 +186,6 @@ export function HomeContact({ t }: HomeContactProps) {
         <p className="home-contact-whisper">{c.helper}</p>
         <a className="home-contact-email" href={"mailto:" + c.email}>{c.email}</a>
       </div>
-      <p className="home-contact-wordmark" aria-hidden="true">WILK</p>
     </section>
   );
 }

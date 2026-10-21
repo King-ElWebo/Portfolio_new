@@ -827,7 +827,7 @@ button {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 55% 68%;
+  object-position: center;
 }
 
 .practitioner-copy {

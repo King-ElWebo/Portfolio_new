@@ -54,7 +54,7 @@ Folgt der bestätigten 3-Akt-Dramaturgie (*Cinematic Obsidian → Warm Paper →
   - `SelectedWork`: 2 kuratierte Leuchtturm-Projekte mit 16:9 bzw. 4:8 Media-Frames.
   - `TransitionBridge`: Projekt 03 / Spekulative System-Studie und Einleitung zum Farbwechsel.
 - **Act II (Warm Editorial Cream)**:
-  - `Capabilities`: Drei Kernbereiche (Websites & Commerce, Apps & Systems, AI & Automation).
+  - `Capabilities`: „Design & Code“ mit Ebenengrafik und drei kurzen Kernbereichen (Websites & Shops, Apps & Systeme, KI & Automatisierung); DE/EN gemäß `DEC-034`.
   - `Practitioner`: Persönliches Statement, Philosophie (*Craft & Code in einer Person*), Studio-Porträt.
   - `Collaboration`: Kollaborationsmodelle (Direct, Studio, Embedded).
 - **Act III (Return to Cinematic Dark)**:

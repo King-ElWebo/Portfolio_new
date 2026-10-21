@@ -8,7 +8,7 @@ export class ParticlePortraitRenderer {
   private readonly config: ParticleConfig;
   private readonly renderer: THREE.WebGLRenderer;
   private readonly scene = new THREE.Scene();
-  private readonly camera = new THREE.PerspectiveCamera(40, 1, 0.1, 20);
+  private readonly camera = new THREE.OrthographicCamera(-1.04, 1.04, 1.3, -1.3, 0.1, 20);
   private readonly material: THREE.ShaderMaterial;
   private readonly abortController = new AbortController();
   private readonly motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -32,8 +32,6 @@ export class ParticlePortraitRenderer {
   private readonly currentPointer = new THREE.Vector3();
   private readonly lastPointer = new THREE.Vector3();
   private readonly pointerVelocity = new THREE.Vector2();
-  private readonly targetRotation = new THREE.Vector2();
-  private readonly currentRotation = new THREE.Vector2();
   private width = 0;
   private height = 0;
   private frameInterval = 0;
@@ -64,7 +62,8 @@ export class ParticlePortraitRenderer {
         uPointerActivity: { value: 0 },
         uPointerInfluence: { value: this.config.pointerInfluence },
         uPointerStrength: { value: this.config.repulsionStrength },
-        uPixelRatio: { value: 1 }, uReducedMotion: { value: this.motionQuery.matches ? 1 : 0 },
+        uPixelRatio: { value: 1 }, uPointScale: { value: 1 },
+        uReducedMotion: { value: this.motionQuery.matches ? 1 : 0 },
         uIdleNoiseAmp: { value: this.config.idleNoiseAmp },
       },
     });
@@ -79,11 +78,11 @@ export class ParticlePortraitRenderer {
 
   private async loadDataset() {
     try {
-      const response = await fetch("/assets/portrait-sculpture.bin", { signal: this.abortController.signal });
+      const response = await fetch("/assets/portrait-photo.bin", { signal: this.abortController.signal });
       if (!response.ok) throw new Error(`Portrait asset: HTTP ${response.status}`);
       const buffer = await response.arrayBuffer();
       if (this.isDisposed) return;
-      const stride = 16;
+      const stride = 12;
       if (!buffer.byteLength || buffer.byteLength % (stride * 4) !== 0) {
         throw new Error("Portrait asset has an invalid stride.");
       }
@@ -94,7 +93,7 @@ export class ParticlePortraitRenderer {
       this.geometry = new THREE.BufferGeometry();
       for (const [name, size, offset] of [
         ["position", 3, 0], ["aOriginalColor", 3, 3], ["aData", 4, 6],
-        ["aDispersal", 3, 10], ["aSurfaceNormal", 3, 13],
+        ["aDispersal", 2, 10],
       ] as const) {
         this.geometry.setAttribute(name, new THREE.InterleavedBufferAttribute(particles, size, offset));
       }
@@ -136,9 +135,11 @@ export class ParticlePortraitRenderer {
       this.height = height;
       this.renderer.setPixelRatio(pixelRatio);
       this.renderer.setSize(width, height, false);
-      this.camera.aspect = width / height;
+      this.camera.left = -1.3 * width / height;
+      this.camera.right = 1.3 * width / height;
       this.camera.updateProjectionMatrix();
       this.material.uniforms.uPixelRatio.value = pixelRatio;
+      this.material.uniforms.uPointScale.value = height / 600;
     }
     this.updateDrawRange();
     this.requestRender();
@@ -154,23 +155,17 @@ export class ParticlePortraitRenderer {
     }
     const ndcX = ((clientX - rect.left) / rect.width) * 2 - 1;
     const ndcY = 1 - ((clientY - rect.top) / rect.height) * 2;
-    const planeHeight = 2 * Math.tan(THREE.MathUtils.degToRad(this.camera.fov / 2))
-      * (this.camera.position.z - 0.45);
-    this.targetPointer.set(ndcX * planeHeight * this.camera.aspect / 2, ndcY * planeHeight / 2, 0.45);
-    this.points.updateMatrixWorld();
-    this.targetPointer.applyMatrix4(this.points.matrixWorld.clone().invert());
+    this.targetPointer.set(ndcX * this.camera.right, ndcY * this.camera.top, 0);
     if (this.targetActivity === 0) {
       this.currentPointer.copy(this.targetPointer);
       this.lastPointer.copy(this.targetPointer);
     }
     this.targetActivity = 1;
-    this.targetRotation.set(-ndcY * this.config.depthParallaxAmp, ndcX * this.config.depthParallaxAmp);
     this.requestRender();
   }
 
   public onPointerLeave() {
     this.targetActivity = 0;
-    this.targetRotation.set(0, 0);
     this.requestRender();
   }
 
@@ -212,7 +207,6 @@ export class ParticlePortraitRenderer {
   private onMotionChange = () => {
     this.material.uniforms.uReducedMotion.value = this.motionQuery.matches ? 1 : 0;
     this.onPointerLeave();
-    this.currentRotation.set(0, 0);
     this.pointerActivity = 0;
     this.pointerVelocity.set(0, 0);
     this.requestRender();
@@ -253,12 +247,7 @@ export class ParticlePortraitRenderer {
     ).clampLength(0, 1.5);
     this.lastPointer.copy(this.currentPointer);
     this.pointerActivity += (this.targetActivity - this.pointerActivity) * damping;
-    this.currentRotation.lerp(this.targetRotation, damping * 0.65);
     this.currentScroll = reduced ? this.targetScroll : THREE.MathUtils.lerp(this.currentScroll, this.targetScroll, 1 - Math.exp(-delta * 12));
-    if (this.points) {
-      this.points.rotation.x = reduced ? 0 : this.currentRotation.x;
-      this.points.rotation.y = reduced ? 0 : this.currentRotation.y;
-    }
     const uniforms = this.material.uniforms;
     uniforms.uTime.value = reduced ? 0 : this.elapsedTime;
     uniforms.uProgress.value = this.assemblyProgress;

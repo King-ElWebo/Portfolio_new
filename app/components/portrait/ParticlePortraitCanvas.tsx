@@ -9,7 +9,7 @@ export function ParticlePortraitCanvas({ className = "", config }: ParticlePortr
   const [status, setStatus] = useState<PortraitStatus>("loading");
   const {
     maxDesktopParticles, maxTabletParticles, maxMobileParticles, pointerInfluence,
-    repulsionStrength, damping, idleNoiseAmp, depthParallaxAmp, assemblyDuration,
+    repulsionStrength, damping, idleNoiseAmp, assemblyDuration,
   } = { ...DEFAULT_PARTICLE_CONFIG, ...config };
 
   useEffect(() => {
@@ -27,7 +27,7 @@ export function ParticlePortraitCanvas({ className = "", config }: ParticlePortr
       if (cancelled) return;
       renderer = new ParticlePortraitRenderer(canvas, {
         maxDesktopParticles, maxTabletParticles, maxMobileParticles, pointerInfluence,
-        repulsionStrength, damping, idleNoiseAmp, depthParallaxAmp, assemblyDuration,
+        repulsionStrength, damping, idleNoiseAmp, assemblyDuration,
       }, (next) => { if (!cancelled) setStatus(next); });
       const activeRenderer = renderer;
       const observer = new IntersectionObserver((entries) => {
@@ -88,12 +88,12 @@ export function ParticlePortraitCanvas({ className = "", config }: ParticlePortr
       renderer?.destroy();
     };
   }, [maxDesktopParticles, maxTabletParticles, maxMobileParticles, pointerInfluence,
-    repulsionStrength, damping, idleNoiseAmp, depthParallaxAmp, assemblyDuration]);
+    repulsionStrength, damping, idleNoiseAmp, assemblyDuration]);
 
   return (
     <div ref={containerRef} className={`hero-portrait-wrap ${className}`}
       data-portrait-status={status} aria-hidden="true">
-      <img className="hero-portrait-static" src="/assets/portrait-sculpture-static.png"
+      <img className="hero-portrait-static" src="/assets/portrait-photo-static.png"
         alt="" width="480" height="600" decoding="async" />
       <canvas ref={canvasRef} className="hero-portrait-canvas" />
     </div>

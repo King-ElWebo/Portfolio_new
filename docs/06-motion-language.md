@@ -2,7 +2,7 @@
 
 > **Zweck**: Festlegung der Animationsprinzipien, Übergänge, Scroll-Mechaniken, Shader-Interaktionen und Performance-Leitlinien.  
 > **Source of Truth**: Interaktions-, Animations- & Motion-Richtlinien  
-> **Status**: IN PROGRESS (Hero 3D-Canvas implementiert & pausiert; CSS-Transitions aktiv; Scroll-Libraries als Kandidaten offen)
+> **Status**: IN PROGRESS (persönliches 2D-Partikelporträt mit bestehendem Three.js-Renderer aktiv; CSS-Transitions aktiv; seitenweite Scroll-Libraries als Kandidaten offen)
 
 ---
 
@@ -17,7 +17,17 @@
 
 ---
 
-## 2. Hero 3D Computational Point-Cloud Portrait `[STATUS: PAUSED]`
+## 2. Hero: persönliches Foto-Partikelporträt `[DEC-033: ACTIVE]`
+
+Seit 2026-10-21 ist die foto-basierte 2D-Richtung ausdrücklich freigegeben.
+`portrait-photo.bin` enthält persönliche Fotopunkte mit ruhenden Z-Koordinaten null.
+Der bestehende Three.js-Renderer verwendet eine orthografische Kamera, 2,4 Sekunden
+Aufbau, minimale Bewegung in der Bildebene, örtlich begrenzte Mausverdrängung und
+reversible Scroll-Auflösung. Reduced Motion zeigt die vollständige Figur sofort
+und blendet beim Scrollen nur aus. Details: [Foto-Partikelporträt](16-photo-particle-portrait.md).
+
+Die folgenden Unterpunkte dokumentieren die ursprüngliche 3D-Richtung. Ihre
+Pause und Geometrie-Anforderungen gelten nicht für die nun freigegebene 2D-Fassung.
 
 Im Hero wurde ein interaktives 3D-Partikel-Porträt als Signatur-Element auf Basis von WebGL implementiert.
 

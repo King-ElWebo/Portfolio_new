@@ -1,0 +1,149 @@
+.dark-act3-wrap.home-ending {
+  padding-bottom: 0;
+}
+
+.home-footer {
+  padding-top: clamp(5rem, 8vw, 8rem);
+  padding-bottom: 2.5rem;
+  color: var(--text-dark-primary);
+  background-color: var(--bg-dark-base);
+}
+
+.home-footer-layout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(2rem, 5vw, 5rem);
+}
+
+.home-footer-identity {
+  min-width: 0;
+}
+
+.home-footer-wordmark {
+  font-family: var(--font-serif);
+  font-size: clamp(7.5rem, 18.75vw, 18rem);
+  font-weight: 400;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  color: color-mix(in srgb, var(--color-secondary) 25%, var(--text-dark-primary));
+  opacity: 0.75;
+}
+
+.home-footer-role {
+  margin-top: 1.5rem;
+  font-size: 0.875rem;
+  line-height: 1.7;
+  color: var(--text-dark-muted);
+}
+
+.home-footer-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 10.5rem;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.home-footer-nav a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  min-height: 2.75rem;
+}
+
+.home-footer-nav svg {
+  flex: none;
+}
+
+.home-footer-nav .home-footer-back-top {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  color: var(--text-dark-muted);
+}
+
+.home-footer-colophon {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: clamp(2.5rem, 4.5vw, 4rem);
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: var(--text-dark-muted);
+}
+
+.home-footer-legal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.home-footer a:focus-visible {
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 6px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .home-footer-nav a:hover {
+    color: var(--color-secondary);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:has(.home-footer) {
+    scroll-behavior: auto;
+  }
+}
+
+@media (max-width: 760px) {
+  .home-footer {
+    padding-top: 4.5rem;
+    padding-bottom: 2rem;
+  }
+
+  .home-footer-layout {
+    flex-direction: column;
+    align-items: start;
+    gap: 2rem;
+  }
+
+  .home-footer-wordmark {
+    font-size: clamp(6rem, 28vw, 10rem);
+  }
+
+  .home-footer-role {
+    margin-top: 1.125rem;
+    font-size: 0.8125rem;
+  }
+
+  .home-footer-nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    min-width: 0;
+    font-size: 0.875rem;
+  }
+
+  .home-footer-nav a {
+    gap: 0.5rem;
+  }
+
+  .home-footer-nav .home-footer-back-top {
+    margin-top: 0;
+    font-size: 0.8125rem;
+  }
+
+  .home-footer-colophon {
+    margin-top: 2rem;
+    gap: 1rem;
+    font-size: 0.75rem;
+  }
+
+  .home-footer-legal {
+    gap: 1.125rem;
+  }
+}

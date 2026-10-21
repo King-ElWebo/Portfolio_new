@@ -18,8 +18,8 @@ export function Practitioner({ t }: PractitionerProps) {
           <img
             src="/assets/profile/wilk-portrait.webp"
             alt={p.portraitAlt}
-            width={466}
-            height={806}
+            width={1122}
+            height={1402}
             loading="lazy"
             decoding="async"
           />

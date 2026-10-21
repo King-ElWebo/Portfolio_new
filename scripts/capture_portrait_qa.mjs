@@ -5,7 +5,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import assert from "node:assert/strict";
 
 const base = process.env.PORTFOLIO_URL || "http://localhost:5173";
-const out = "qa-results/portrait";
+const out = process.env.PORTRAIT_QA_OUT || "qa-results/portrait";
 const captureScreenshots = !process.argv.includes("--verify-only");
 mkdirSync(out, { recursive: true });
 const browser = await chromium.launch({ headless: true });
@@ -161,7 +161,7 @@ try {
 
   // Malformed assets should produce the same coherent fallback, never a blank hero.
   const corrupt = await browser.newPage();
-  await corrupt.route("**/assets/portrait-sculpture.bin", (route) => route.fulfill({ body: Buffer.from([0, 1, 2]) }));
+  await corrupt.route("**/assets/portrait-photo.bin", (route) => route.fulfill({ body: Buffer.from([0, 1, 2]) }));
   await corrupt.goto(`${base}/en`, { waitUntil: "networkidle" });
   await corrupt.locator('[data-portrait-status="unavailable"]').waitFor();
   report.checks.invalidAssetFallback = true;

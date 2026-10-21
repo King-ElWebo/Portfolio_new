@@ -3,9 +3,12 @@ import type { Locale } from "~/i18n/translations";
 import { getAlternateLocale, getLocaleSwitchUrl, setLocaleCookie } from "~/i18n/locale";
 import "~/styles/language-switch.css";
 
-interface LanguageSwitchProps { locale: Locale }
+interface LanguageSwitchProps {
+  locale: Locale;
+  shortLabel?: boolean;
+}
 
-export function LanguageSwitch({ locale }: LanguageSwitchProps) {
+export function LanguageSwitch({ locale, shortLabel = false }: LanguageSwitchProps) {
   const location = useLocation();
   const targetLocale = getAlternateLocale(locale);
 
@@ -23,7 +26,7 @@ export function LanguageSwitch({ locale }: LanguageSwitchProps) {
       aria-label={targetLocale === "en" ? "Switch to English" : "Zu Deutsch wechseln"}
       onClick={() => setLocaleCookie(targetLocale)}
     >
-      {targetLocale === "en" ? "English" : "Deutsch"}
+      {shortLabel ? targetLocale.toUpperCase() : targetLocale === "en" ? "English" : "Deutsch"}
     </Link>
   );
 }

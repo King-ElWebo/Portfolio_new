@@ -1,0 +1,23 @@
+{
+  "version": "personal-photo-2d-1",
+  "particleCount": 10939,
+  "strideFloats": 12,
+  "strideBytes": 48,
+  "geometry": "2D samples of a locally supplied personal photograph. Base Z is zero. No scan or reconstructed anatomy.",
+  "seed": 20261021,
+  "sourcePhotoDistributed": false,
+  "bounds": {
+    "x": [
+      -0.8041035532951355,
+      0.5816220045089722
+    ],
+    "y": [
+      -1.1276190280914307,
+      1.1120041608810425
+    ],
+    "z": [
+      0.0,
+      0.0
+    ]
+  }
+}

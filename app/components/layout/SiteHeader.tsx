@@ -101,7 +101,7 @@ export function SiteHeader({ t, locale }: SiteHeaderProps) {
 
         {/* Language Switcher & Mobile Toggle */}
         <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-          <LanguageSwitch locale={locale} />
+          <LanguageSwitch locale={locale} shortLabel />
 
           {/* Mobile menu toggle */}
           <button

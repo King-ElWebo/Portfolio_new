@@ -2,9 +2,8 @@ export const portraitVertexShader = /* glsl */ `
 precision highp float;
 
 attribute vec3 aOriginalColor;
-attribute vec3 aSurfaceNormal;
 attribute vec4 aData; // size, opacity, feature weight, deterministic phase
-attribute vec3 aDispersal;
+attribute vec2 aDispersal;
 uniform float uTime;
 uniform float uProgress;
 uniform float uScrollProgress;
@@ -14,6 +13,7 @@ uniform float uPointerActivity;
 uniform float uPointerInfluence;
 uniform float uPointerStrength;
 uniform float uPixelRatio;
+uniform float uPointScale;
 uniform float uReducedMotion;
 uniform float uIdleNoiseAmp;
 varying vec3 vColor;
@@ -23,52 +23,45 @@ void main() {
   float feature = aData.z;
   float phase = aData.w;
   float motion = 1.0 - uReducedMotion;
-  // Facial anchors gather from a nearby depth veil, followed by the outline.
-  float delay = 0.09 + phase * 0.18 + (1.0 - feature) * 0.18;
+  // The photograph defines the final XY positions. No reconstructed anatomy.
+  float delay = 0.08 + phase * 0.22 + (1.0 - feature) * 0.08;
   float arrival = clamp((uProgress - delay) / (1.0 - delay), 0.0, 1.0);
   arrival = mix(arrival, 1.0, uReducedMotion);
   float resolve = 1.0 - pow(1.0 - arrival, 4.0);
-  vec3 flight = position + vec3(aDispersal.x * 0.14,
-    0.12 + aDispersal.y * 0.10, -0.40 + aDispersal.z * 0.10);
+  vec3 flight = position + vec3(aDispersal * 0.12 + vec2(0.0, 0.06), 0.0);
   vec3 pos = mix(flight, position, resolve);
 
-  // Slow, coherent surface motion keeps facial anchors nearly stationary.
-  float breath = sin(uTime * 0.85) * 0.0018;
+  // Subpixel idle movement preserves the facial expression and silhouette.
   float drift = sin(position.y * 3.0 + uTime * 0.32)
               * cos(position.x * 2.5 + uTime * 0.24);
-  pos += aSurfaceNormal * (drift * uIdleNoiseAmp * (1.0 - feature * 0.8)
-         + breath * 0.35) * motion * resolve;
+  pos.xy += vec2(drift, sin(position.x * 2.0 + uTime * 0.28))
+            * uIdleNoiseAmp * (1.0 - feature * 0.8) * motion * resolve;
 
-  // Bounded depth ripple; fading activity releases particles in place.
-  float distanceToPointer = length(position.xy - uPointer.xy);
+  // A small, local radial disturbance eases back to the photographic anchors.
+  vec2 fromPointer = position.xy - uPointer.xy;
+  float distanceToPointer = length(fromPointer);
   float falloff = 1.0 - smoothstep(0.0, uPointerInfluence, distanceToPointer);
   float influence = falloff * falloff * uPointerActivity * motion * resolve;
-  pos.z -= influence * uPointerStrength * (1.0 - feature * 0.55);
-  pos.xy += uPointerVelocity * influence * uPointerStrength * 0.12;
-  pos.z += sin(distanceToPointer * 18.0 - uTime * 2.0)
-           * influence * uPointerStrength * 0.12;
+  vec2 direction = fromPointer / max(distanceToPointer, 0.035);
+  pos.xy += (direction + uPointerVelocity * 0.12)
+            * influence * uPointerStrength * (1.0 - feature * 0.2);
 
   // Deterministic scroll exit retraces naturally. Reduced motion only fades.
-  float exitDelay = phase * 0.14 + feature * 0.14;
+  float exitDelay = phase * 0.16 + feature * 0.06;
   float exitProgress = clamp((uScrollProgress - exitDelay) / (1.0 - exitDelay), 0.0, 1.0);
   float dissolve = exitProgress * exitProgress;
-  pos += vec3(aDispersal.x * 0.10, -0.34 - phase * 0.18, aDispersal.z * 0.10)
-         * dissolve * motion;
+  pos.xy += (aDispersal * vec2(0.30, 0.23) + vec2(0.0, -0.14))
+            * dissolve * motion;
 
-  // Approximate normals of the existing surface, not reconstructed anatomy.
-  vec3 normal = normalize(mat3(modelMatrix) * aSurfaceNormal);
-  float lightTravel = sin(uTime * 0.22) * 0.035 * motion;
-  vec3 key = normalize(vec3(-0.55 + lightTravel, 0.65, 0.75));
-  vec3 fill = normalize(vec3(0.65, 0.15, 0.70));
-  float light = 0.18 + 0.70 * max(dot(normal, key), 0.0)
-                    + 0.13 * max(dot(normal, fill), 0.0);
-  vColor = aOriginalColor * light;
+  // Photo-derived opacity carries the real eyes, lips and facial shadows.
+  // Directional mesh lighting would flatten or invent those characteristics.
+  vColor = aOriginalColor * (1.0 + sin(uTime * 0.19 + position.x) * 0.018 * motion);
   vec4 viewPosition = modelViewMatrix * vec4(pos, 1.0);
   gl_Position = projectionMatrix * viewPosition;
   // Identical fine footprint in every motion mode, independent of DPR.
-  gl_PointSize = clamp(aData.x * 1.5 * uPixelRatio * (3.5 / -viewPosition.z),
-                      1.25 * uPixelRatio, 2.2 * uPixelRatio);
-  float reveal = smoothstep(0.0, 0.28, arrival);
+  gl_PointSize = clamp(aData.x * uPointScale * uPixelRatio,
+                      0.8 * uPixelRatio, 2.25 * uPixelRatio);
+  float reveal = smoothstep(0.0, 0.45, arrival);
   vAlpha = aData.y * reveal * (1.0 - smoothstep(0.12, 1.0, exitProgress));
 }
 `;

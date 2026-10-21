@@ -35,9 +35,8 @@ export interface Project03 {
 
 export interface CapabilityRow {
   id: "web" | "systems" | "automation";
-  title: string;
+  title: { lead: string; rest: string };
   description: string;
-  examples: string[];
 }
 
 export interface CollaborationModel {
@@ -116,8 +115,7 @@ export interface Translations {
     heading: string;
   };
   capabilities: {
-    headline: string;
-    subline: string;
+    headline: { lead: string; accent: string };
     rows: CapabilityRow[];
     visual: {
       description: string;
@@ -193,6 +191,12 @@ export interface Translations {
       successMsg: string;
     };
     colophon: string;
+  };
+  homeFooter: {
+    navigationLabel: string;
+    backToTop: string;
+    imprint: string;
+    privacy: string;
   };
   footer: {
     brand: string;
@@ -308,38 +312,22 @@ export const translations: Record<Locale, Translations> = {
       heading: "CRAFT & METHODOLOGY",
     },
     capabilities: {
-      "headline": "What I design and build.",
-      "subline": "Websites, applications, and useful automation – from design to technical implementation.",
+      "headline": { "lead": "Design & Code.", "accent": "From one source." },
       "rows": [
         {
           "id": "web",
-          "title": "Websites & Commerce",
-          "description": "Websites and shops that fit your business – clearly designed and reliably built.",
-          "examples": [
-            "Websites",
-            "Online shops",
-            "Content systems"
-          ]
+          "title": { "lead": "Websites", "rest": "& Shops" },
+          "description": "Your digital presence."
         },
         {
           "id": "systems",
-          "title": "Apps & Business Systems",
-          "description": "Custom applications that make workflows easier to follow and support everyday work.",
-          "examples": [
-            "Order management",
-            "Internal tools",
-            "Data overviews"
-          ]
+          "title": { "lead": "Apps", "rest": "& Systems" },
+          "description": "For your everyday work."
         },
         {
           "id": "automation",
-          "title": "AI & Automation",
-          "description": "AI and automated workflows where they make everyday work easier.",
-          "examples": [
-            "AI integrations",
-            "Automated workflows",
-            "System integrations"
-          ]
+          "title": { "lead": "AI &", "rest": "Automation" },
+          "description": "For repetitive tasks."
         }
       ],
       "visual": {
@@ -462,6 +450,12 @@ export const translations: Record<Locale, Translations> = {
       },
       colophon: "Designed & Developed by Wilk. Running on Edge Infrastructure. Built with semantic web standards.",
     },
+    homeFooter: {
+      navigationLabel: "Footer navigation",
+      backToTop: "Back to top",
+      imprint: "Legal notice",
+      privacy: "Privacy",
+    },
     footer: {
       brand: "WILK",
       tagline: "— DESIGN & CODE",
@@ -574,38 +568,22 @@ export const translations: Record<Locale, Translations> = {
       heading: "CRAFT & METHODOLOGY",
     },
     capabilities: {
-      "headline": "Was ich gestalte und entwickle.",
-      "subline": "Websites, Anwendungen und sinnvolle Automatisierung – von der Gestaltung bis zur technischen Umsetzung.",
+      "headline": { "lead": "Design & Code.", "accent": "Aus einer Hand." },
       "rows": [
         {
           "id": "web",
-          "title": "Websites & Commerce",
-          "description": "Websites und Shops, die zu deinem Unternehmen passen – klar gestaltet und zuverlässig umgesetzt.",
-          "examples": [
-            "Websites",
-            "Onlineshops",
-            "Content-Systeme"
-          ]
+          "title": { "lead": "Websites", "rest": "& Shops" },
+          "description": "Dein digitaler Auftritt."
         },
         {
           "id": "systems",
-          "title": "Apps & Business-Systeme",
-          "description": "Individuelle Anwendungen, die Abläufe übersichtlich machen und im Arbeitsalltag unterstützen.",
-          "examples": [
-            "Auftragsverwaltung",
-            "Interne Tools",
-            "Datenübersichten"
-          ]
+          "title": { "lead": "Apps", "rest": "& Systeme" },
+          "description": "Für deinen Arbeitsalltag."
         },
         {
           "id": "automation",
-          "title": "KI & Automatisierung",
-          "description": "KI und automatisierte Abläufe dort einsetzen, wo sie im Alltag konkret weiterhelfen.",
-          "examples": [
-            "KI-Integrationen",
-            "Automatisierte Workflows",
-            "Systemverknüpfungen"
-          ]
+          "title": { "lead": "KI &", "rest": "Automatisierung" },
+          "description": "Für wiederkehrende Aufgaben."
         }
       ],
       "visual": {
@@ -727,6 +705,12 @@ export const translations: Record<Locale, Translations> = {
         successMsg: "Vielen Dank für Ihre Nachricht. Ich antworte Ihnen in Kürze.",
       },
       colophon: "Gestaltet & entwickelt von Wilk. Bereitgestellt auf Edge-Infrastruktur. Entwickelt nach semantischen Webstandards.",
+    },
+    homeFooter: {
+      navigationLabel: "Footer-Navigation",
+      backToTop: "Nach oben",
+      imprint: "Impressum",
+      privacy: "Datenschutz",
     },
     footer: {
       brand: "WILK",

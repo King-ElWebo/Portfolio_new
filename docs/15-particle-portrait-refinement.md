@@ -2,6 +2,11 @@
 
 Stand: 2026-10-11. Lokale Implementierung und Prüfung, kein Deployment/Commit/Push.
 
+**Historischer Bericht:** Seit DEC-033 (2026-10-21) verwendet der aktive Hero ein
+persönliches, foto-basiertes 2D-Partikelporträt. Die hier beschriebenen generischen
+Assets bleiben erhalten, werden aber nicht mehr geladen. Aktueller Stand:
+[Foto-Partikelporträt](16-photo-particle-portrait.md).
+
 Das bestehende Variant-A-Porträt wurde verfeinert. Homepage-Layout, Typografie,
 Navigation, Work-Archiv, Case Studies und Projektdaten wurden dabei nicht geändert.
 Die bereits vorhandenen Änderungen im Arbeitsverzeichnis sind erhalten.

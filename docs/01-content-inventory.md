@@ -104,6 +104,6 @@ Folgende 7 Projekte sind nun direkt in `app/data/projects.ts`, dem Work-Archiv u
 | **Name des Practitioners** | *WILK* (Arbeitsbezeichnung) | `WORKING DIRECTION` | Offizielle Namensnennung bestätigen. |
 | **Standort** | Österreich | `CONFIRMED` | Genaue Formulierung prüfen. |
 | **Vita / Werdegang** | `content/experience/` (aktuell `.gitkeep`) | `MISSING` | Relevante Stationen erfassen. |
-| **Authentisches Foto** | `public/assets/profile/wilk-portrait.webp` aus dem privaten Original `front.jpg` | `CONFIRMED` (gewählter Entwurf, DEC-026) | Aktuell gewähltes Porträt der Profilsektion; private Originaldatei unverändert. |
-| **3D Partikel-Porträt** | Variante A vorbereitet, Geometrie pausiert | `PAUSED` | Entscheidung über Gesichtsgeometrie ausstehend. |
+| **Authentisches Foto** | `public/assets/profile/wilk-portrait.webp`, vom Nutzer am 2026-10-21 bereitgestelltes Foto am Telefon | `CONFIRMED` (Bildtausch ausdrücklich beauftragt, DEC-026) | Optimierte WebP-Kopie in der Profilsektion; frühere private Originaldateien unverändert. |
+| **Hero Partikel-Porträt** | Persönliches, foto-basiertes 2D-Porträt; Three.js-Rendering bleibt erhalten | `CONFIRMED` (DEC-033) | Aktive persönliche Punktassets aus lokal verarbeitetem `front.jpg`; keine rekonstruierte 3D-Gesichtsgeometrie. |
 | **Testimonials** | `content/testimonials/` (aktuell `.gitkeep`) | `MISSING / OPTIONAL` | Reale Kundenfreigaben einholen oder Sektion überspringen. |

@@ -16,12 +16,10 @@ export function Capabilities({ t }: CapabilitiesProps) {
       aria-labelledby="capabilities-heading"
     >
       <div className="capabilities-editorial-intro">
-        <div>
-          <h2 className="capabilities-editorial-heading" id="capabilities-heading">
-            {copy.headline}
-          </h2>
-          <p className="capabilities-editorial-subline">{copy.subline}</p>
-        </div>
+        <h2 className="capabilities-editorial-heading" id="capabilities-heading">
+          {copy.headline.lead}{" "}
+          <em>{copy.headline.accent}</em>
+        </h2>
         <CapabilityLayers labels={copy.visual} />
       </div>
 
@@ -33,14 +31,10 @@ export function Capabilities({ t }: CapabilitiesProps) {
             aria-labelledby={"capability-" + capability.id}
           >
             <h3 className="capability-column-title" id={"capability-" + capability.id}>
-              {capability.title}
+              {capability.title.lead}{" "}
+              <span className="capability-column-title-rest">{capability.title.rest}</span>
             </h3>
             <p className="capability-column-description">{capability.description}</p>
-            <ul className="capability-column-examples" role="list">
-              {capability.examples.map((example) => (
-                <li key={example}>{example}</li>
-              ))}
-            </ul>
           </article>
         ))}
       </div>
