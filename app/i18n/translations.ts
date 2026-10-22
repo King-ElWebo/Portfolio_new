@@ -39,9 +39,8 @@ export interface CapabilityRow {
   description: string;
 }
 
-export interface CollaborationModel {
-  id: "project" | "agency" | "team";
-  title: string;
+export interface CollaborationPerspective {
+  headline: { lead: string; rest: string };
   description: string;
 }
 
@@ -133,9 +132,8 @@ export interface Translations {
   };
   collaboration: {
     label: string;
-    headline: { lead: string; accent: string };
-    intro: string;
-    models: CollaborationModel[];
+    project: CollaborationPerspective & { disciplines: string[] };
+    team: CollaborationPerspective & { signatureLead: string };
   };
   lab: {
     kicker: string;
@@ -350,28 +348,16 @@ export const translations: Record<Locale, Translations> = {
     },
     collaboration: {
       "label": "Collaboration",
-      "headline": {
-        "lead": "Your project.",
-        "accent": "Three ways."
+      "project": {
+        "headline": { "lead": "I take", "rest": "the lead." },
+        "disciplines": ["Concept.", "Design.", "Code."],
+        "description": "From the first idea to a finished product."
       },
-      "intro": "A complete project or focused support – we can find the way of working together that fits your project.",
-      "models": [
-        {
-          "id": "project",
-          "title": "For your project",
-          "description": "From the first idea to a working product: I take care of design and development."
-        },
-        {
-          "id": "agency",
-          "title": "With your agency",
-          "description": "I support your studio with technical implementation and work closely with your team."
-        },
-        {
-          "id": "team",
-          "title": "In your product team",
-          "description": "Focused support with interfaces, applications, and the continued development of existing systems."
-        }
-      ]
+      "team": {
+        "headline": { "lead": "I", "rest": "contribute." },
+        "signatureLead": "Your team &",
+        "description": "Focused support for agencies and product teams."
+      }
     },
     lab: {
       "kicker": "05 / THE LAB",
@@ -606,28 +592,16 @@ export const translations: Record<Locale, Translations> = {
     },
     collaboration: {
       "label": "Zusammenarbeit",
-      "headline": {
-        "lead": "Dein Projekt.",
-        "accent": "Drei Wege."
+      "project": {
+        "headline": { "lead": "Ich", "rest": "übernehme." },
+        "disciplines": ["Konzept.", "Design.", "Code."],
+        "description": "Von der Idee bis zum fertigen Produkt."
       },
-      "intro": "Ein ganzes Projekt oder gezielte Unterstützung – wir finden die Zusammenarbeit, die zu deinem Vorhaben passt.",
-      "models": [
-        {
-          "id": "project",
-          "title": "Für dein Projekt",
-          "description": "Von der Idee bis zum fertigen Produkt: Ich übernehme Gestaltung und Entwicklung."
-        },
-        {
-          "id": "agency",
-          "title": "Mit deiner Agentur",
-          "description": "Ich ergänze euer Studio bei der technischen Umsetzung und arbeite eng mit eurem Team zusammen."
-        },
-        {
-          "id": "team",
-          "title": "In deinem Produktteam",
-          "description": "Gezielte Unterstützung bei Interfaces, Anwendungen und der Weiterentwicklung bestehender Systeme."
-        }
-      ]
+      "team": {
+        "headline": { "lead": "Ich", "rest": "ergänze." },
+        "signatureLead": "Dein Team &",
+        "description": "Gezielte Unterstützung für Agenturen und Produktteams."
+      }
     },
     lab: {
       "kicker": "05 / DAS LABOR",

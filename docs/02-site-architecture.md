@@ -56,7 +56,7 @@ Folgt der bestätigten 3-Akt-Dramaturgie (*Cinematic Obsidian → Warm Paper →
 - **Act II (Warm Editorial Cream)**:
   - `Capabilities`: „Design & Code“ mit Ebenengrafik und drei kurzen Kernbereichen (Websites & Shops, Apps & Systeme, KI & Automatisierung); DE/EN gemäß `DEC-034`.
   - `Practitioner`: Persönliches Statement, Philosophie (*Craft & Code in einer Person*), Studio-Porträt.
-  - `Collaboration`: Kollaborationsmodelle (Direct, Studio, Embedded).
+  - `Collaboration`: „Zwei Perspektiven“ – gesamtes Projekt übernehmen oder Agenturen und Produktteams ergänzen, als helle und dunkle Fläche; DE/EN gemäß `DEC-035`.
 - **Act III (Return to Cinematic Dark)**:
   - `Lab`: 3 experimentelle interaktive Karten / Skizzen.
   - `Contact`: Schneller Kontaktbereich mit Vorab-Formular.

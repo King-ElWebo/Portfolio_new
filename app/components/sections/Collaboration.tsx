@@ -8,37 +8,26 @@ export function Collaboration({ t }: CollaborationProps) {
   const c = t.collaboration;
 
   return (
-    <section className="max-w-7xl collaboration-container" id="collaboration" aria-label={c.label}>
-      <h2 className="collaboration-heading">
-        {c.headline.lead}<br /><em>{c.headline.accent}</em>
-      </h2>
-      <p className="collaboration-intro">{c.intro}</p>
-
-      <div className="collaboration-network">
-        <figure className="collaboration-source">
-          <img
-            className="collaboration-sculpture"
-            src="/assets/collaboration/interwoven-bands-960.webp"
-            srcSet="/assets/collaboration/interwoven-bands-480.webp 480w, /assets/collaboration/interwoven-bands-960.webp 960w"
-            sizes="(max-width: 760px) 280px, (max-width: 1100px) 40vw, 448px"
-            width={960}
-            height={960}
-            loading="lazy"
-            decoding="async"
-            alt=""
-          />
-          <figcaption className="collaboration-wordmark">WILK</figcaption>
-        </figure>
-
-        <div className="collaboration-models">
-          {c.models.map((model) => (
-            <article className="collaboration-model" key={model.id}>
-              <span className="collaboration-connector" aria-hidden="true" />
-              <h3>{model.title}</h3>
-              <p>{model.description}</p>
-            </article>
-          ))}
-        </div>
+    <section className="collaboration-container" id="collaboration" aria-label={c.label}>
+      <div className="collaboration-perspectives">
+        <article className="collaboration-perspective collaboration-project" aria-labelledby="collaboration-project-heading">
+          <h2 className="collaboration-role-heading" id="collaboration-project-heading">
+            {c.project.headline.lead}{" "}<span>{c.project.headline.rest}</span>
+          </h2>
+          <ul className="collaboration-disciplines" role="list">
+            {c.project.disciplines.map((discipline) => <li key={discipline}>{discipline}</li>)}
+          </ul>
+          <p className="collaboration-description">{c.project.description}</p>
+        </article>
+        <article className="collaboration-perspective collaboration-team" aria-labelledby="collaboration-team-heading">
+          <h2 className="collaboration-role-heading" id="collaboration-team-heading">
+            {c.team.headline.lead}{" "}<em>{c.team.headline.rest}</em>
+          </h2>
+          <p className="collaboration-team-signature">
+            <span>{c.team.signatureLead}</span>{" "}<strong>{t.header.brand}</strong>
+          </p>
+          <p className="collaboration-description">{c.team.description}</p>
+        </article>
       </div>
     </section>
   );

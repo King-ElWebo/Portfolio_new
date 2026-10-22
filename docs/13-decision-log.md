@@ -223,7 +223,7 @@ NOTES: [Relevante Einschränkungen oder nachgelagerte Aufgaben]
 ---
 ### DEC-027: Zusammenarbeit als „Räumliches Gefüge“
 - **DATE**: 2026-10-16
-- **STATUS**: WORKING DIRECTION / IMPLEMENTATION APPROVED
+- **STATUS**: SUPERSEDED BY DEC-035
 - **RATIONALE**: Der Nutzer hat das Verbindungskonzept und die gezeigte Variante „Räumliches Gefüge“ zur lokalen Implementierung freigegeben. Die Gestaltung ist eine aktuelle Arbeitsfassung und darf später weiterentwickelt werden; sie ist nicht als endgültige visuelle Lösung bestätigt.
 - **NOTES**:
   - Drei verschränkte Bänder in Creme, Dunkel und Bronze ergänzen die drei Formen: eigenes Projekt, Agentur und Produktteam. Verwendet wird die im Chat erzeugte Illustration, als transparente WebP-Dateien in 480 und 960 px unter `public/assets/collaboration/`.
@@ -311,6 +311,31 @@ NOTES: [Relevante Einschränkungen oder nachgelagerte Aufgaben]
   - Desktop: drei offene Spalten mit bewusst gesetzten Titelumbrüchen. Mobile: Aussage, Grafik und kompakte Leistungsbereiche untereinander. Vorhandene Farb- und Schrifttokens bleiben erhalten; keine Karten, neuen Trennlinien oder zusätzlichen CTAs.
   - Bestehende einmalige 3-Sekunden-Sequenz der Ebenengrafik, statische Darstellung ohne JavaScript und Reduced Motion bleiben erhalten. Keine neue Animationslogik oder Abhängigkeit.
   - Umfang: ausschließlich Kompetenzkomponente, zugehöriges Stylesheet, typisierte DE-/EN-Texte und diese Dokumentation. Hero, Porträt, Navigation, übrige Sektionen und Case Studies bleiben erhalten. Kein Commit, Push oder Deployment.
+
+---
+### DEC-035: Zusammenarbeit als „Zwei Perspektiven“
+- **DATE**: 2026-10-21
+- **STATUS**: CONFIRMED / LOCAL IMPLEMENTATION
+- **RATIONALE**: Der Nutzer lehnt die große Ringgrafik ab und empfindet den ersten typografischen Entwurf als leer und monoton. Nach einer weiteren Auswahl bestätigt er ausdrücklich „Zwei Perspektiven“ zur Umsetzung.
+- **NOTES**:
+  - Zwei gleichzeitig sichtbare Flächen ersetzen Ringgrafik, Verbindungslinien, Einleitung und drei gleichgewichtete Textblöcke. Links auf Creme: „Ich übernehme.“ mit „Konzept. Design. Code.“ und einem kurzen Satz zum gesamten Projekt. Rechts auf Obsidian: „Ich ergänze.“ mit „Dein Team & WILK“ und gezielter Unterstützung für Agenturen und Produktteams.
+  - Die drei bisherigen Zielgruppen bleiben inhaltlich enthalten: eigenes Projekt sowie Agenturen und Produktteams. Keine neuen Leistungs- oder Erfahrungsbehauptungen. Englische Entsprechungen werden in der vorhandenen typisierten Übersetzungsdatei gepflegt.
+  - Desktop und Tablet: zwei aneinander anschließende Flächen. Mobile: Projekt und Team untereinander. Vorhandene Schrift- und Farbvariablen, keine neuen globalen Tokens oder Abhängigkeiten.
+  - **Randlose Verfeinerung auf Nutzerwunsch:** Die Flächen nutzen die gesamte Fensterbreite; die bisherige maximale Containerbreite und seitlichen Außenabstände entfallen für diese Sektion. Beide Flächen erhalten gemäß DEC-036 identische Textabstände. Auf Mobile reichen beide Flächen bis zum Rand. Der cremefarbene Abstand unter der Sektion entfällt, sodass sie direkt an den dunklen dritten Akt anschließt.
+  - Rein servergerendertes Markup und CSS, vollständig lesbar ohne JavaScript. Keine Schalter, Animationen oder neue Interaktion; der alternative Entwurf „Rollenwechsel“ ist nicht freigegeben. Die bisherigen Bilddateien bleiben als historische Assets erhalten, werden aber in dieser Sektion nicht mehr geladen.
+  - Umfang: ausschließlich Collaboration-Komponente, zugehöriger Abschnitt in `app.css`, DE-/EN-Texte und relevante Dokumentation. Andere Homepage-Sektionen und Unterseiten bleiben erhalten. Kein Commit, Push oder Deployment.
+
+---
+### DEC-036: Einheitlicher Rhythmus im hellen Seitenabschnitt
+- **DATE**: 2026-10-21
+- **STATUS**: USER-REQUESTED REFINEMENT / LOCAL IMPLEMENTATION
+- **RATIONALE**: Der Nutzer bemängelt den kleinen isolierten „Über mich“-Kicker, den Übergang zwischen Porträt und Zusammenarbeit sowie den größeren linken Texteinzug im randlosen Zweiteiler. Die asymmetrischen Padding-Regeln stammten aus der vorherigen Randlos-Anpassung.
+- **NOTES**:
+  - Ein gemeinsamer, nur im hellen Homepage-Abschnitt geltender Abstand steuert den Übergang von Kompetenzen zum Porträt und vom Porträt zum Zweiteiler. Doppelt verteilte Außenabstände entfallen; der Abstand wächst von 5 bis 12 rem mit der Fensterbreite.
+  - Der sichtbare Mini-Kicker entfällt. Die semantische Überschrift „Über mich“ / „About me“, die Benennung des Abschnitts und beide bisherigen Anker bleiben erhalten.
+  - Zwei gleich breite Flächen erhalten dieselben Innenabstände an allen seitlichen Kanten. Die separate Berechnung des äußeren linken Einzugs entfällt. Auf Mobile bleiben beide Flächen randlos untereinander.
+  - Bestehende Grafik und „Design & Code“-Komposition, Profilbild, Zitat und weitere Texte bleiben erhalten. Ausschließlich lokale Layoutregeln und diese Dokumentation ändern sich; keine neue Animation, Abhängigkeit oder globale Typografieänderung.
+  - Eine gespeicherte Browserberechtigung blockiert die erneute visuelle Prüfung trotz ausdrücklicher Freigabe im Chat. Die aktuelle Fassung wird daher durch Quellprüfung, Typprüfung und Build geprüft; keine neue Live-Sichtprüfung behaupten.
 
 ---
 ## 🔍 Noch offene Entscheidungen `[OPEN / TODO]`

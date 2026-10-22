@@ -694,10 +694,11 @@ button {
    05. WARM EDITORIAL CREAM / PAPER SECTION (#F6F3EC)
    -------------------------------------------------------------------------- */
 .cream-section-wrap {
+  --cream-section-gap: clamp(5rem, 12vw, 12rem);
   background-color: var(--bg-cream-base);
   color: var(--text-cream-primary);
   padding-top: 5rem;
-  padding-bottom: 8rem;
+  padding-bottom: 0;
   transition: colors 500ms ease;
 }
 
@@ -789,24 +790,25 @@ button {
 
 /* Practitioner — Editorial portrait */
 .practitioner-container {
-  margin-top: 7rem;
-  margin-bottom: 7rem;
+  margin-top: var(--cream-section-gap);
+  margin-bottom: 0;
   scroll-margin-top: 6.5rem;
 }
 
 .practitioner-heading-row {
-  margin-bottom: clamp(2rem, 4.5vw, 4.25rem);
   scroll-margin-top: 6.5rem;
 }
 
 .practitioner-heading {
-  color: var(--accent-cream-brown);
-  font-family: var(--font-sans);
-  font-size: 0.75rem;
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0.11em;
-  text-transform: uppercase;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
 }
 
 .practitioner-grid {
@@ -890,194 +892,139 @@ button {
 }
 
 
-/* Collaboration — Interwoven forms */
+/* Collaboration — Two perspectives */
 .collaboration-container {
-  --collaboration-gap: clamp(3rem, 6vw, 5rem);
-  --collaboration-row-gap: clamp(2rem, 3.5vw, 3rem);
-  --collaboration-joint: clamp(1.05rem, 1.56vw, 1.35rem);
-  --collaboration-line: color-mix(in srgb, var(--accent-cream-brown) 35%, var(--bg-cream-base));
-  margin-top: 7rem;
+  width: 100%;
+  margin-top: var(--cream-section-gap);
   scroll-margin-top: 6.5rem;
 }
 
-.collaboration-heading {
+.collaboration-perspectives {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.collaboration-perspective {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: clamp(2rem, 3.5vw, 3rem);
+  min-width: 0;
+  min-height: clamp(32rem, 46vw, 42rem);
+  padding: clamp(2rem, 4.5vw, 4rem) clamp(2rem, 6vw, 6rem);
+  background: var(--bg-cream-base);
   color: var(--text-cream-primary);
+}
+
+.collaboration-role-heading {
   font-family: var(--font-serif);
-  font-size: clamp(2.125rem, 4vw, 3.5rem);
+  font-size: clamp(2.5rem, 4.5vw, 4rem);
   font-weight: 400;
   line-height: 1.12;
-  letter-spacing: -0.035em;
+  letter-spacing: -0.03em;
 }
 
-.collaboration-heading em {
+.collaboration-role-heading span,
+.collaboration-role-heading em {
+  display: block;
+}
+
+.collaboration-disciplines {
+  display: grid;
+  align-self: center;
+  gap: 0.3125rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
   color: var(--accent-cream-brown);
-  font-weight: 400;
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  line-height: 1.22;
+  letter-spacing: -0.025em;
 }
 
-.collaboration-intro {
-  max-width: 53ch;
-  margin-top: 1.5rem;
+.collaboration-description {
+  max-width: 27ch;
   color: var(--text-cream-secondary);
   font-family: var(--font-sans);
-  font-size: clamp(1rem, 1.4vw, 1.125rem);
+  font-size: 1rem;
   font-weight: 400;
-  line-height: 1.7;
-  text-wrap: pretty;
+  line-height: 1.65;
 }
 
-.collaboration-network {
-  display: grid;
-  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
-  gap: var(--collaboration-gap);
-  align-items: center;
-  margin-top: clamp(2.5rem, 4vw, 4rem);
+.collaboration-team {
+  background: var(--bg-dark-base);
+  color: var(--text-dark-primary);
 }
 
-.collaboration-source {
-  position: relative;
-  min-width: 0;
+.collaboration-team .collaboration-role-heading em {
+  color: var(--color-secondary);
+  font-weight: 400;
 }
 
-.collaboration-source::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 100%;
-  width: calc(var(--collaboration-gap) / 2);
-  border-top: 1px solid var(--collaboration-line);
+.collaboration-team .collaboration-description {
+  color: var(--text-dark-secondary);
 }
 
-.collaboration-sculpture {
-  width: min(100%, 28rem);
-  height: auto;
-  aspect-ratio: 1;
-  margin-inline: auto;
+.collaboration-team-signature {
+  align-self: center;
 }
 
-.collaboration-wordmark {
-  margin-top: 1.25rem;
-  margin-left: 1rem;
-  color: var(--text-cream-primary);
+.collaboration-team-signature span {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+}
+
+.collaboration-team-signature strong {
+  display: block;
+  margin-top: 0.5rem;
+  color: var(--color-secondary);
   font-family: var(--font-serif);
-  font-size: clamp(1.75rem, 2.8vw, 2.5rem);
+  font-size: clamp(3.5rem, 8vw, 7rem);
   font-weight: 400;
   line-height: 1;
-  letter-spacing: -0.035em;
-}
-
-.collaboration-models {
-  display: grid;
-  gap: var(--collaboration-row-gap);
-  position: relative;
-  min-width: 0;
-}
-
-.collaboration-model {
-  position: relative;
-  min-width: 0;
-}
-
-.collaboration-model::before {
-  content: "";
-  position: absolute;
-  left: calc(var(--collaboration-gap) / -2);
-  top: calc(var(--collaboration-row-gap) / -2);
-  bottom: calc(var(--collaboration-row-gap) / -2);
-  border-left: 1px solid var(--collaboration-line);
-}
-
-.collaboration-model:first-child::before {
-  top: var(--collaboration-joint);
-}
-
-.collaboration-model:last-child::before {
-  bottom: calc(100% - var(--collaboration-joint));
-}
-
-.collaboration-connector {
-  position: absolute;
-  top: var(--collaboration-joint);
-  left: calc(var(--collaboration-gap) / -2);
-  width: calc(var(--collaboration-gap) / 2 - 0.75rem);
-  border-top: 1px solid var(--collaboration-line);
-}
-
-.collaboration-connector::after {
-  content: "";
-  position: absolute;
-  top: -4px;
-  right: -3px;
-  width: 7px;
-  height: 7px;
-  border: 1px solid var(--collaboration-line);
-  border-radius: 50%;
-  background: var(--bg-cream-base);
-}
-
-.collaboration-model h3 {
-  color: var(--text-cream-primary);
-  font-family: var(--font-serif);
-  font-size: clamp(1.75rem, 2.6vw, 2.25rem);
-  font-weight: 400;
-  line-height: 1.2;
-  letter-spacing: -0.025em;
-  text-wrap: pretty;
-}
-
-.collaboration-model p {
-  max-width: 52ch;
-  margin-top: 0.875rem;
-  color: var(--text-cream-secondary);
-  font-family: var(--font-sans);
-  font-size: clamp(1rem, 1.3vw, 1.125rem);
-  font-weight: 400;
-  line-height: 1.7;
-  text-wrap: pretty;
+  letter-spacing: -0.04em;
 }
 
 @media (max-width: 760px) {
   .collaboration-container {
-    --collaboration-gap: 4rem;
     scroll-margin-top: 8.5rem;
   }
 
-  .collaboration-network {
-    display: block;
-    margin-top: 2rem;
+  .collaboration-perspectives {
+    grid-template-columns: minmax(0, 1fr);
   }
 
-  .collaboration-source {
-    width: min(100%, 17.5rem);
-    margin: 0 auto 3rem;
+  .collaboration-perspective {
+    min-height: 20rem;
+    padding: 1.75rem var(--gutter-x);
+    gap: 1.5rem;
   }
 
-  .collaboration-source::after {
-    top: 100%;
-    left: 50%;
-    width: 0;
-    height: 1.5rem;
-    border-top: none;
-    border-left: 1px solid var(--collaboration-line);
+  .collaboration-role-heading {
+    font-size: clamp(1.875rem, 7vw, 2.25rem);
   }
 
-  .collaboration-wordmark {
-    margin-left: 0;
-    text-align: center;
+  .collaboration-role-heading span,
+  .collaboration-role-heading em {
+    display: inline;
   }
 
-  .collaboration-models {
-    padding-left: 2rem;
+  .collaboration-disciplines {
+    gap: 0.0625rem;
+    font-size: 1.6875rem;
   }
 
-  .collaboration-models::before {
-    content: "";
-    position: absolute;
-    top: -1.5rem;
-    left: 0;
-    width: 50%;
-    height: calc(1.5rem + var(--collaboration-joint));
-    border-top: 1px solid var(--collaboration-line);
-    border-left: 1px solid var(--collaboration-line);
+  .collaboration-description {
+    font-size: 0.875rem;
+  }
+
+  .collaboration-team-signature span {
+    font-size: 1rem;
+  }
+
+  .collaboration-team-signature strong {
+    font-size: 3.25rem;
   }
 }
 
