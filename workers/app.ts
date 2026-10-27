@@ -2,7 +2,7 @@ import {
   createRequestHandler,
   RouterContextProvider,
 } from "react-router";
-import { cloudflareContext, type Env } from "~/context";
+import { cloudflareContext, type Env } from "../app/context";
 
 export { cloudflareContext, type Env };
 

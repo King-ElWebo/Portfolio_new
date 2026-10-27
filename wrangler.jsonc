@@ -7,9 +7,5 @@
   "main": "./workers/app.ts",
   "assets": {
     "directory": "./build/client"
-  },
-  "vars": {
-    "CONTACT_FROM_EMAIL": "WILK Portfolio <contact@bywilk.at>",
-    "CONTACT_RECIPIENT_EMAIL": "office@bywilk.at"
   }
 }
