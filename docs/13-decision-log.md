@@ -340,7 +340,7 @@ NOTES: [Relevante Einschränkungen oder nachgelagerte Aufgaben]
 ---
 ### DEC-037: Bestehendes Cloudflare-Produktionsziel angleichen
 - **DATE**: 2026-10-27
-- **STATUS**: USER-REQUESTED REPAIR / LIVE UPDATE PENDING VERIFICATION
+- **STATUS**: CONFIRMED / LIVE UPDATE VERIFIED
 - **RATIONALE**: Der Nutzer verlangt die saubere Reparatur der veralteten Domain-Fassung. Screenshots zeigen den bestehenden Worker `portfolio-bywilk` und das Produktionskonto; das Repository verwendete bisher den abweichenden Namen `portfolio`. Die lokale Wrangler-Anmeldung gehört zu einem anderen Konto. Eine zuvor getrennte Git-Verbindung wurde vom Nutzer durch erneuerte GitHub-App-Berechtigungen bearbeitet.
 - **NOTES**:
   - `wrangler.jsonc` benennt den bestehenden Worker und sein Produktionskonto explizit. Keine neuen Worker, Domains, Bindings, Secrets, Abhängigkeiten oder Frameworkänderungen.
@@ -349,6 +349,7 @@ NOTES: [Relevante Einschränkungen oder nachgelagerte Aufgaben]
   - Die angezeigte aktive Cloudflare-Version `8b267ba9` ist kein Git-Commit. Für den letzten Portfolio-Commit `9120f02` waren zum Prüfzeitpunkt keine Statusprüfungen oder Check-Runs auf GitHub vorhanden. Das belegt keine konkrete Build-Fehlermeldung.
   - Details und Prüfschritte in `docs/12-deployment-data.md`. Eine lokale Typ-, Build- oder Dry-Run-Prüfung darf nicht als erfolgreiches Live-Update ausgegeben werden.
   - Lokale Verifikation: `npm run typecheck`, `npm run build`, `wrangler deploy --dry-run` und Diff-Prüfung erfolgreich. Die erzeugte Worker-Konfiguration übernimmt Name und Konto korrekt; die bestehende Größenwarnung des Three.js-Chunks bleibt unverändert.
+  - Live-Verifikation: Push von Reparatur-Commit `be12f44` auf `main` erzeugte einen erfolgreichen Cloudflare-Check (`4e59ab9d-9cf5-495e-a041-17ce1aac5a78`, Worker-Version `7e071705-0ff3-49ce-a3b9-cb3a5bed9fce`). Frische öffentliche Anfragen an `/de` und `/en` lieferten HTTP 200, `collaboration-perspectives` und die passenden Styles; `collaboration-network` war nicht mehr enthalten. Damit sind Git-Trigger und Aktualisierung der Domain bestätigt. Keine neue visuelle Browserprüfung behaupten.
 
 ---
 ## 🔍 Noch offene Entscheidungen `[OPEN / TODO]`
@@ -365,7 +366,7 @@ NOTES: [Relevante Einschränkungen oder nachgelagerte Aufgaben]
 - **DEC-O10**: Datenschutzkonforme Analytics (Cloudflare Web Analytics vs. Plausible/Umami) `[OPEN]`.
 - **DEC-O11**: CMS-Bedarf `[RESOLVED -> DEC-019 (Lokale strukturierte Dateien in content/projects/)]`.
 - **DEC-O12**: Homepage-Auswahl der drei "Selected Work" Projekte `[RESOLVED -> DEC-023]`.
-- **DEC-O13**: Finale Domain-Registrierung `[OPEN / NEEDS CONFIRMATION]`.
+- **DEC-O13**: Finale Domain-Registrierung `[RESOLVED -> DEC-037 (bywilk.at öffentlich erreichbar und aktualisiert)]`.
 
 ---
 
