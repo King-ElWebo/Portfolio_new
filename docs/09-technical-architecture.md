@@ -13,7 +13,7 @@
   *(Serverless Postgres, Branching, schlanke Skalierung bei Bedarf).*
 
 > [!IMPORTANT]
-> **Wichtiger Hinweis**: Die Festlegung von Cloudflare und Neon bedeutet **nicht**, dass diese Dienste jetzt bereits provisioniert, eingerichtet oder im Code verbunden werden. Sie dienen als verbindliche Zielinfrastruktur für spätere architektonische Entscheidungen.
+> **Aktueller Infrastrukturstand (2026-10-27)**: Der bestehende Cloudflare Worker `portfolio-bywilk` bedient `bywilk.at`. Zielkonto, Build-Ablauf und offene Prüfung der Git-Verbindung sind in [`12-deployment-data.md`](12-deployment-data.md) dokumentiert. Neon bleibt unprovisioniert und nicht angebunden.
 
 ---
 

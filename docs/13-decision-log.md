@@ -338,6 +338,19 @@ NOTES: [Relevante Einschränkungen oder nachgelagerte Aufgaben]
   - Eine gespeicherte Browserberechtigung blockiert die erneute visuelle Prüfung trotz ausdrücklicher Freigabe im Chat. Die aktuelle Fassung wird daher durch Quellprüfung, Typprüfung und Build geprüft; keine neue Live-Sichtprüfung behaupten.
 
 ---
+### DEC-037: Bestehendes Cloudflare-Produktionsziel angleichen
+- **DATE**: 2026-10-27
+- **STATUS**: USER-REQUESTED REPAIR / LIVE UPDATE PENDING VERIFICATION
+- **RATIONALE**: Der Nutzer verlangt die saubere Reparatur der veralteten Domain-Fassung. Screenshots zeigen den bestehenden Worker `portfolio-bywilk` und das Produktionskonto; das Repository verwendete bisher den abweichenden Namen `portfolio`. Die lokale Wrangler-Anmeldung gehört zu einem anderen Konto. Eine zuvor getrennte Git-Verbindung wurde vom Nutzer durch erneuerte GitHub-App-Berechtigungen bearbeitet.
+- **NOTES**:
+  - `wrangler.jsonc` benennt den bestehenden Worker und sein Produktionskonto explizit. Keine neuen Worker, Domains, Bindings, Secrets, Abhängigkeiten oder Frameworkänderungen.
+  - Die Account-ID ist ein Ziel-Identifier, kein Zugangsschlüssel. Die lokale Authentifizierung wird nicht automatisch ersetzt; eine Anmeldung im richtigen Konto muss der Nutzer selbst durchführen, falls lokale Remote-Aktionen erforderlich werden.
+  - `King-ElWebo/Portfolio_new`, Produktionsbranch `main`, Build `npm run build` und Veröffentlichung `npx wrangler deploy` bilden den vorgesehenen vorhandenen Git-basierten Weg. Die aktuelle Dashboard-Konfiguration und ein erfolgreicher neuer Build sind getrennt zu verifizieren.
+  - Die angezeigte aktive Cloudflare-Version `8b267ba9` ist kein Git-Commit. Für den letzten Portfolio-Commit `9120f02` waren zum Prüfzeitpunkt keine Statusprüfungen oder Check-Runs auf GitHub vorhanden. Das belegt keine konkrete Build-Fehlermeldung.
+  - Details und Prüfschritte in `docs/12-deployment-data.md`. Eine lokale Typ-, Build- oder Dry-Run-Prüfung darf nicht als erfolgreiches Live-Update ausgegeben werden.
+  - Lokale Verifikation: `npm run typecheck`, `npm run build`, `wrangler deploy --dry-run` und Diff-Prüfung erfolgreich. Die erzeugte Worker-Konfiguration übernimmt Name und Konto korrekt; die bestehende Größenwarnung des Three.js-Chunks bleibt unverändert.
+
+---
 ## 🔍 Noch offene Entscheidungen `[OPEN / TODO]`
 
 - **DEC-O1**: Finales Frontend-Framework `[RESOLVED -> DEC-014 (React Router v8)]`.

@@ -120,4 +120,4 @@ npm run preview
 
 - **Hero Particle Portrait**: Technisch lauffähig (Three.js, GLSL Shader, Variante A), aber aktuell **PAUSIERT** (`PAUSED — awaiting decision on personalized facial geometry`). Keine weiteren Arbeiten am Portrait ohne explizite Freigabe.
 - **Inhalte**: Aktuelle Projekte in `translations.ts` sind temporäre Stitch-Platzhalter. Reale Projektdaten werden im Rahmen des Content-Workflows (Epic C) eingepflegt.
-- **Datenbank & Hosting**: Neon PostgreSQL und Cloudflare Workers sind die bestätigten Architekturziele; Remote-Ressourcen sind noch unprovisioniert.
+- **Datenbank & Hosting**: Der bestehende Cloudflare Worker `portfolio-bywilk` bedient `bywilk.at`; Zielkonto und Veröffentlichungsprüfung sind in [`docs/12-deployment-data.md`](docs/12-deployment-data.md) dokumentiert. Neon PostgreSQL bleibt unprovisioniert.
