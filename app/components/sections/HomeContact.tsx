@@ -1,9 +1,20 @@
-import { useEffect, useRef, type FormEvent, type MouseEvent } from "react";
-import type { Translations } from "~/i18n/translations";
+import { useEffect, useRef, useState, type FormEvent, type MouseEvent } from "react";
+import { Link } from "react-router";
+import type { Locale, Translations } from "~/i18n/translations";
 import { createContactDraft } from "./contactDraft";
 import "~/styles/home-contact.css";
 
-interface HomeContactProps { t: Translations }
+interface ContactApiResponse {
+  success?: boolean;
+  message?: string;
+  mailto?: string;
+  error?: string;
+}
+
+interface HomeContactProps {
+  t: Translations;
+  locale?: Locale;
+}
 
 function Arrow() {
   return (
@@ -13,7 +24,7 @@ function Arrow() {
   );
 }
 
-export function HomeContact({ t }: HomeContactProps) {
+export function HomeContact({ t, locale = "de" }: HomeContactProps) {
   const c = t.homeContact;
   const disclosureRef = useRef<HTMLDetailsElement>(null);
   const composerRef = useRef<HTMLDivElement>(null);
@@ -22,6 +33,11 @@ export function HomeContact({ t }: HomeContactProps) {
   const animationsRef = useRef<Animation[]>([]);
   const targetOpenRef = useRef(false);
   const contentHeightRef = useRef(0);
+
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [fallbackMailto, setFallbackMailto] = useState<string | null>(null);
 
   function finishTransition() {
     const disclosure = disclosureRef.current;
@@ -73,8 +89,7 @@ export function HomeContact({ t }: HomeContactProps) {
     const contentStyle = getComputedStyle(composer);
     const startOpacity = wasOpen ? contentStyle.opacity : "0";
     const startTransform = wasOpen ? contentStyle.transform : "translateY(6px)";
-    // Capture the current frame before cancelling: rapid reversals continue
-    // from the visible height rather than restarting at either endpoint.
+
     disclosure.style.height = `${startHeight}px`;
     animationsRef.current.forEach((animation) => animation.cancel());
     animationsRef.current = [];
@@ -99,8 +114,6 @@ export function HomeContact({ t }: HomeContactProps) {
       return;
     }
 
-    // Keep native details open until the closing animation finishes. Without
-    // JavaScript the same markup remains an ordinary, fully usable disclosure.
     disclosure.open = true;
     disclosure.dataset.closing = String(!open);
     disclosure.style.overflow = "hidden";
@@ -129,16 +142,55 @@ export function HomeContact({ t }: HomeContactProps) {
     toggleDisclosure(!open, event.detail === 0);
   }
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const values = new FormData(event.currentTarget);
-    window.location.href = createContactDraft({
+    if (submitting) return;
+
+    const formElement = event.currentTarget;
+    const values = new FormData(formElement);
+    const name = String(values.get("name") || "").trim();
+    const email = String(values.get("email") || "").trim();
+    const message = String(values.get("message") || "").trim();
+
+    const fallbackUrl = createContactDraft({
       recipient: c.email,
       subjectPrefix: c.form.subjectPrefix,
-      name: String(values.get("name") || "").trim(),
-      replyTo: String(values.get("email") || "").trim(),
-      message: String(values.get("message") || "").trim(),
+      name,
+      replyTo: email,
+      message,
     });
+
+    setSubmitting(true);
+    setErrorMessage(null);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          email,
+          message,
+          _gotcha: String(values.get("_gotcha") || ""),
+        }),
+      });
+
+      const result = (await response.json().catch(() => null)) as ContactApiResponse | null;
+
+      if (response.ok && result?.success) {
+        setSubmitted(true);
+        formElement.reset();
+      } else {
+        const errorText = result?.message || c.form.errorMessage;
+        setErrorMessage(errorText);
+        setFallbackMailto(result?.mailto || fallbackUrl);
+      }
+    } catch {
+      setErrorMessage(c.form.errorMessage);
+      setFallbackMailto(fallbackUrl);
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -165,21 +217,99 @@ export function HomeContact({ t }: HomeContactProps) {
         <div className="home-contact-composer" ref={composerRef}>
           <h3 className="home-contact-compose-heading" id="home-contact-compose-heading">{c.form.headline.lead} <em>{c.form.headline.accent}</em></h3>
           <p className="home-contact-compose-intro">{c.form.intro}</p>
-          <form className="home-contact-form" aria-labelledby="home-contact-compose-heading" action={"mailto:" + c.email} method="post" encType="text/plain" onSubmit={handleSubmit}>
-            <div className="home-contact-fields">
-              <label className="home-contact-field" htmlFor="home-contact-name">{c.form.nameLabel}
-                <input id="home-contact-name" name="name" type="text" autoComplete="name" placeholder={c.form.namePlaceholder} maxLength={120} required ref={nameRef} />
-              </label>
-              <label className="home-contact-field" htmlFor="home-contact-email">{c.form.emailLabel}
-                <input id="home-contact-email" name="email" type="email" autoComplete="email" placeholder={c.form.emailPlaceholder} maxLength={254} required />
-              </label>
+
+          {submitted ? (
+            <div
+              className="home-contact-success-box"
+              role="status"
+              aria-live="polite"
+              style={{
+                marginTop: "1.75rem",
+                padding: "2rem",
+                backgroundColor: "var(--bg-dark-surface)",
+                border: "1px solid var(--color-secondary)",
+                borderRadius: "3px",
+                color: "var(--color-secondary)",
+                fontFamily: "var(--font-mono)",
+                fontSize: "13px",
+                lineHeight: "1.6",
+              }}
+            >
+              <div style={{ fontSize: "18px", marginBottom: "0.5rem" }}>✓</div>
+              <p style={{ margin: 0 }}>
+                {c.form.successMsg}
+              </p>
             </div>
-            <label className="home-contact-field home-contact-message" htmlFor="home-contact-message">{c.form.messageLabel}
-              <textarea id="home-contact-message" name="message" rows={3} placeholder={c.form.messagePlaceholder} maxLength={3000} required />
-            </label>
-            <button className="home-contact-draft-button" type="submit">{c.form.submitLabel}<Arrow /></button>
-            <p className="home-contact-mail-hint">{c.form.mailHint}</p>
-          </form>
+          ) : (
+            <form className="home-contact-form" aria-labelledby="home-contact-compose-heading" onSubmit={handleSubmit}>
+              {/* Invisible anti-spam honeypot */}
+              <input type="text" name="_gotcha" tabIndex={-1} autoComplete="off" style={{ display: "none" }} aria-hidden="true" />
+
+              <div className="home-contact-fields">
+                <label className="home-contact-field" htmlFor="home-contact-name">{c.form.nameLabel}
+                  <input id="home-contact-name" name="name" type="text" autoComplete="name" placeholder={c.form.namePlaceholder} maxLength={120} required ref={nameRef} />
+                </label>
+                <label className="home-contact-field" htmlFor="home-contact-email">{c.form.emailLabel}
+                  <input id="home-contact-email" name="email" type="email" autoComplete="email" placeholder={c.form.emailPlaceholder} maxLength={254} required />
+                </label>
+              </div>
+              <label className="home-contact-field home-contact-message" htmlFor="home-contact-message">{c.form.messageLabel}
+                <textarea id="home-contact-message" name="message" rows={3} placeholder={c.form.messagePlaceholder} maxLength={3000} required />
+              </label>
+
+              <button className="home-contact-draft-button" type="submit" disabled={submitting}>
+                {submitting
+                  ? c.form.submittingLabel
+                  : c.form.submitLabel}
+                <Arrow />
+              </button>
+
+              {/* Privacy Notice */}
+              <p className="home-contact-mail-hint" style={{ marginTop: "0.75rem", fontSize: "0.75rem", color: "var(--text-dark-muted)" }}>
+                {c.form.privacyPrefix}
+                <Link
+                  to={locale === "de" ? `/${locale}/datenschutz` : `/${locale}/privacy`}
+                  style={{ color: "var(--color-secondary)", textDecoration: "underline", textUnderlineOffset: "3px" }}
+                >
+                  {c.form.privacyLink}
+                </Link>
+                {c.form.privacySuffix}
+              </p>
+
+              {/* Error feedback with direct mailto fallback */}
+              {errorMessage && (
+                <div
+                  role="alert"
+                  style={{
+                    marginTop: "1.25rem",
+                    padding: "1rem 1.25rem",
+                    backgroundColor: "rgba(220, 50, 50, 0.08)",
+                    border: "1px solid rgba(220, 50, 50, 0.25)",
+                    borderRadius: "3px",
+                    color: "#fca5a5",
+                    fontSize: "12px",
+                    lineHeight: "1.5",
+                  }}
+                >
+                  <p style={{ margin: "0 0 0.5rem 0" }}>{errorMessage}</p>
+                  {fallbackMailto && (
+                    <a
+                      href={fallbackMailto}
+                      style={{
+                        display: "inline-block",
+                        color: "var(--color-secondary)",
+                        textDecoration: "underline",
+                        textUnderlineOffset: "3px",
+                        fontWeight: 500,
+                      }}
+                    >
+                      {c.form.fallbackDraft} →
+                    </a>
+                  )}
+                </div>
+              )}
+            </form>
+          )}
         </div>
       </details>
       <div className="home-contact-afterword">

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router";
 import type { Translations, Locale } from "~/i18n/translations";
 import { LanguageSwitch } from "./LanguageSwitch";
 
@@ -8,8 +9,9 @@ interface SiteFooterProps {
   email?: string;
 }
 
-export function SiteFooter({ t, locale, email = "wilk@studio.lab" }: SiteFooterProps) {
+export function SiteFooter({ t, locale, email = "office@bywilk.at" }: SiteFooterProps) {
   const f = t.footer;
+  const hf = t.homeFooter;
 
   return (
     <footer className="global-footer" role="contentinfo">
@@ -34,12 +36,20 @@ export function SiteFooter({ t, locale, email = "wilk@studio.lab" }: SiteFooterP
           <a href={"mailto:" + email} className="label-md" style={{ color: "var(--text-dark-secondary)" }}>
             {f.email}
           </a>
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="label-md" style={{ color: "var(--text-dark-secondary)" }}>
-            {f.linkedin}
-          </a>
-          <a href="#hero" className="label-md" style={{ color: "var(--text-dark-secondary)" }}>
-            {f.legal}
-          </a>
+          <Link
+            to={locale === "de" ? `/${locale}/impressum` : `/${locale}/legal-notice`}
+            className="label-md"
+            style={{ color: "var(--text-dark-secondary)" }}
+          >
+            {hf.imprint}
+          </Link>
+          <Link
+            to={locale === "de" ? `/${locale}/datenschutz` : `/${locale}/privacy`}
+            className="label-md"
+            style={{ color: "var(--text-dark-secondary)" }}
+          >
+            {hf.privacy}
+          </Link>
           <LanguageSwitch locale={locale} />
         </nav>
       </div>

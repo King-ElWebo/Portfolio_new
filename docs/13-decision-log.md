@@ -245,12 +245,12 @@ NOTES: [Relevante Einschränkungen oder nachgelagerte Aufgaben]
 
 ---
 ### DEC-029: Homepage-Kontakt als „Offene Einladung“
-- **DATE**: 2026-10-16
+- **DATE**: 2026-10-16 (Migriert zu `office@bywilk.at` unter DEC-038)
 - **STATUS**: CONFIRMED DESIGN / LOCAL IMPLEMENTATION
-- **RATIONALE**: Der Nutzer hat „Offene Einladung“ als Favoriten bestätigt und `bywilk@office.at` als echte Kontaktadresse genannt.
+- **RATIONALE**: Der Nutzer hat „Offene Einladung“ als Favoriten bestätigt (ursprünglich `bywilk@office.at`, aktualisiert auf die offizielle Geschäftsadresse `office@bywilk.at`).
 - **NOTES**:
   - Große persönliche Einladung und dezentes WILK als Abschluss ersetzen technische Kicker, Formularrahmen und Colophon. Ein natives Disclosure öffnet das reduzierte Formular; DE und EN, Tastaturfokus, Zurück/Escape und Nutzung ohne JavaScript bleiben verfügbar.
-  - Der native Kontaktweg bereitet eine E-Mail an `bywilk@office.at` im Mailprogramm vor. Button und Hinweis benennen diesen Ablauf ausdrücklich; keine simulierte Versandbestätigung. Direktmail-Link als Alternative. Ein serverseitiger Maildienst bleibt offen und wird nicht eingerichtet.
+  - Der native Kontaktweg bereitet eine E-Mail an `office@bywilk.at` im Mailprogramm vor (Mailto-Fallback); serverseitiger Versand über Resend unter DEC-038 ergänzt. Button und Hinweis benennen diesen Ablauf ausdrücklich; keine simulierte Versandbestätigung. Direktmail-Link als Alternative.
   - Eigene Homepage-Texte statt Änderungen an der separaten Kontaktseite. Der Footer erhält nur auf der Homepage die bestätigte E-Mail über einen optionalen Prop; andere Seiten behalten die bisherige Ausgabe.
   - Keine neue Animation oder Abhängigkeit. Alle übrigen Homepage-Sektionen, Navbar, Porträtlogik, Case Studies und die separate Kontaktseite bleiben unverändert. Kein Commit, Push oder Deployment.
 
@@ -352,18 +352,32 @@ NOTES: [Relevante Einschränkungen oder nachgelagerte Aufgaben]
   - Live-Verifikation: Push von Reparatur-Commit `be12f44` auf `main` erzeugte einen erfolgreichen Cloudflare-Check (`4e59ab9d-9cf5-495e-a041-17ce1aac5a78`, Worker-Version `7e071705-0ff3-49ce-a3b9-cb3a5bed9fce`). Frische öffentliche Anfragen an `/de` und `/en` lieferten HTTP 200, `collaboration-perspectives` und die passenden Styles; `collaboration-network` war nicht mehr enthalten. Damit sind Git-Trigger und Aktualisierung der Domain bestätigt. Keine neue visuelle Browserprüfung behaupten.
 
 ---
+### DEC-038: Rechtliche Pflichtseiten, Self-Hosted Fonts & Resend-Integration
+- **DATE**: 2026-10-27
+- **STATUS**: CONFIRMED / LOCAL IMPLEMENTATION
+- **RATIONALE**: Vorbereitung des öffentlichen Launches unter https://bywilk.at. Rechtliche Konformität (DSGVO, TKG 2021, ECG, GewO, MedienG), vollständige Eliminierung externer Drittanbieter-Ressourcen im Erstabruf, und Bereitstellung eines sicheren, serverseitig validierten Kontaktwegs über Resend und Cloudflare Email Routing.
+- **NOTES**:
+  - **Rechtliche Seiten**: `/de/impressum`, `/en/legal-notice`, `/de/datenschutz`, `/en/privacy` mit bidirektionalem Sprachwechsel, kanonischen Headern, editorialem Dark-Design und barrierefreier Verlinkung im Footer auf allen Routen.
+  - **Impressum**: Österreichischer Standard für nicht protokollierten Einzelunternehmer (Benjamin Wilk, Wien, GISA 39386267, MBA 13/14, keine UID, keine Firmenbuchnummer). Keine veralteten Links auf die eingestellte EU-OS-Plattform; klarer AStG-Verbraucherhinweis.
+  - **Datenschutz**: Volle Transparenz über Cloudflare Workers Edge, Cloudflare Web Analytics (cookie-frei), funktionale Sprachspeicherung (`portfolio_locale`), lokale Webfonts, Resend-Verarbeitungskette (Region Dublin, EU-US DPF) und 7-jährige Aufbewahrungsdifferenzierung (§ 132 BAO / § 212 UGB).
+  - **Self-Hosted Webfonts**: Google Fonts und Google-Preconnect-Tags vollständig aus `app/root.tsx` entfernt. Alle 21 Schriftschnitte (Inter, JetBrains Mono, Playfair Display) lokal als WOFF2 in `public/assets/fonts/` abgelegt und über `app/styles/fonts.css` eingebunden. Null externe Serveranfragen beim Seitenabruf.
+  - **Bild-Fixtures**: Externe `lh3.googleusercontent.com`-URLs in `app/data/projects.ts` durch lokale WebP-Assets ersetzt.
+  - **E-Mail & Kontakt**: E-Mail-Migration auf die offizielle Geschäftsadresse `office@bywilk.at`. Einheitlicher Kontakt-Backend-Endpunkt `/api/contact` mit serverseitiger Validierung, CRLF-Schutz, HTML-Escaping, Bot-Honeypot, optionalem Turnstile-Gate, Reply-To-Handling und Resend REST-API-Versand (Dublin). Sensible API-Keys (`RESEND_API_KEY`) verbleiben als Cloudflare Secret außerhalb des Codes. Mailto-Fallback bleibt parallel erhalten.
+  - Kein Commit, Push oder Deployment ohne ausdrückliche Nutzerfreigabe.
+
+---
 ## 🔍 Noch offene Entscheidungen `[OPEN / TODO]`
 
 - **DEC-O1**: Finales Frontend-Framework `[RESOLVED -> DEC-014 (React Router v8)]`.
 - **DEC-O2**: Cloudflare Adapter & Build-Pipeline `[RESOLVED -> DEC-014 (@cloudflare/vite-plugin)]`.
 - **DEC-O3**: ORM / Query Builder (Drizzle ORM vs. Kysely) `[DEFERRED -> DB aktuell unprovisioniert]`.
-- **DEC-O4**: Konkrete Schriftarten (Finaler Webfont-Stack vs. kommerzieller Editorial-Schnitt).
+- **DEC-O4**: Konkrete Schriftarten `[RESOLVED -> DEC-038 (Inter, JetBrains Mono, Playfair Display als lokale Webfonts)]`.
 - **DEC-O5**: Exakte Hex-/OKLCH-Farbwerte `[RESOLVED -> D3.1 Baseline in app.css verifiziert]`.
 - **DEC-O6**: Art des Hero-Visuals `[RESOLVED -> DEC-033 (persönliches foto-basiertes 2D-Partikelporträt)]`.
 - **DEC-O7**: Gewinner der Design-Explorationen `[RESOLVED -> DEC-016 (D3.1 Visual Polish)]`.
 - **DEC-O8**: Motion-Stack für seitenweites Scrollen (GSAP + Lenis vs. CSS-Fokus) `[OPEN]`.
-- **DEC-O9**: Transaktions-E-Mail-Provider für Kontaktanfragen (Resend vs. Cloudflare Workers Mail) `[OPEN]`.
-- **DEC-O10**: Datenschutzkonforme Analytics (Cloudflare Web Analytics vs. Plausible/Umami) `[OPEN]`.
+- **DEC-O9**: Transaktions-E-Mail-Provider für Kontaktanfragen `[RESOLVED -> DEC-038 (Resend REST API, Region Dublin, Weiterleitung an office@bywilk.at via Cloudflare Email Routing)]`.
+- **DEC-O10**: Datenschutzkonforme Analytics `[RESOLVED -> DEC-038 (Cloudflare Web Analytics, cookie-frei, serverseitig/proxy)]`.
 - **DEC-O11**: CMS-Bedarf `[RESOLVED -> DEC-019 (Lokale strukturierte Dateien in content/projects/)]`.
 - **DEC-O12**: Homepage-Auswahl der drei "Selected Work" Projekte `[RESOLVED -> DEC-023]`.
 - **DEC-O13**: Finale Domain-Registrierung `[RESOLVED -> DEC-037 (bywilk.at öffentlich erreichbar und aktualisiert)]`.

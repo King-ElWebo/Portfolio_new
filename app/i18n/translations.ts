@@ -164,9 +164,16 @@ export interface Translations {
       messageLabel: string;
       messagePlaceholder: string;
       submitLabel: string;
+      submittingLabel: string;
       mailHint: string;
       directLabel: string;
       subjectPrefix: string;
+      privacyPrefix: string;
+      privacyLink: string;
+      privacySuffix: string;
+      fallbackDraft: string;
+      errorMessage: string;
+      successMsg: string;
     };
   };
   contact: {
@@ -187,6 +194,11 @@ export interface Translations {
       submitBtn: string;
       submittingBtn: string;
       successMsg: string;
+      privacyPrefix: string;
+      privacyLink: string;
+      privacySuffix: string;
+      fallbackDraft: string;
+      errorMessage: string;
     };
     colophon: string;
   };
@@ -388,7 +400,7 @@ export const translations: Record<Locale, Translations> = {
     },
     homeContact: {
       "regionLabel": "Contact",
-      "email": "bywilk@office.at",
+      "email": "office@bywilk.at",
       "headline": {
         "lead": "Got an idea?",
         "accent": "Let’s talk."
@@ -409,10 +421,17 @@ export const translations: Record<Locale, Translations> = {
         "emailPlaceholder": "Where can I reach you?",
         "messageLabel": "Your idea",
         "messagePlaceholder": "What do you have in mind?",
-        "submitLabel": "Prepare email",
-        "mailHint": "Opens a draft in your email app. You send it from there.",
+        "submitLabel": "Send message",
+        "submittingLabel": "Sending...",
+        "mailHint": "Secure server-side delivery. No email application required.",
         "directLabel": "Or email me directly:",
-        "subjectPrefix": "Project enquiry"
+        "subjectPrefix": "Project enquiry",
+        "privacyPrefix": "By submitting this message, you agree to our ",
+        "privacyLink": "Privacy Policy",
+        "privacySuffix": ".",
+        "fallbackDraft": "Open message directly as email draft",
+        "errorMessage": "Unable to send message via edge server. You can open your draft directly in your email app:",
+        "successMsg": "Thank you! Your message has been sent successfully. I'll get back to you as soon as possible."
       }
     },
     contact: {
@@ -420,9 +439,9 @@ export const translations: Record<Locale, Translations> = {
       headline: "Let’s build something considered.",
       subline: "Open to select projects and engineering engagements.",
       directLabel: "DIRECT INQUIRIES:",
-      directEmail: "wilk@studio.lab",
-      networkLabel: "NETWORK:",
-      networkUrl: "linkedin.com/in/wilk-studio",
+      directEmail: "office@bywilk.at",
+      networkLabel: "WEBSITE:",
+      networkUrl: "bywilk.at",
       form: {
         nameLabel: "01 // NAME OR ORGANIZATION",
         namePlaceholder: "e.g. Katherine Vance",
@@ -430,9 +449,14 @@ export const translations: Record<Locale, Translations> = {
         emailPlaceholder: "katherine@vance.com",
         messageLabel: "03 // INQUIRY SUMMARY & SCOPE",
         messagePlaceholder: "Brief overview of project objectives, timeline, or technical challenges...",
-        submitBtn: "SEND INQUIRY",
-        submittingBtn: "SENDING...",
-        successMsg: "Thank you for your message. I will respond promptly.",
+        submitBtn: "Send message",
+        submittingBtn: "Sending...",
+        successMsg: "Thank you! Your message has been sent successfully. I'll get back to you as soon as possible.",
+        privacyPrefix: "By submitting, you agree to the processing of your details according to our ",
+        privacyLink: "Privacy Policy",
+        privacySuffix: ".",
+        fallbackDraft: "Open message directly as email draft",
+        errorMessage: "Unable to send message via edge server. You can open your draft directly in your email app:"
       },
       colophon: "Designed & Developed by Wilk. Running on Edge Infrastructure. Built with semantic web standards.",
     },
@@ -632,7 +656,7 @@ export const translations: Record<Locale, Translations> = {
     },
     homeContact: {
       "regionLabel": "Kontakt",
-      "email": "bywilk@office.at",
+      "email": "office@bywilk.at",
       "headline": {
         "lead": "Eine Idee im Kopf?",
         "accent": "Lass uns reden."
@@ -653,10 +677,17 @@ export const translations: Record<Locale, Translations> = {
         "emailPlaceholder": "Wo kann ich dich erreichen?",
         "messageLabel": "Deine Idee",
         "messagePlaceholder": "Worum geht’s?",
-        "submitLabel": "E-Mail vorbereiten",
-        "mailHint": "Öffnet einen Entwurf in deinem E-Mail-Programm. Du versendest ihn dort.",
+        "submitLabel": "Nachricht senden",
+        "submittingLabel": "Wird gesendet...",
+        "mailHint": "Sicherer serverseitiger Versand. Kein E-Mail-Programm erforderlich.",
         "directLabel": "Oder direkt per E-Mail:",
-        "subjectPrefix": "Projektanfrage"
+        "subjectPrefix": "Projektanfrage",
+        "privacyPrefix": "Mit dem Absenden erklärst du dich mit unserer ",
+        "privacyLink": "Datenschutzerklärung",
+        "privacySuffix": " einverstanden.",
+        "fallbackDraft": "Nachricht direkt als E-Mail-Entwurf öffnen",
+        "errorMessage": "Übermittlung über den Edge-Server fehlgeschlagen. Du kannst die Nachricht direkt als E-Mail-Entwurf öffnen:",
+        "successMsg": "Vielen Dank! Deine Nachricht wurde erfolgreich übermittelt. Ich melde mich so bald wie möglich."
       }
     },
     contact: {
@@ -664,9 +695,9 @@ export const translations: Record<Locale, Translations> = {
       headline: "Lassen Sie uns etwas Durchdachtes schaffen.",
       subline: "Offen für ausgewählte Projekte und technische Zusammenarbeiten.",
       directLabel: "DIREKTER KONTAKT:",
-      directEmail: "wilk@studio.lab",
-      networkLabel: "NETZWERK:",
-      networkUrl: "linkedin.com/in/wilk-studio",
+      directEmail: "office@bywilk.at",
+      networkLabel: "WEBSITE:",
+      networkUrl: "bywilk.at",
       form: {
         nameLabel: "01 // NAME ODER ORGANISATION",
         namePlaceholder: "z.B. Katherine Vance",
@@ -674,9 +705,14 @@ export const translations: Record<Locale, Translations> = {
         emailPlaceholder: "katherine@vance.com",
         messageLabel: "03 // PROJEKTÜBERSICHT & RAHMEN",
         messagePlaceholder: "Kurze Beschreibung der Projektziele, des Zeitplans oder der Herausforderungen...",
-        submitBtn: "ANFRAGE SENDEN",
-        submittingBtn: "WIRD GESENDET...",
-        successMsg: "Vielen Dank für Ihre Nachricht. Ich antworte Ihnen in Kürze.",
+        submitBtn: "Nachricht senden",
+        submittingBtn: "Wird gesendet...",
+        successMsg: "Vielen Dank! Deine Nachricht wurde erfolgreich übermittelt. Ich melde mich so bald wie möglich.",
+        privacyPrefix: "Mit dem Absenden erklären Sie sich mit der ",
+        privacyLink: "Datenschutzerklärung",
+        privacySuffix: " einverstanden.",
+        fallbackDraft: "Nachricht direkt als E-Mail-Entwurf öffnen",
+        errorMessage: "Übermittlung über den Edge-Server fehlgeschlagen. Sie können die Nachricht direkt als E-Mail-Entwurf öffnen:"
       },
       colophon: "Gestaltet & entwickelt von Wilk. Bereitgestellt auf Edge-Infrastruktur. Entwickelt nach semantischen Webstandards.",
     },

@@ -69,7 +69,7 @@ export default function HomeRoute() {
         {/* ACT 3: Return to Cinematic Obsidian Dark */}
         <div className="dark-act3-wrap home-ending">
           <Lab t={t} locale={locale} />
-          <HomeContact t={t} />
+          <HomeContact t={t} locale={locale} />
         </div>
       </main>
       <HomeFooter t={t} locale={locale} year={year} />

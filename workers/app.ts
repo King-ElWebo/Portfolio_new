@@ -1,17 +1,10 @@
 import {
-  createContext,
   createRequestHandler,
   RouterContextProvider,
 } from "react-router";
+import { cloudflareContext, type Env } from "~/context";
 
-export interface Env {
-  // Bindings (KV, D1, Assets, etc.) can be declared here
-}
-
-export const cloudflareContext = createContext<{
-  env: Env;
-  ctx: ExecutionContext;
-}>();
+export { cloudflareContext, type Env };
 
 const requestHandler = createRequestHandler(
   () => import("virtual:react-router/server-build"),

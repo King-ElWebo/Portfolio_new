@@ -36,11 +36,13 @@ export function HomeFooter({ t, locale, year }: HomeFooterProps) {
         </div>
         <div className="home-footer-colophon">
           <p>© {year} {t.header.brand}</p>
-          {/* These pages are not implemented yet. Keep the approved labels
-              as text rather than pointing visitors to a placeholder or 404. */}
           <div className="home-footer-legal">
-            <span>{f.imprint}</span>
-            <span>{f.privacy}</span>
+            <Link to={locale === "de" ? `/${locale}/impressum` : `/${locale}/legal-notice`}>
+              {f.imprint}
+            </Link>
+            <Link to={locale === "de" ? `/${locale}/datenschutz` : `/${locale}/privacy`}>
+              {f.privacy}
+            </Link>
           </div>
         </div>
       </div>

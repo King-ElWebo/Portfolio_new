@@ -29,8 +29,8 @@ In der aktuellen Codebasis (`app/i18n/translations.ts`) befinden sich noch über
 | `work.project02` | *Interactive Spatial Experience & Web Application* | `FICTIONAL PLACEHOLDER` | Ersetzen durch echtes Referenzprojekt nach Nutzerbestätigung. |
 | `bridge.project03` | *Adaptive Data Surface & System Shell* | `FICTIONAL PLACEHOLDER` | Ersetzen durch echtes Independent Concept oder reales Projekt. |
 | `lab` | LUMENWERK Studio, RÖSTWERK 1070, KERN / FIELD & gefaltete Linienfläche | `IMPLEMENTED / INDEPENDENT CONCEPTS` | Gemeinsame Homepage-Bühne mit echten Vorschauen, Case-Study-Links und integrierter SVG-Bewegung (DEC-028). |
-| `contact.directEmail` | `wilk@studio.lab` | `PLACEHOLDER` | Ersetzen durch reale, bestätigte Kontaktadresse. |
-| `homeContact.email` | `bywilk@office.at` | `CONFIRMED` | Vom Nutzer bestätigte Adresse. Homepage-Formular öffnet einen E-Mail-Entwurf; kein serverseitiger Versand (DEC-029). |
+| `contact.directEmail` | `office@bywilk.at` | `CONFIRMED` | Vom Nutzer bestätigte geschäftliche Adresse für direkte Kontaktaufnahme. |
+| `homeContact.email` | `office@bywilk.at` | `CONFIRMED` | Vom Nutzer bestätigte geschäftliche Adresse. Anbindung via Resend API und Cloudflare Email Routing; Mailto-Fallback vorhanden. |
 | `contact.networkUrl` | `linkedin.com/in/wilk-studio` | `PLACEHOLDER` | Ersetzen durch reale LinkedIn-URL des Practitioners. |
 | `meta.title` | *D3 — Refined Cinematic Editorial Portfolio...* | `PLACEHOLDER` | Bereinigen um interne Stitch-Versionskürzel. |
 

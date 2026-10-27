@@ -14,8 +14,10 @@ export function getAlternateLocale(locale: Locale): Locale {
  */
 export function setLocaleCookie(locale: Locale): void {
   if (typeof document !== "undefined") {
-    // Cookie valid for 1 year across the whole site, SameSite=Lax
-    document.cookie = `${LOCALE_COOKIE_NAME}=${locale}; path=/; max-age=31536000; SameSite=Lax`;
+    // Cookie valid for 1 year across the whole site, SameSite=Lax, Secure when on HTTPS
+    const isSecure = typeof window !== "undefined" && window.location.protocol === "https:";
+    const secureFlag = isSecure ? "; Secure" : "";
+    document.cookie = `${LOCALE_COOKIE_NAME}=${locale}; path=/; max-age=31536000; SameSite=Lax${secureFlag}`;
     try {
       localStorage.setItem(LOCALE_COOKIE_NAME, locale);
     } catch {
@@ -40,23 +42,48 @@ export function getSavedLocaleFromCookie(cookieHeader: string | null): Locale | 
  * Generates the target URL for language toggling while preserving the current
  * pathname, query parameters, and hash fragment.
  *
+ * Handles explicit legal route mappings:
+ *   /de/impressum   <-> /en/legal-notice
+ *   /de/datenschutz <-> /en/privacy
+ *
  * Examples:
- *   /de         -> /en
- *   /de/work    -> /en/work
- *   /en/contact -> /de/contact
+ *   /de                 -> /en
+ *   /de/work            -> /en/work
+ *   /de/impressum       -> /en/legal-notice
+ *   /en/legal-notice    -> /de/impressum
+ *   /de/datenschutz     -> /en/privacy
+ *   /en/privacy         -> /de/datenschutz
  */
 export function getLocaleSwitchUrl(pathname: string, search = "", hash = ""): string {
   const currentLocale = pathname.startsWith("/de") ? "de" : pathname.startsWith("/en") ? "en" : null;
   const targetLocale: Locale = currentLocale === "de" ? "en" : "de";
 
-  let newPath: string;
   if (currentLocale) {
-    // Replace leading /de or /en with target locale
-    newPath = pathname.replace(new RegExp(`^/${currentLocale}(?=/|$)`), `/${targetLocale}`);
+    const subpath = pathname.replace(new RegExp(`^/${currentLocale}(?=/|$)`), "") || "/";
+
+    // Explicit legal route mapping
+    if (targetLocale === "en") {
+      if (subpath === "/impressum" || subpath === "/imprint" || subpath === "/legal-notice") {
+        return `/en/legal-notice${search}${hash}`;
+      }
+      if (subpath === "/datenschutz" || subpath === "/privacy") {
+        return `/en/privacy${search}${hash}`;
+      }
+    } else {
+      if (subpath === "/legal-notice" || subpath === "/imprint" || subpath === "/impressum") {
+        return `/de/impressum${search}${hash}`;
+      }
+      if (subpath === "/privacy" || subpath === "/datenschutz") {
+        return `/de/datenschutz${search}${hash}`;
+      }
+    }
+
+    // Default: replace leading /de or /en with target locale
+    const newPath = pathname.replace(new RegExp(`^/${currentLocale}(?=/|$)`), `/${targetLocale}`);
+    return `${newPath}${search}${hash}`;
   } else {
     // If route does not have a locale prefix, prefix it
-    newPath = `/${targetLocale}${pathname.startsWith("/") ? pathname : "/" + pathname}`;
+    const newPath = `/${targetLocale}${pathname.startsWith("/") ? pathname : "/" + pathname}`;
+    return `${newPath}${search}${hash}`;
   }
-
-  return `${newPath}${search}${hash}`;
 }

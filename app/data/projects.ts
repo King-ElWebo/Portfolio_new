@@ -278,8 +278,7 @@ export const PREVIEW_FIXTURES: ProjectEntry[] = [
       en: "Art Direction & Fullstack Engineering",
     },
     year: "2025",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuBujPG_ARb2VFYUxkskniXRbz5cAUW9i6h__6p4cR1MT6f5bXhG-tM9J3k4TCq1EgSCPgvMS8fx4djfTYEkZaEvGe2aq-fDQh-jqBnoHOY-4oeiPc5LYM8JJtsIKP_TM2m-uWNzhdSnRB7_sftKS7czYhBUhkwSf-xYyrCowQ6foSFMGeYqpAYxWJUwEfaD39B-QbP4wI3HdzrZml4jSZTsvGTFio7YYD0_n9oA-Th8gsXei4bDqyidGXaXMrk0kKyE4PYptVvB0vA",
+    image: "/assets/projects/bloom/selected-work-1080.webp",
     imageAlt: {
       de: "Minimalistisches High-End Fashion E-Commerce Interface in architektonischer Galerie-Ästhetik",
       en: "Minimalist luxury fashion e-commerce interface mockup in an obsidian gallery setting",
@@ -312,8 +311,7 @@ export const PREVIEW_FIXTURES: ProjectEntry[] = [
       en: "Information Architecture & Frontend Systems",
     },
     year: "2025",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuCOyvpqNcYj-TJlablzaOzOcgy3MQwWOTBZE4q0zTs5FAUbfDQm-DK_UBH8_tjlioFQ8cwveTqliEFgeAWVIaZbbFRlde34B5VBCS0-RUNIQPUGT2hq6TeJ8S3LsTCHAf7a3lgkNwzKA75wRa2Ls-ofpBc_YoUDawDnnqnW5xM5yn5h5DL5l1y28_E5WaDhvBArFRkVVvxNxZl-aICrOlkN4WWGPp-ThBXwLtKwmmW_RobcxY0CbbK7f-7w5c-dFw7PavTRD-qQJLU",
+    image: "/assets/projects/checkpot/selected-work-1080.webp",
     imageAlt: {
       de: "Digitales Archiv- und Lese-Interface mit historischen Manuskripten und editorialem Satzspiegel",
       en: "Digital archive reading platform with historical manuscripts and editorial grid typesetting",
@@ -346,8 +344,7 @@ export const PREVIEW_FIXTURES: ProjectEntry[] = [
       en: "Product Design & Cloud API Architecture",
     },
     year: "2024",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuAmO9cobZWGGsc1idk6CMS7VPSs4tK5fUKfacd3ojmZq123ZD45S0lUzjNw1OtObb7jiDlNNc-6XLpsWUNY3aZEGwpxxHm607i94qkMDf_1egbdYrqbocnfJf9tVNvPoF3GRjClN3Ymp7HLd13ZY1w81G5v8W7eivnNzDI322OfX6MWqb3F2c6fSDL7QgiryK8c_B8YZtp6l2U8Z5seJAea9-dzfSb288ZxeqTNX9K3LL92izBnAhdkO6JBEQwwyE8mymlnRIo3ZRY",
+    image: "/assets/projects/speiche/selected-work-1080.webp",
     imageAlt: {
       de: "Dunkle Telematik-Benutzeroberfläche mit GPS-Vektoren und Fahrzeugstatus",
       en: "Dark automotive telematics interface screen showing GPS vectors and telemetry status",
@@ -380,8 +377,7 @@ export const PREVIEW_FIXTURES: ProjectEntry[] = [
       en: "Creative Coding & Shader Development",
     },
     year: "2026",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuARXjTAOIFOHDHUlvU9Sy001R3NJtNUpsyYQzSjL-HTsN2IKKhGe5X9k81QZ-fkPG-ZA2NNgM67NpMyi5xCBM81u1W1vwTegbJkkHiXlCux2I5KZxuiqX5sOfsOuk6DRQa5cKLMrWn_51lH1QFzOADPTO8nkCtm7p5u-iRhnmi1bWtK0GD5Zb-SvuHaiNrqBSOK7gcoksVqZP8cFTLaEUcocMSfSRV4ZiAYYUpZ8TmRucthp3-6jySAbSUhOz4ENM4VEEB9kkQ9Un4",
+    image: "/assets/projects/lumenwerk/selected-work-1080.webp",
     imageAlt: {
       de: "Interaktive generative Audiowellen-Simulation mit goldenen Partikelströmen im dunklen Raum",
       en: "Interactive generative audio waveform simulation with dense golden particle strands",
@@ -414,8 +410,7 @@ export const PREVIEW_FIXTURES: ProjectEntry[] = [
       en: "Database Architecture & Desktop UI",
     },
     year: "2024",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuBwKYNu1c8VYtJqlayIwAQ9bakEVqrMMUrS8qHd9CKM0IFAEWuXNZPIewhI3sX5ISyzYvBl46qbh8i64eoPXaI54gsuZJ9nJYdfx9sEc3RvzaefTXZv5H10WIQbcsbqV0TCVcTTMsLTemVjGIC85GPDgxZuqtUvdNpFcMx8u3yMhs_ucxQtsVbjcnj3NFGs2XXjEq6jcO0syp665fZeXpyylH8t8QMJXJR8Vpvfa2OwaM3eIiNmixyXVhg-jGUyKxVj5HEIUbPuJ9Q",
+    image: "/assets/projects/kern-field-hero.webp",
     imageAlt: {
       de: "Dichtes Interface für Finanz- und Unternehmensanalysen mit tabellarischen Rastern",
       en: "High-density analytical financial software interface with multi-pane data grids",
@@ -448,8 +443,7 @@ export const PREVIEW_FIXTURES: ProjectEntry[] = [
       en: "Brand Strategy, Interface & Prototyping",
     },
     year: "2025",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuAfUBGUrfVkkGs1ZeI4ViuEAy5DIwr_J3wgWf-ue1B3PrHYS-vH52ToKbhbYL7zT8BU3oAYH7x7Qz1mQcmGcpKBUrQqIeF7xLUtGiCCR7xSoDTmxWM8-OKLZZM4MVLwcn4lcBBlqOO7U_7VWcwCn7tXRyqgxGjzX2Nqs8nNDc0hM-WH4KX9ezVmJKo1Rq25cOqefg78gugVrybepwIiEXqkIl_TTYBff-vBGHAaayv7O4c84DuLhhU4qn4Ok6243t6b3eu29-zg-6s",
+    image: "/assets/projects/roestwerk/selected-work-1080.webp",
     imageAlt: {
       de: "Kaffeeverpackungs-Mockup mit minimalistischem sensorischem Radar-Diagramm",
       en: "Artisanal specialty coffee packaging mockups alongside a minimal sensory radar chart",

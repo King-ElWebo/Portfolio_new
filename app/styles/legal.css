@@ -1,0 +1,202 @@
+/* ==========================================================================
+   WILK PORTFOLIO — LEGAL PAGES STYLING (IMPRESSUM & DATENSCHUTZ)
+   Clean, dark editorial typography matching the canonical WILK design system
+   ========================================================================== */
+
+.legal-page-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-dark-base, #0d0e11);
+  color: var(--text-dark-primary, #e3e2e7);
+}
+
+.legal-main {
+  flex: 1;
+  width: 100%;
+  max-width: 840px;
+  margin: 0 auto;
+  padding: clamp(6.5rem, 10vw, 8.5rem) clamp(1.5rem, 4vw, 2.5rem) clamp(4rem, 8vw, 6rem);
+}
+
+.legal-header {
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  border-bottom: 1px solid var(--border-dark-subtle, rgba(70, 70, 75, 0.2));
+  padding-bottom: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.legal-kicker {
+  display: inline-block;
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-secondary, #ebbf87);
+  margin-bottom: 1rem;
+}
+
+.legal-title {
+  font-family: var(--font-serif, "Playfair Display", serif);
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--text-dark-primary, #e3e2e7);
+  margin: 0 0 1rem 0;
+}
+
+.legal-subtitle {
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  line-height: 1.6;
+  color: var(--text-dark-secondary, #c7c6cb);
+  max-width: 65ch;
+  margin: 0;
+}
+
+.legal-content {
+  font-family: var(--font-sans, "Inter", sans-serif);
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--text-dark-secondary, #c7c6cb);
+}
+
+.legal-section {
+  margin-bottom: clamp(2.5rem, 4vw, 3.5rem);
+}
+
+.legal-section-title {
+  font-family: var(--font-serif, "Playfair Display", serif);
+  font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+  font-weight: 400;
+  color: var(--text-dark-primary, #e3e2e7);
+  margin: 0 0 1.25rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-dark-subtle, rgba(70, 70, 75, 0.2));
+}
+
+.legal-section-subtitle {
+  font-family: var(--font-sans, "Inter", sans-serif);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-dark-primary, #e3e2e7);
+  margin: 1.5rem 0 0.75rem 0;
+}
+
+.legal-content p {
+  margin: 0 0 1.25rem 0;
+}
+
+.legal-content p:last-child {
+  margin-bottom: 0;
+}
+
+.legal-content ul,
+.legal-content ol {
+  margin: 0 0 1.5rem 1.25rem;
+  padding: 0;
+}
+
+.legal-content li {
+  margin-bottom: 0.5rem;
+  padding-left: 0.25rem;
+}
+
+.legal-content strong {
+  color: var(--text-dark-primary, #e3e2e7);
+  font-weight: 600;
+}
+
+.legal-content a {
+  color: var(--color-secondary, #ebbf87);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: color 0.15s ease;
+}
+
+.legal-content a:hover {
+  color: var(--color-secondary-hover, #ffddb5);
+}
+
+.legal-content a:focus-visible {
+  outline: 2px solid var(--color-secondary, #ebbf87);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+/* Definition and meta lists */
+.legal-meta-grid {
+  display: grid;
+  grid-template-columns: minmax(140px, 200px) 1fr;
+  gap: 0.75rem 1.5rem;
+  margin: 1.5rem 0;
+  padding: 1.25rem 1.5rem;
+  background-color: var(--bg-dark-surface, #121317);
+  border: 1px solid var(--border-dark-subtle, rgba(70, 70, 75, 0.2));
+  border-radius: 3px;
+}
+
+.legal-meta-label {
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dark-muted, #909095);
+  margin: 0;
+}
+
+.legal-meta-value {
+  margin: 0;
+  color: var(--text-dark-primary, #e3e2e7);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+.legal-callout {
+  padding: 1.25rem 1.5rem;
+  margin: 1.5rem 0;
+  background-color: var(--bg-dark-surface, #121317);
+  border-left: 3px solid var(--color-secondary, #ebbf87);
+  border-radius: 0 3px 3px 0;
+  font-size: 0.9375rem;
+}
+
+.legal-footer-nav {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-dark-subtle, rgba(70, 70, 75, 0.2));
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.legal-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-dark-muted, #909095);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.legal-back-link:hover {
+  color: var(--color-secondary, #ebbf87);
+}
+
+@media (max-width: 640px) {
+  .legal-meta-grid {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+    padding: 1rem;
+  }
+  .legal-meta-label {
+    margin-top: 0.75rem;
+  }
+  .legal-meta-label:first-child {
+    margin-top: 0;
+  }
+}

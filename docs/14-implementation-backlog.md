@@ -18,7 +18,7 @@
 | **EPIC B** | **Multi-Page Routing & Navigation Architecture** | Fehlerfreie Navigation über alle Unterseiten, Locale-Persistierung & HTML-Shell | `IN PROGRESS` (NAV-001 & NAV-002 abgeschlossen) |
 | **EPIC C** | **Content System & Truthful Project Modeling** | Typisiertes lokales Datenmodell & Erfassung realer Projektfakten (Weg von D3.1-Demos) | `COMPLETED` |
 | **EPIC D** | **Work Archive & Individual Case Study Pages** | Eigenständige Work-Page (`/work`) & alle 7 Case-Study-Routen (`/work/:slug`) | `COMPLETED` (WORK-001, CASE-001 & CASE-002 vollständig umgesetzt & verifiziert) |
-| **EPIC E** | **Production Contact & Statutory Legal Pages** | Echtes Server-Handling für Formulare, E-Mail-Provider & gesetzeskonforme Legal-Pages | `PLANNED` |
+| **EPIC E** | **Production Contact & Statutory Legal Pages** | Echtes Server-Handling für Formulare, E-Mail-Provider & gesetzeskonforme Legal-Pages | `COMPLETED` (CONT-004, CONT-005 & LEGAL-001 implementiert & verifiziert) |
 | **EPIC F** | **Design Refinement, Motion & Paused Portrait** | Scroll-Scrubbing der Dark-Cream-Bridge, Lab-Interaktionen & Porträt-Wiederaufnahme | `PLANNED / PAUSED` |
 | **EPIC G** | **Quality Gates, Tooling, SEO & Cloudflare Launch** | Linter/Test-Setup, SEO (Hreflang, Sitemap), WCAG 2.2 AA Audit & Cloudflare Go-Live | `PLANNED` |
 
@@ -177,44 +177,47 @@
 ## EPIC E — Production Contact & Statutory Legal Pages
 
 ### `CONT-004`: Server-Side Contact Form Submission & Email Delivery
-- **Zweck**: Ablösung der 500ms `setTimeout`-Simulation durch eine echte Server-Action mit E-Mail-Versand.
-- **Aktueller Status**: `READY FOR IMPLEMENTATION`
+- **Zweck**: Echtes serverseitiges Handling für Formulareinsendungen via Resend REST API mit Cloudflare Email Routing und robustem Spam-Schutz.
+- **Aktueller Status**: `COMPLETED`
 - **Priorität**: `P0`
 - **Abhängigkeiten**: Keine.
 - **Akzeptanzkriterien**:
-  1. React Router `action` in `app/routes/contact.tsx` verarbeitet `POST`-Requests serverseitig in Cloudflare Workers.
-  2. Serverseitige Validierung der Pflichtfelder (Name, valide E-Mail, Nachricht).
-  3. Spam-Schutz (Honeypot-Feld und einfache Zeit-Validierung, ohne störende Captchas).
-  4. Anbindung eines Transaktions-Mail-Dienstes (z. B. Resend API) über Umgebungsvariablen (`RESEND_API_KEY`).
-  5. Zugängliche Fehler- und Erfolgsrückmeldungen mit ARIA Live Regions (`role="status"`).
-- **Betroffene Dateien**: `app/routes/contact.tsx`, `app/components/sections/Contact.tsx`.
+  1. Universeller Endpoint `app/routes/api.contact.ts` verarbeitet `POST`-Anfragen von Homepage und Kontaktseite serverseitig in Cloudflare Workers.
+  2. Strikte Server-Validierung (Name, E-Mail mit RFC-5322-Regex, Nachricht 10–5000 Zeichen).
+  3. Robuster Spam-Schutz: Unsichtbares Honeypot-Feld (`_gotcha`), CRLF-Injektionsfilter, HTML-Escaping, optionales Turnstile-Gate bei konfiguriertem Secret.
+  4. Integration der Resend REST API mit Region Dublin (`https://api.resend.com/emails`), Absender `WILK Portfolio <contact@bywilk.at>`, Empfänger `office@bywilk.at`, `Reply-To` auf Besucher-Adresse.
+  5. Saubere Fehler- und Erfolgsrückmeldungen mit ARIA Live Regions (`role="status"`); Client meldet nur dann Erfolg, wenn Resend HTTP 200/201 bestätigt.
+  6. Keine Ausflockung von PII oder API-Keys in Server-Logs; `RESEND_API_KEY` verbleibt als Cloudflare Secret.
+- **Betroffene Dateien**: `app/routes/api.contact.ts`, `app/components/sections/HomeContact.tsx`, `app/components/sections/Contact.tsx`, `wrangler.jsonc`, `workers/app.ts`.
 - **Empfohlene Skills**: `web-accessibility`
-- **Nutzer-Input erforderlich**: E-Mail-Provider API Key (z. B. Resend) vor Go-Live.
+- **Nutzer-Input erforderlich**: `RESEND_API_KEY` als Cloudflare Secret im Dashboard hinterlegen.
 
 ### `CONT-005`: Dedizierte Kontaktseite (`/:locale/contact`) als eigene Experience
-- **Zweck**: Eigenständige Kontaktseite mit ruhigem, fokussiertem Layout statt bloßer Wiederverwendung der Homepage-Sektion.
-- **Aktueller Status**: `READY FOR IMPLEMENTATION`
+- **Zweck**: Eigenständige Kontaktseite mit ruhigem, fokussiertem Layout, konsistenter Backend-Anbindung und nativer Ausweichoption.
+- **Aktueller Status**: `COMPLETED`
 - **Priorität**: `P1`
 - **Abhängigkeiten**: `CONT-004`
 - **Akzeptanzkriterien**:
-  1. Spezifisches Editorial-Intro für Kontaktanfragen (Verfügbarkeit, typische Formate, Antwortzeit).
+  1. Spezifisches redaktionelles Layout für Kontaktanfragen mit Verfügbarkeitshinweis und direkter E-Mail-Adresse (`office@bywilk.at`).
   2. Saubere mobile und Desktop-Spaltenaufteilung.
-  3. Prominente Darstellung von direkter E-Mail und Netzwerk-Profilen.
-- **Betroffene Dateien**: `app/routes/contact.tsx`.
-- **Nutzer-Input erforderlich**: Bestätigung von Antwortzeit / Verfügbarkeits-Hinweis.
+  3. Vollständige Anbindung an `/api/contact` mit Client-Validierung, dynamischem Versandstatus und zugänglichem Mailto-Fallback.
+- **Betroffene Dateien**: `app/routes/contact.tsx`, `app/components/sections/Contact.tsx`.
+- **Nutzer-Input erforderlich**: Nein.
 
 ### `LEGAL-001`: Gesetzliche Legal-Pages (Impressum & Datenschutz)
-- **Zweck**: Bereitstellung der rechtlich erforderlichen Impressums- und Datenschutz-Routen.
-- **Aktueller Status**: `READY FOR IMPLEMENTATION`
-- **Priorität**: `P1`
+- **Zweck**: Bereitstellung der rechtlich erforderlichen Impressums- und Datenschutz-Routen im authentischen WILK-Dark-Editorial-Design für den österreichischen Rechtsrahmen.
+- **Aktueller Status**: `COMPLETED`
+- **Priorität**: `P0`
 - **Abhängigkeiten**: `routes.ts`
 - **Akzeptanzkriterien**:
-  1. Routen `/:locale/impressum` und `/:locale/datenschutz` in `routes.ts` angelegt.
-  2. Sauberes Editorial-Layout im Warm-Paper- oder Obsidian-Look.
-  3. Platzhalter für Name, Anschrift, E-Mail und UID deutlich als ausstehend markiert.
-  4. Datenschutz-Text deckt Cloudflare Workers Hosting, Logging und Kontaktformular datenschutzkonform ab.
-- **Betroffene Dateien**: `app/routes.ts`, `app/routes/impressum.tsx`, `app/routes/privacy.tsx`.
-- **Nutzer-Input erforderlich**: **JA** (Rechtliche Pflichtangaben: Name, Adresse, Unternehmensform).
+  1. Routen `/de/impressum`, `/en/legal-notice`, `/de/datenschutz`, `/en/privacy` mit sauberem bidirektionalem Sprachwechsel in `routes.ts` registriert.
+  2. Authentisches Dark-Editorial-Layout (`app/styles/legal.css`) passend zur Design-DNA von WILK.
+  3. Vollständige, verifizierte Pflichtangaben für den österreichischen Einzelunternehmer Benjamin Wilk (Wien, GISA 39386267, MBA 13/14, keine UID, keine Firmenbuchnummer).
+  4. Datenschutz-Text deckt Cloudflare Workers Edge, Cloudflare Web Analytics (cookie-frei), funktionale Sprachspeicherung (`portfolio_locale`), lokale Webfonts, Resend-Infrastruktur (Region Dublin, EU-US DPF) und 7-jährige Aufbewahrungsdifferenzierung (§ 132 BAO / § 212 UGB) transparent ab.
+  5. Vollständige Ersetzung externer Google Fonts durch 21 lokale WOFF2-Dateien in `public/assets/fonts/` und Bereinigung externer Bild-Fixtures.
+  6. Seitenweite barrierefreie Verlinkung in `HomeFooter` und `SiteFooter`.
+- **Betroffene Dateien**: `app/routes.ts`, `app/routes/impressum.tsx`, `app/routes/legal-notice.tsx`, `app/routes/datenschutz.tsx`, `app/routes/privacy.tsx`, `app/styles/legal.css`, `app/components/layout/HomeFooter.tsx`, `app/components/layout/SiteFooter.tsx`, `app/root.tsx`, `app/styles/fonts.css`.
+- **Nutzer-Input erforderlich**: Nein.
 
 ---
 

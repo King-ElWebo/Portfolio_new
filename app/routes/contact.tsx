@@ -31,7 +31,7 @@ export default function ContactRoute() {
     <>
       <SiteHeader t={t} locale={locale} />
       <main id="main-content" style={{ paddingTop: "6rem", paddingBottom: "4rem" }}>
-        <Contact t={t} />
+        <Contact t={t} locale={locale} />
       </main>
       <SiteFooter t={t} locale={locale} />
     </>

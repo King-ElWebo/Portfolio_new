@@ -8,19 +8,11 @@ import {
   useLocation,
 } from "react-router";
 import type { Route } from "./+types/root";
+import fontsStylesheet from "./styles/fonts.css?url";
 import stylesheet from "./app.css?url";
 
 export const links: Route.LinksFunction = () => [
-  { rel: "preconnect", href: "https://fonts.googleapis.com" },
-  {
-    rel: "preconnect",
-    href: "https://fonts.gstatic.com",
-    crossOrigin: "anonymous",
-  },
-  {
-    rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap",
-  },
+  { rel: "stylesheet", href: fontsStylesheet },
   { rel: "stylesheet", href: stylesheet },
 ];
 

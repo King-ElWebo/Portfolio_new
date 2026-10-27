@@ -1,22 +1,76 @@
 import React, { useState } from "react";
-import type { Translations } from "~/i18n/translations";
+import { Link } from "react-router";
+import type { Locale, Translations } from "~/i18n/translations";
+import { createContactDraft } from "./contactDraft";
+
+interface ContactApiResponse {
+  success?: boolean;
+  message?: string;
+  mailto?: string;
+  error?: string;
+}
 
 interface ContactProps {
   t: Translations;
+  locale?: Locale;
 }
 
-export function Contact({ t }: ContactProps) {
+export function Contact({ t, locale = "de" }: ContactProps) {
   const c = t.contact;
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [fallbackMailto, setFallbackMailto] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (isSubmitting) return;
+
+    const formElement = e.currentTarget;
+    const values = new FormData(formElement);
+    const name = String(values.get("name") || "").trim();
+    const email = String(values.get("email") || "").trim();
+    const message = String(values.get("message") || "").trim();
+
+    const fallbackUrl = createContactDraft({
+      recipient: c.directEmail,
+      subjectPrefix: "Projektanfrage",
+      name,
+      replyTo: email,
+      message,
+    });
+
     setIsSubmitting(true);
-    setTimeout(() => {
+    setErrorMessage(null);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          email,
+          message,
+          _gotcha: String(values.get("_gotcha") || ""),
+        }),
+      });
+
+      const result = (await response.json().catch(() => null)) as ContactApiResponse | null;
+
+      if (response.ok && result?.success) {
+        setSubmitted(true);
+        formElement.reset();
+      } else {
+        const errorText = result?.message || c.form.errorMessage;
+        setErrorMessage(errorText);
+        setFallbackMailto(result?.mailto || fallbackUrl);
+      }
+    } catch {
+      setErrorMessage(c.form.errorMessage);
+      setFallbackMailto(fallbackUrl);
+    } finally {
       setIsSubmitting(false);
-      setSubmitted(true);
-    }, 400);
+    }
   };
 
   return (
@@ -93,6 +147,9 @@ export function Contact({ t }: ContactProps) {
               </div>
             ) : (
               <form className="hp-contact-form-box" onSubmit={handleSubmit}>
+                {/* Honeypot field */}
+                <input type="text" name="_gotcha" tabIndex={-1} autoComplete="off" style={{ display: "none" }} aria-hidden="true" />
+
                 <div className="hp-form-field">
                   <label htmlFor="hp-name" className="hp-form-label">
                     {c.form.nameLabel}
@@ -142,6 +199,51 @@ export function Contact({ t }: ContactProps) {
                 >
                   {isSubmitting ? c.form.submittingBtn : c.form.submitBtn}
                 </button>
+
+                {/* Privacy note */}
+                <p style={{ marginTop: "1rem", fontSize: "11px", color: "var(--text-dark-muted)", lineHeight: 1.5 }}>
+                  {c.form.privacyPrefix}
+                  <Link
+                    to={locale === "de" ? `/${locale}/datenschutz` : `/${locale}/privacy`}
+                    style={{ color: "var(--color-secondary)", textDecoration: "underline", textUnderlineOffset: "3px" }}
+                  >
+                    {c.form.privacyLink}
+                  </Link>
+                  {c.form.privacySuffix}
+                </p>
+
+                {/* Error feedback */}
+                {errorMessage && (
+                  <div
+                    role="alert"
+                    style={{
+                      marginTop: "1.25rem",
+                      padding: "1rem 1.25rem",
+                      backgroundColor: "rgba(220, 50, 50, 0.08)",
+                      border: "1px solid rgba(220, 50, 50, 0.25)",
+                      borderRadius: "3px",
+                      color: "#fca5a5",
+                      fontSize: "12px",
+                      lineHeight: "1.5",
+                    }}
+                  >
+                    <p style={{ margin: "0 0 0.5rem 0" }}>{errorMessage}</p>
+                    {fallbackMailto && (
+                      <a
+                        href={fallbackMailto}
+                        style={{
+                          display: "inline-block",
+                          color: "var(--color-secondary)",
+                          textDecoration: "underline",
+                          textUnderlineOffset: "3px",
+                          fontWeight: 500,
+                        }}
+                      >
+                        {c.form.fallbackDraft} →
+                      </a>
+                    )}
+                  </div>
+                )}
               </form>
             )}
           </div>
